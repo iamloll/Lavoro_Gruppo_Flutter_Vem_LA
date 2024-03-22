@@ -1,4 +1,4 @@
-Nome App (RicettApp)
+--ZdorApp--
 
 
 Da tutte le schermate sarà possibile raggiungere le altre schermate disponibili nell’applicazione.
