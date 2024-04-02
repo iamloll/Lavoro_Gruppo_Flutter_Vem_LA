@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zdor_app/services/recipes_service.dart';
+//import 'package:accordion/accordion.dart';
+//import 'package:accordion/controllers.dart';
+import 'widgets/recipe_detail_screen.dart';
 
 void main() {
   //QUI VA IL COMPONENTE BASE DA VISUALIZZARE NELL'APP
@@ -8,8 +11,18 @@ void main() {
     MaterialApp(
       //elimino il flag debug in alto a destra
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(),
+        bodyMedium: TextStyle(),
+      ).apply(
+        bodyColor: Colors.white, 
+        displayColor: Colors.black, 
+      ),
+    ),
       home: SafeArea(
-        child: RecipesListView()),
+        //child: RecipesListView()),
+        child: RecipeDetailScreen()),
     ));
 }
 
@@ -46,3 +59,25 @@ class RecipesListView extends StatelessWidget {
     );
   }
 }
+
+
+
+// void main() {
+//   runApp(MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     home: SafeArea(child: HomeScreen()),
+//   ));
+// }
+
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'ZdorApp',
+//       theme: ThemeData(
+//         primarySwatch: Colors.orange,
+//       ),
+//       home: const RecipeDetailScreen(),
