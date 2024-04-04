@@ -5,16 +5,14 @@ extension AccordionItem on AccordionSection {
   static AccordionSection buildAccordionSection({
     required headerText,
     required headerStyle,
-    required index,
+    required isOpen,
     nestedWidget,
   }) {
     return AccordionSection(
-        //isOpen : true,
-        isOpen: index == 0 ? true : false,
+        isOpen: isOpen,
         header: Text(headerText, style: headerStyle),
-        contentHorizontalPadding: 40,
-        contentVerticalPadding: 20,
+        contentHorizontalPadding: 8,
+        contentVerticalPadding: 15,
         content: nestedWidget != null ? nestedWidget! : Text("Widget non trovato"));
   }
 }
-
