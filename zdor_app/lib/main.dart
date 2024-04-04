@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zdor_app/services/recipes_service.dart';
+import 'package:zdor_app/views/home.dart';
+import 'package:zdor_app/widgets/recipe_card.dart';
+import 'package:zdor_app/views/home.dart';
 
 void main() {
   //QUI VA IL COMPONENTE BASE DA VISUALIZZARE NELL'APP
@@ -9,7 +12,7 @@ void main() {
       //elimino il flag debug in alto a destra
       debugShowCheckedModeBanner: false,
       home: SafeArea(
-        child: RecipesListView()),
+        child: Homepage()),
     ));
 }
 
@@ -43,6 +46,25 @@ class RecipesListView extends StatelessWidget {
             ),
           );
       })
+    );
+  }
+}
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Ricette',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch:Colors.blue,
+        primaryColor: Color.fromARGB(255, 1, 1, 1),
+        textTheme: TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+      ),
+      home: Homepage(),
     );
   }
 }
