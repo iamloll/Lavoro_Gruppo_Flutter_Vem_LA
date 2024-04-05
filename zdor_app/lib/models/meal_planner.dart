@@ -1,5 +1,3 @@
-import 'package:zdor_app/models/models.dart';
-
 enum WeekDays { 
   monday, 
   tuesday, 

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import 'widgets/planner_widget.dart';
 
 void main() {

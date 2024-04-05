@@ -13,6 +13,6 @@ extension AccordionItem on AccordionSection {
         header: Text(headerText, style: headerStyle),
         contentHorizontalPadding: 8,
         contentVerticalPadding: 15,
-        content: nestedWidget != null ? nestedWidget! : Text("Widget non trovato"));
+        content: nestedWidget != null ? nestedWidget! : const Text("Widget non trovato"));
   }
 }
