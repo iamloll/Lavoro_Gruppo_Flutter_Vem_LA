@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/constant.dart';
-import 'package:zdor_app/screens/modifica_lista_screen.dart';
-import 'package:zdor_app/widgets/modifica_lista_button.dart'; // Importa la pagina di modifica
+import 'package:zdor_app/screens/modifica_lista_screen.dart'; // Importa la pagina di modifica
 
 final Map<String, dynamic> json = {
   'acquistabili': [
@@ -76,7 +75,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                     unselectedWidgetColor: kWhiteColor,
                     checkboxTheme: CheckboxThemeData(
                       side: BorderSide(
-                        color: kLightOrangeColor,
+                        color: kOrangeColor,
                       ),
                     ),
                   ),
@@ -133,7 +132,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                   ),
                   leading: IconButton(
                     icon: Icon(Icons.check_box),
-                    color: kLightOrangeColor,
+                    color: kOrangeColor,
                     onPressed: () {
                       setState(() {
                         bought.remove(ingredient);
@@ -153,10 +152,18 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
             // Naviga alla pagina di modifica quando il pulsante della matita viene premuto
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ModifyListScreen()),
+              MaterialPageRoute(
+                  builder: (context) => ModifyListScreen(
+                        onOk: (ing) {
+                          setState(() {
+                            ingredients.addAll(ing);
+                          });
+                          Navigator.pop(context);
+                        },
+                      )),
             );
           },
-          child: modifica_lista_button()),
+          child: Icon(Icons.edit)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
