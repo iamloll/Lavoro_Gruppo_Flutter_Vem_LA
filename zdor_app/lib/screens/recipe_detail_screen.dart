@@ -7,7 +7,6 @@ import 'package:zdor_app/services/recipes_service.dart';
 import '../widgets/recipe_detail/recipe_detail.dart';
 import '../widgets/recipe_detail/share_recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-import 'package:zdor_app/widgets/bottom_navigation_bar.dart';
 import 'package:zdor_app/models/recipe.dart'; // Importa la classe Recipe
 
 class RecipeDetailScreen extends StatelessWidget {
