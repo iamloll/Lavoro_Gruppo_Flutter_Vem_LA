@@ -39,7 +39,7 @@ class _RecipeCardState extends State<RecipeCard> {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(widget.recipe.image ?? ''), // Immagine della ricetta
+          image: AssetImage(widget.recipe.image ?? ''), // Immagine della ricetta
           fit: BoxFit.cover, // Adatta l'immagine per coprire tutto il container
         ),
       ),
@@ -63,7 +63,12 @@ class _RecipeCardState extends State<RecipeCard> {
                     size: 18, // Dimensione dell'icona
                   ),
                   SizedBox(width: 7),
-                  Text(widget.recipe.prep_time ?? ''), // Tempo di preparazione della ricetta
+                  Text(
+                    widget.recipe.prep_time ?? '',
+                    style: TextStyle(
+                      color: kWhiteColor
+                    ),
+                  ), // Tempo di preparazione della ricetta
                 ],
               ),
             ),
@@ -75,6 +80,7 @@ class _RecipeCardState extends State<RecipeCard> {
               child: Text(
                 widget.recipe.title ?? '', // Titolo della ricetta
                 style: TextStyle(
+                  color: kWhiteColor,
                   fontSize: 19, // Dimensione del testo
                 ),
                 overflow: TextOverflow.ellipsis, // Tronca il testo se troppo lungo

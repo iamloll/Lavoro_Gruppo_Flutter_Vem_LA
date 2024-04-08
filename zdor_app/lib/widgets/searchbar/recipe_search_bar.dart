@@ -59,7 +59,9 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
         ),
         onChanged: (value) {
           setState(() {
-            _isFocused = value.isNotEmpty; // Aggiorna lo stato di focus in base al testo inserito
+            print("val $value");
+            _isFocused = value.isNotEmpty;
+            print("foc $_isFocused"); // Aggiorna lo stato di focus in base al testo inserito
           });
           widget.onFocusChanged(_isFocused); // Chiama la funzione di cambio focus
         },
