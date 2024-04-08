@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart'; 
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeSearchBar extends StatefulWidget {
   final TextEditingController searchController; // Controller per il campo di ricerca

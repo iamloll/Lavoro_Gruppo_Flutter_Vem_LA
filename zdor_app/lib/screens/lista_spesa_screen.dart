@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/screens/modifica_lista_screen.dart';
 import 'package:zdor_app/widgets/modifica_lista_button.dart'; // Importa la pagina di modifica
 
@@ -76,7 +76,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                     unselectedWidgetColor: kWhiteColor,
                     checkboxTheme: CheckboxThemeData(
                       side: BorderSide(
-                        color: kLightOrangeColor,
+                        color: kOrangeColor,
                       ),
                     ),
                   ),
@@ -133,7 +133,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                   ),
                   leading: IconButton(
                     icon: Icon(Icons.check_box),
-                    color: kLightOrangeColor,
+                    color: kOrangeColor,
                     onPressed: () {
                       setState(() {
                         bought.remove(ingredient);

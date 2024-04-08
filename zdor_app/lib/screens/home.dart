@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/recipe_card.dart';
 import 'package:zdor_app/services/recipes_service.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/horizontal_recipe_card.dart';
 import 'package:zdor_app/widgets/recipe_search_bar.dart';
 import 'package:zdor_app/widgets/bottom_navigation_bar.dart' as Custom;
