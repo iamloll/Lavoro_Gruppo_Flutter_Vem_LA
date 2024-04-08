@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart'; 
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeSearchBar extends StatefulWidget {
   final TextEditingController searchController; // Controller per il campo di ricerca
@@ -52,7 +52,7 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
           ),
           hintText: "Cerca una ricetta...", 
           hintStyle: TextStyle(
-            color: kLightGreyColor, 
+            color: kGreyColor, 
             fontSize: 20.0, 
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0), 

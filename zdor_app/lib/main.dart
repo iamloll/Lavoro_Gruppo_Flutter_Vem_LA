@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zdor_app/services/recipes_service.dart';
-import 'package:zdor_app/views/home.dart';
+import 'package:zdor_app/screens/home.dart';
 import 'package:zdor_app/widgets/recipe_card.dart';
-import 'package:zdor_app/views/home.dart';
+import 'package:zdor_app/screens/home.dart';
 import 'package:zdor_app/widgets/main_screen.dart';
 
 void main() {
@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
 
 
 
@@ -45,5 +44,3 @@ class MyApp extends StatelessWidget {
 //         primarySwatch: Colors.orange,
 //       ),
 //       home: const RecipeDetailScreen(),
-=======
->>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
