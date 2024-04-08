@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/planner/accordion_list.dart';
 
 class PlannerWidget extends StatelessWidget {
@@ -11,7 +13,10 @@ class PlannerWidget extends StatelessWidget {
         appBar: AppBar(
           title: const Center(child: Text('Planner Pasti')),
         ),
-        body : AccordionList()
+        body : ChangeNotifierProvider(
+          create: (context) => RecipeState(),
+          child: AccordionList()
+          )
     );
   }
 }
