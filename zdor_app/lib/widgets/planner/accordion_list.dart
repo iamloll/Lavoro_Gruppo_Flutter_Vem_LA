@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:zdor_app/models/models.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/widgets/planner/accordion_item.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
 import 'accordion_item_recipes.dart';
 
@@ -26,11 +27,11 @@ class AccordionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Accordion(
-        headerBorderColor: const Color.fromARGB(255, 230, 160, 97),
-        headerBorderColorOpened: const Color.fromARGB(255, 230, 160, 97),
+        headerBorderColor: kOrangeColor,
+        headerBorderColorOpened: kOrangeColor,
         headerBorderWidth: 1,
-        headerBackgroundColorOpened: const Color.fromARGB(255, 1, 1, 1),
-        contentBackgroundColor: const Color.fromARGB(255, 1, 1, 1),
+        headerBackgroundColorOpened: kBlackColor,
+        contentBackgroundColor: kBlackColor,
         contentHorizontalPadding: 20,
         scaleWhenAnimating: true,
         openAndCloseAnimation: true,
@@ -44,13 +45,13 @@ class AccordionList extends StatelessWidget {
               headerStyle: headerStyle,
               isOpen: e == WeekDays.monday,
               nestedWidget: Accordion(
-                  headerBorderColor: const Color.fromARGB(255, 230, 160, 97),
+                  headerBorderColor: kOrangeColor,
                   headerBorderColorOpened:
-                      const Color.fromARGB(255, 230, 160, 97),
+                      kOrangeColor,
                   headerBorderWidth: 1,
                   headerBackgroundColorOpened:
-                      const Color.fromARGB(255, 1, 1, 1),
-                  contentBackgroundColor: const Color.fromARGB(255, 1, 1, 1),
+                      kBlackColor,
+                  contentBackgroundColor: kBlackColor,
                   contentHorizontalPadding: 20,
                   scaleWhenAnimating: true,
                   openAndCloseAnimation: true,

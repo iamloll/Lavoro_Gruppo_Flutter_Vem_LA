@@ -13,30 +13,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(
+        brightness: Brightness.dark,
+          // Definisci il tema della tua app
           ),
-      home: MainScreen(),
+      home: const MainScreen(), // Utilizza il MainScreen come schermata principale
     );
   }
 }
-
-
-
-// void main() {
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     home: SafeArea(child: HomeScreen()),
-//   ));
-// }
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'ZdorApp',
-//       theme: ThemeData(
-//         primarySwatch: Colors.orange,
-//       ),
-//       home: const RecipeDetailScreen(),
