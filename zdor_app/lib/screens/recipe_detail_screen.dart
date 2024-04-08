@@ -4,27 +4,28 @@ import 'package:flutter/material.dart';
 //import 'package:zdor_app/main.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 //import 'package:zdor_app/widgets/share_buttons.dart';
-import 'recipe_detail.dart';
-import 'share_recipe.dart';
-
+import '../widgets/recipe_detail/recipe_detail.dart';
+import '../widgets/recipe_detail/share_recipe.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/models/recipe.dart'; // Importa la classe Recipe
 
 class RecipeDetailScreen extends StatelessWidget {
   static const headerStyle = TextStyle(
-      color: Color.fromARGB(255, 255, 255, 255), fontSize: 18, fontWeight: FontWeight.bold);
+      color: kWhiteColor, fontSize: 18, fontWeight: FontWeight.bold);
 
   const RecipeDetailScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    final recipesList = RecipesService().getRecipes(results: 10).toList();
+    final recipesList = RecipesService().getRecipes(results: 30).toList();
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 1, 1, 1),
+      backgroundColor: kBlackColor,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 1, 1, 1),
+        backgroundColor: kBlackColor,
         shape: Border(
             bottom: BorderSide(
-                color: Colors.white,
+                color: kWhiteColor,
                 width: 1
             )
         ),
@@ -33,9 +34,9 @@ class RecipeDetailScreen extends StatelessWidget {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white,),
+              icon: const Icon(Icons.arrow_back, color: kWhiteColor,),
               onPressed: () {
-
+                //Navigator.pop(context);
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
@@ -43,12 +44,12 @@ class RecipeDetailScreen extends StatelessWidget {
         ),
 
         //Recipe title
-        title: Text(recipesList[4].title!, style: TextStyle(color: Colors.white),),
+        title: Text(recipesList[4].title!, style: TextStyle(color: kWhiteColor)),
 
         //Appbar menu
         actions: <Widget>[
           //menuAccordion(headerStyle: headerStyle)
-          PopupMenuButton(icon: Icon(Icons.menu, color: Colors.white,),itemBuilder: (context) {
+          PopupMenuButton(icon: Icon(Icons.menu, color: kWhiteColor,),itemBuilder: (context) {
             return [
               PopupMenuItem(
                 child: Text("Modifica"),
@@ -117,7 +118,7 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
 
   @override
   Widget build(BuildContext context) {
-    final Recipe selectedRecipe = RecipesService().getRecipes(results: 10).toList()[4];
+    final Recipe selectedRecipe = RecipesService().getRecipes().toList()[4];
 
     _title = selectedRecipe.title;
     _category = selectedRecipe.category;
@@ -126,9 +127,27 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
     _procedure = selectedRecipe.procedure;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kBlackColor,
       appBar: AppBar(
-        title: Text('Modifica Ricetta'),
+        backgroundColor: kBlackColor,
+        title: Text('Modifica Ricetta', style: TextStyle(color: kWhiteColor)),
+        shape: Border(
+            bottom: BorderSide(
+                color: kWhiteColor,
+                width: 1
+            )
+        ),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back, color: kWhiteColor,),
+              onPressed: () {
+                Navigator.pop(context);  //Return to previous screen
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(15.0),
@@ -137,54 +156,59 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
+                style: TextStyle(color: kWhiteColor),
                 initialValue: _title,
                 onChanged: (value) {
                   setState(() {
                     _title = value;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Titolo'),
+                decoration: InputDecoration(labelText: 'Titolo', labelStyle: TextStyle(color: kWhiteColor)),
               ),
               SizedBox(height: 10),
               TextFormField(
+                style: TextStyle(color: kWhiteColor),
                 initialValue: _category,
                 onChanged: (value) {
                   setState(() {
                     _category = value;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Categoria'),
+                decoration: InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: kWhiteColor)),
               ),
               SizedBox(height: 10),
               TextFormField(
+                style: TextStyle(color: kWhiteColor),
                 initialValue: _prepTime,
                 onChanged: (value) {
                   setState(() {
                     _prepTime = value;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Tempo'),
+                decoration: InputDecoration(labelText: 'Tempo', labelStyle: TextStyle(color: kWhiteColor)),
               ),
               SizedBox(height: 10),
               TextFormField(
+                style: TextStyle(color: kWhiteColor),
                 initialValue: _ingredients,
                 onChanged: (value) {
                   setState(() {
                     _ingredients = value;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Ingredienti'),
+                decoration: InputDecoration(labelText: 'Ingredienti', labelStyle: TextStyle(color: kWhiteColor)),
                 maxLines: null,
               ),
               SizedBox(height: 10),
               TextFormField(
+                style: TextStyle(color: kWhiteColor),
                 initialValue: _procedure,
                 onChanged: (value) {
                   setState(() {
                     _procedure = value;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Procedimento'),
+                decoration: InputDecoration(labelText: 'Procedimento', labelStyle: TextStyle(color: kWhiteColor)),
                 maxLines: null,
               ),
               SizedBox(height: 20),
@@ -198,7 +222,7 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
                   //   procedure: _procedure,
                   // );
                 },
-                child: Text('Salva'),
+                child: Text('Salva', style: TextStyle(color: kBlackColor)),
               ),
             ],
           ),

@@ -14,8 +14,6 @@ class RecipeCard extends StatefulWidget {
 }
 
 class _RecipeCardState extends State<RecipeCard> {
-  bool _isFavorite = false; // Variabile booleana per tenere traccia dello stato del preferito
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,27 +45,6 @@ class _RecipeCardState extends State<RecipeCard> {
       ),
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: IconButton(
-                icon: Icon(
-                  widget.isSaved ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
-                  color: widget.isSaved ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
-                  size: 20, // Dimensione dell'icona
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isFavorite = !_isFavorite; // Cambia lo stato del preferito quando viene premuto l'icona
-                  });
-                  if (widget.onSave != null) {
-                    widget.onSave!(); // Esegui la funzione di salvataggio, se definita
-                  }
-                },
-              ),
-            ),
-          ),
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
@@ -110,6 +87,22 @@ class _RecipeCardState extends State<RecipeCard> {
                 maxLines: 2, // Numero massimo di linee per il testo
                 textAlign: TextAlign.center, // Allineamento del testo al centro
               ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: IconButton(
+              icon: Icon(
+                widget.isSaved ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
+                color: widget.isSaved ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
+                size: 20, // Dimensione dell'icona
+              ),
+              onPressed: () {
+                if (widget.onSave != null) {
+                  widget.onSave!(); // Esegui la funzione di salvataggio, se definita
+                }
+              },
             ),
           ),
         ],

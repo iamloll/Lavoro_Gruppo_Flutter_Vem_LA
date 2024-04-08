@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/screens/planner_screen.dart';
-import 'package:zdor_app/widgets/main_screen.dart';
+import 'package:flutter/widgets.dart';
+import 'package:zdor_app/screens/screen_selector/main_screen.dart';
 
 void main() {
   runApp(MyApp());
