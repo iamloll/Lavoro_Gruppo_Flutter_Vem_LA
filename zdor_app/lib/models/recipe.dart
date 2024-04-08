@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:flutter/foundation.dart'; // Importa questo pacchetto
 
 class Recipe {
   final String? id;
@@ -9,7 +10,8 @@ class Recipe {
   final List<dynamic>? ingredients_list;
   final String? procedure;
   final String? prep_time;
-
+  final bool isSaved;
+  final VoidCallback onSave; // Usa VoidCallback da flutter/foundation
 
   Recipe({
     this.id,
@@ -18,10 +20,10 @@ class Recipe {
     this.image, 
     this.ingredients_list, 
     this.procedure, 
-    this.prep_time,    
+    this.prep_time,
+    required this.isSaved,
+    required this.onSave,
   });
-
-  
 
   Recipe copyWith({
     String? id,
@@ -31,6 +33,8 @@ class Recipe {
     List<dynamic>? ingredients_list,
     String? procedure,
     String? prep_time,
+    bool? isSaved,
+    VoidCallback? onSave,
   }) {
     return Recipe(
       id: id ?? this.id,
@@ -40,6 +44,8 @@ class Recipe {
       ingredients_list: ingredients_list ?? this.ingredients_list,
       procedure: procedure ?? this.procedure,
       prep_time: prep_time ?? this.prep_time,
+      isSaved: isSaved ?? this.isSaved,
+      onSave: onSave ?? this.onSave,
     );
   }
 
@@ -66,7 +72,9 @@ class Recipe {
       image: map['image'] != null ? map['image'] as String : null,
       ingredients_list: map['ingredients_list'] != null ? map['ingredients_list'] as List<dynamic> : null,
       procedure: map['procedure'] != null ? map['procedure'] as String : null,
-      prep_time: map['prep_time'] != null ? map['prep_time'] as String : null
+      prep_time: map['prep_time'] != null ? map['prep_time'] as String : null,
+      isSaved: false,
+      onSave: () {},
   );
 
   @override

@@ -4,8 +4,10 @@ import 'package:zdor_app/constant.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;
+  final bool isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
+  final VoidCallback? onSave; // Nuovo parametro per la funzione di salvataggio della ricetta
 
-  RecipeCard({required this.recipe}); // Costruttore che richiede una ricetta come argomento
+  RecipeCard({required this.recipe, this.isSaved = false, this.onSave}); // Costruttore con i nuovi parametri opzionali
 
   @override
   _RecipeCardState createState() => _RecipeCardState(); // Crea lo stato associato al widget
@@ -51,14 +53,17 @@ class _RecipeCardState extends State<RecipeCard> {
               margin: EdgeInsets.all(10),
               child: IconButton(
                 icon: Icon(
-                  _isFavorite ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
-                  color: _isFavorite ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
+                  widget.isSaved ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
+                  color: widget.isSaved ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
                   size: 20, // Dimensione dell'icona
                 ),
                 onPressed: () {
                   setState(() {
                     _isFavorite = !_isFavorite; // Cambia lo stato del preferito quando viene premuto l'icona
                   });
+                  if (widget.onSave != null) {
+                    widget.onSave!(); // Esegui la funzione di salvataggio, se definita
+                  }
                 },
               ),
             ),

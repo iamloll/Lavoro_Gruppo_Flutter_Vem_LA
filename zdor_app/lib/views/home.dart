@@ -5,48 +5,44 @@ import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/constant.dart';
 import 'package:zdor_app/widgets/horizontal_recipe_card.dart';
 import 'package:zdor_app/widgets/recipe_search_bar.dart';
-import 'package:zdor_app/widgets/bottom_navigation_bar.dart' as Custom; 
-
+import 'package:zdor_app/widgets/bottom_navigation_bar.dart' as Custom;
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+  final void Function() navigateToSavedRecipes; // Aggiunto parametro navigateToSavedRecipes
+
+  const Homepage({Key? key, required this.navigateToSavedRecipes}) : super(key: key);
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
-
 class _HomepageState extends State<Homepage> {
-  // Lista di ricette prese dal servizio di ricette
   final List<Recipe> recipesList = RecipesService().getRecipes(results: 10).toList();
-  int currentPageIndex = 0; 
-  final TextEditingController _searchController = TextEditingController(); // Controller per la barra di ricerca
-  bool _isSearchFocused = false; // Variabile booleana per tenere traccia del focus sulla barra di ricerca
+  int currentPageIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  bool _isSearchFocused = false;
+  List<Recipe> savedRecipesList = []; // Dichiarazione della lista di ricette salvate
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Il colore di sfondo della schermata varia in base a se la barra di ricerca ha il focus o meno
       backgroundColor: _isSearchFocused ? Colors.black.withOpacity(0.8) : kBlackColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Widget per la barra di ricerca delle ricette
             RecipeSearchBar(
               searchController: _searchController,
               onSearch: (query) {
-                // Logica per la ricerca delle ricette
                 print('Ricerca: $query');
               },
               onFocusChanged: (isFocused) {
                 setState(() {
-                  _isSearchFocused = isFocused; // Aggiorna lo stato del focus sulla barra di ricerca
+                  _isSearchFocused = isFocused;
                 });
               },
             ),
             SizedBox(height: 20),
-           
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
               child: Text(
@@ -58,14 +54,13 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            SizedBox(height: 10), 
-            // Visualizzazione orizzontale delle ricette
+            SizedBox(height: 10),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
                   for (final r in recipesList)
-                    RecipeCardHorizontal(recipe: r),// Richiamo la classe RecipeCardHorizontal che mostra orizontalmente le ricette
+                    RecipeCardHorizontal(recipe: r),
                 ],
               ),
             ),
@@ -82,24 +77,38 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
             SizedBox(height: 10),
-            // Visualizzazione verticale delle ricette
             Column(
               children: [
                 for (final r in recipesList)
-                  RecipeCard(recipe: r),// Richiamo la classe RecipeCard che mostra verticalmente le ricette
+                  RecipeCard(
+                    recipe: r,
+                    isSaved: savedRecipesList.contains(r), // Imposta il flag isSaved in base alla presenza della ricetta nella lista salvate
+                    onSave: () {
+                      setState(() {
+                        if (savedRecipesList.contains(r)) {
+                          savedRecipesList.remove(r); // Rimuovi la ricetta se è già salvata
+                        } else {
+                          savedRecipesList.add(r); // Aggiungi la ricetta se non è ancora salvata
+                        }
+                      });
+                    },
+                  ),
               ],
             ),
             SizedBox(height: 20),
           ],
         ),
       ),
-      // Widget per la barra di navigazione personalizzata
       bottomNavigationBar: Custom.CustomNavigationBar(
         currentPageIndex: currentPageIndex,
         onPageChanged: (int index) {
           setState(() {
-            currentPageIndex = index; // Aggiorna l'indice della pagina corrente
+            currentPageIndex = index;
           });
+          if (index == 1) {
+            // Naviga alla schermata delle ricette salvate quando viene selezionata l'opzione "Salvate" nella barra di navigazione
+            widget.navigateToSavedRecipes(); // Chiamata alla funzione navigateToSavedRecipes fornita come parametro
+          }
         },
       ),
     );
