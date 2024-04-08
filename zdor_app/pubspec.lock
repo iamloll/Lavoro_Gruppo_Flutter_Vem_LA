@@ -82,15 +82,20 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: e2a421b7e59244faef694ba7b30562e489c2b489866e505074eb005cd7060db7
+      sha256: "9e8c3858111da373efc5aa341de011d9bd23e2c5c5e0c62bccf32438e192d7b1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
   get:
     dependency: transitive
     description:
@@ -99,6 +104,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.6"
+<<<<<<< HEAD
+=======
+>>>>>>> e7295b83ce42f2766775f486867fd7a71a8b2558
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
   leak_tracker:
     dependency: transitive
     description:
@@ -155,6 +164,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+<<<<<<< HEAD
+=======
   nested:
     dependency: transitive
     description:
@@ -163,6 +174,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+>>>>>>> e7295b83ce42f2766775f486867fd7a71a8b2558
   path:
     dependency: transitive
     description:
@@ -171,6 +183,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
   provider:
     dependency: "direct main"
     description:
@@ -179,6 +195,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
   scroll_to_index:
     dependency: transitive
     description:
@@ -187,6 +204,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+<<<<<<< HEAD
+=======
+>>>>>>> e7295b83ce42f2766775f486867fd7a71a8b2558
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
   sky_engine:
     dependency: transitive
     description: flutter
@@ -258,4 +279,11 @@ packages:
     version: "13.0.0"
 sdks:
   dart: ">=3.3.0 <4.0.0"
+<<<<<<< HEAD
   flutter: ">=3.13.0"
+=======
+<<<<<<< HEAD
+=======
+  flutter: ">=3.13.0"
+>>>>>>> e7295b83ce42f2766775f486867fd7a71a8b2558
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720
