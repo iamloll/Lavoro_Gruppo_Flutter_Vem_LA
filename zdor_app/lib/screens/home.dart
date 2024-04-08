@@ -13,7 +13,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final List<Recipe> recipesList = RecipesService().getRecipes(results: 10).toList();
+  final List<Recipe> recipesList = RecipesService().getRecipes(results: 30).toList();
   final TextEditingController _searchController = TextEditingController();
   bool _isSearchFocused = false;
   List<Recipe> savedRecipesList = [];
@@ -39,6 +39,7 @@ class _HomepageState extends State<Homepage> {
                 // );
                 showBottomSheet(context: context, builder: (bc) {
                   return Column(
+                    
                   children: [
                     ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
                   ],
