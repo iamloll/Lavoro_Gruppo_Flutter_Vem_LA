@@ -11,8 +11,7 @@ class Recipe {
   final String? procedure;
   final String? prep_time;
   final bool isSaved;
-  final VoidCallback onSave; // Usa VoidCallback da flutter/foundation
-
+  final VoidCallback onSave; 
   Recipe({
     this.id,
     this.title, 
