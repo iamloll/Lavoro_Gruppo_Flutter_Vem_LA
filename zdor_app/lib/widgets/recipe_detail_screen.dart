@@ -190,13 +190,13 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  final updatedRecipe = selectedRecipe.copyWith(
-                    title: _title,
-                    category: _category,
-                    prep_time: _prepTime,
-                    ingredients_list: _ingredients != null ? _ingredients!.split('\n') : null,
-                    procedure: _procedure,
-                  );
+                  // final updatedRecipe = selectedRecipe.copyWith(
+                  //   title: _title,
+                  //   category: _category,
+                  //   prep_time: _prepTime,
+                  //   ingredients_list: _ingredients != null ? _ingredients!.split('\n') : null,
+                  //   procedure: _procedure,
+                  // );
                 },
                 child: Text('Salva'),
               ),
