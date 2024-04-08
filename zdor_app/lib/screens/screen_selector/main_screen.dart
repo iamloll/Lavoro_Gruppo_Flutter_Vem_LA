@@ -36,10 +36,6 @@ class _MainScreenState extends State<MainScreen> {
           IngredientListScreen(),
         ],
       ),
-      bottomNavigationBar: CustomNavigationBar(
-        currentPageIndex: _currentPageIndex,
-        onPageChanged: _navigateToPage,
-      ),
     );
   }
 }
