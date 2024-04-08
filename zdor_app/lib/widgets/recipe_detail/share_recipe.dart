@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_buttons.dart';
-import 'package:zdor_app/widgets/style/constant.dart';
 
 class ShareRecipe extends StatelessWidget {
   const ShareRecipe({Key? key});
@@ -21,7 +20,7 @@ class ShareRecipe extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
               border: Border.all(
-                color: kOrangeColor,
+                color: Color.fromARGB(255, 230, 160, 97),
                 width: 2.0,
               ),
               borderRadius: BorderRadius.circular(8.0),
@@ -29,7 +28,7 @@ class ShareRecipe extends StatelessWidget {
             child: const TextField(
               decoration: InputDecoration(
                 hintText: 'Inserisci email per condivisione', //Placeholder text
-                contentPadding: EdgeInsets.fromLTRB(5, 15, 5, 5),
+                contentPadding: EdgeInsets.all(10.0),
                 border: InputBorder.none,
               ),
             ),
@@ -38,23 +37,23 @@ class ShareRecipe extends StatelessWidget {
           Row(
             children: [
               ShareButtons(
-                imagePath: 'assets/icon_social/share.png',
+                imagePath: 'lib/assets/share.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'assets/icon_social/instagram.png',
+                imagePath: 'lib/assets/instagram.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'assets/icon_social/facebook.png',
+                imagePath: 'lib/assets/facebook.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'assets/icon_social/telegram.png',
+                imagePath: 'lib/assets/telegram.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'assets/icon_social/whatsapp.png',
+                imagePath: 'lib/assets/whatsapp.png',
                 onPressed: () {},
               ),
             ],
