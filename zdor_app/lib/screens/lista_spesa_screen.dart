@@ -1,6 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/screens/modifica_lista_screen.dart';
+import 'package:zdor_app/widgets/modifica_lista_button.dart'; // Importa la pagina di modifica
 
 final Map<String, dynamic> json = {
   'acquistabili': [
@@ -22,14 +23,27 @@ final Map<String, dynamic> json = {
   "acquistati": []
 };
 
+// ignore: must_be_immutable
 class IngredientListScreen extends StatefulWidget {
+  List<String> selectedIngredients;
+
+  IngredientListScreen({Key? key, List<String>? selectedIngredients})
+      : selectedIngredients = selectedIngredients ?? [],
+        super(key: key);
+
   @override
   _IngredientListScreenState createState() => _IngredientListScreenState();
 }
 
 class _IngredientListScreenState extends State<IngredientListScreen> {
-  final List<String> ingredients = List<String>.from(json["acquistabili"]);
+  List<String> ingredients = List<String>.from(json["acquistabili"]);
   final List<String> bought = List<String>.from(json["acquistati"]);
+
+  @override
+  void initState() {
+    super.initState();
+    ingredients.addAll(widget.selectedIngredients);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,17 +108,15 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
           ),
           SizedBox(height: 20),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 20.0), // Aggiunge spazio ai lati
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Divider(
-              // Aggiunta della linea bianca con spazio ai lati
               color: kWhiteColor,
               thickness: 2.0,
             ),
           ),
           SizedBox(height: 20),
           Text(
-            'Ingredienti Acquistati',
+            'Acquistati',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: kWhiteColor),
@@ -119,8 +131,8 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                     ingredient,
                     style: TextStyle(color: kWhiteColor),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                  leading: IconButton(
+                    icon: Icon(Icons.check_box),
                     color: kLightOrangeColor,
                     onPressed: () {
                       setState(() {
@@ -136,28 +148,15 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
           ),
         ],
       ),
-      floatingActionButton: Container(
-        width: 70.0, // Imposta la larghezza desiderata
-        height: 70.0, // Imposta l'altezza desiderata
-        padding: EdgeInsets.all(6.0), // Spazio intorno all'icona
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: kDarkGreyColor,
-          border: Border.all(
-            color: kLightOrangeColor,
-            width: 2.0,
-          ),
-        ),
-        child: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Aggiungi qui la logica per l'azione del bottone della matita
+            // Naviga alla pagina di modifica quando il pulsante della matita viene premuto
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ModifyListScreen()),
+            );
           },
-          backgroundColor: kDarkGreyColor,
-          foregroundColor: kLightOrangeColor,
-          child:
-              Icon(Icons.edit, size: 40.0), // Imposta la grandezza dell'icona
-        ),
-      ),
+          child: modifica_lista_button()),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
@@ -166,10 +165,4 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
     json['acquistabili'] = List<String>.from(ingredients);
     json['acquistati'] = List<String>.from(bought);
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: IngredientListScreen(),
-  ));
 }
