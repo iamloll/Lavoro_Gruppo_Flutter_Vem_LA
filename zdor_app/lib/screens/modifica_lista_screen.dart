@@ -59,14 +59,14 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide(
-                    color: kLightOrangeColor,
+                    color: kOrangeColor,
                   ),
                 ),
                 filled: true,
                 fillColor: kDarkGreyColor,
                 suffixIcon: IconButton(
                   icon: Icon(Icons.add),
-                  color: kLightOrangeColor,
+                  color: kOrangeColor,
                   onPressed: () {
                     if (newIngredients.isNotEmpty) {
                       addIngredient(newIngredients.last);
@@ -76,7 +76,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 ),
                 hintText: "Aggiungi un ingrediente...",
                 hintStyle: TextStyle(
-                  color: kLightGreyColor,
+                  color: kGreyColor,
                   fontSize: 20.0,
                 ),
                 contentPadding: EdgeInsets.symmetric(
@@ -130,7 +130,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                       ),
                       IconButton(
                         icon: Icon(Icons.delete),
-                        color: kLightOrangeColor,
+                        color: kOrangeColor,
                         onPressed: () {
                           removeIngredient(ingredient);
                         },

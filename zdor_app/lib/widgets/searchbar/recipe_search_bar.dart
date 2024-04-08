@@ -52,7 +52,7 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
           ),
           hintText: "Cerca una ricetta...", 
           hintStyle: TextStyle(
-            color: kLightGreyColor, 
+            color: kGreyColor, 
             fontSize: 20.0, 
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0), 
