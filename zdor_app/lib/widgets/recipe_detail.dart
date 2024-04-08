@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class RecipeDetail extends StatefulWidget {
   const RecipeDetail({
     Key? key,
-    //required this.r,
   });
 
   @override
@@ -19,6 +18,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
 
   @override
   Widget build(BuildContext context) {
+    //Recipe example
+    final selectedRecipe = recipesList[4];
+    
     return Card(
       color: Colors.transparent,
       child: Padding(
@@ -27,33 +29,63 @@ class _RecipeDetailState extends State<RecipeDetail> {
           //mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-            //Row with placeholder recipe image
+            //Row with recipe image
             Row(
               children: [
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30.0), // Imposta il raggio dell'arco degli angoli
-                    child: Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg',
-                      fit: BoxFit.fill,
+                    borderRadius: BorderRadius.circular(30.0),
+                    child: Container(
+                      constraints: BoxConstraints(maxHeight: 250),
+                      child: Image.network(
+                        // 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg'
+                        selectedRecipe.image!,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 20,),
-
-            //Column with recipe category type:
-            Column(
+            Row(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("Categoria:")],
+
+                //Column with recipe category
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text("Categoria:")],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text(selectedRecipe.category!)],
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 5),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text(recipesList[1].category!)],
+                SizedBox(width: 10),
+
+                //Column with preparation time
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text("Tempo:")],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text(selectedRecipe.prep_time!)],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -69,10 +101,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 // ListView for showing every ingredient in a different line
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: recipesList[1].ingredients_list!.length,
+                  itemCount: selectedRecipe.ingredients_list!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Text(
-                      '- ${recipesList[1].ingredients_list![index]}',
+                      '- ${selectedRecipe.ingredients_list![index]}',
                       style: TextStyle(fontSize: 14),
                     );
                   },
@@ -94,7 +126,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   children: [
                     Expanded(
                       child: Text(
-                        recipesList[1].procedure!,
+                        selectedRecipe.procedure!,
                         softWrap: true, //Enable wrapping of text
                       ),
                     ),
