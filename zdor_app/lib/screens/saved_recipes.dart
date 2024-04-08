@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/widgets/recipe_card.dart';
-import 'package:zdor_app/widgets/bottom_navigation_bar.dart' as Custom;
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/card/recipe_card.dart';
+import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class SavedRecipesPage extends StatelessWidget {
   final List<Recipe> savedRecipesList;
