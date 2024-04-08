@@ -22,28 +22,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-
-
-
-// void main() {
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     home: SafeArea(child: HomeScreen()),
-//   ));
-// }
-
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'ZdorApp',
-//       theme: ThemeData(
-//         primarySwatch: Colors.orange,
-//       ),
-//       home: const RecipeDetailScreen(),
-=======
->>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720

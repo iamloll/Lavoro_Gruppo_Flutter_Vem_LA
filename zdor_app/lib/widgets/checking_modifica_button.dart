@@ -12,7 +12,7 @@ class checking_modifica_button extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle, // Imposta la forma del contorno su cerchio
           border: Border.all(
-            color: kLightOrangeColor, // Colore del contorno
+            color: kOrangeColor, // Colore del contorno
             width: 3.0, // Spessore del contorno
           ),
         ),
@@ -23,7 +23,7 @@ class checking_modifica_button extends StatelessWidget {
             Navigator.pop(context);
           },
           backgroundColor: kDarkGreyColor,
-          foregroundColor: kLightOrangeColor,
+          foregroundColor: kOrangeColor,
           shape: CircleBorder(),
           child: Icon(Icons.check, size: 40.0),
         ));
