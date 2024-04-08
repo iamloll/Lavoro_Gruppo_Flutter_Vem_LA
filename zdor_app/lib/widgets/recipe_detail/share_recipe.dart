@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_buttons.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class ShareRecipe extends StatelessWidget {
   const ShareRecipe({Key? key});
@@ -20,7 +21,7 @@ class ShareRecipe extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color.fromARGB(255, 230, 160, 97),
+                color: kOrangeColor,
                 width: 2.0,
               ),
               borderRadius: BorderRadius.circular(8.0),

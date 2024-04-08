@@ -15,7 +15,7 @@ class RecipeDetail extends StatefulWidget {
 }
 
 class _RecipeDetailState extends State<RecipeDetail> {
-  final recipesList = RecipesService().getRecipes().toList();
+  final recipesList = RecipesService().getRecipes(results: 30).toList();
 
   @override
   Widget build(BuildContext context) {

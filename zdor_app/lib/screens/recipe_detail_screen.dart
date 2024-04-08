@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 //import 'package:zdor_app/main.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 //import 'package:zdor_app/widgets/share_buttons.dart';
-import 'recipe_detail.dart';
-import 'share_recipe.dart';
+import '../widgets/recipe_detail/recipe_detail.dart';
+import '../widgets/recipe_detail/share_recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-
+import 'package:zdor_app/widgets/bottom_navigation_bar.dart';
 import 'package:zdor_app/models/recipe.dart'; // Importa la classe Recipe
 
 class RecipeDetailScreen extends StatelessWidget {
@@ -18,7 +18,8 @@ class RecipeDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recipesList = RecipesService().getRecipes(results: 10).toList();
+    final recipesList = RecipesService().getRecipes(results: 30).toList();
+
     return Scaffold(
       backgroundColor: kBlackColor,
       appBar: AppBar(

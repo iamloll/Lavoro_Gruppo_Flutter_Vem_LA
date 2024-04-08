@@ -5,7 +5,7 @@ import 'package:zdor_app/screens/home.dart';
 import 'package:zdor_app/widgets/recipe_card.dart';
 import 'package:zdor_app/screens/home.dart';
 import 'package:zdor_app/widgets/main_screen.dart';
-import 'package:zdor_app/widgets/recipe_detail/recipe_detail_screen.dart';
+import 'package:zdor_app/screens/recipe_detail_screen.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 void main() {
