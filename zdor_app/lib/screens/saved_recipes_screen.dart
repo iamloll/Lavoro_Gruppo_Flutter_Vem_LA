@@ -3,7 +3,7 @@ import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
-import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; // Import del widget RecipeSaveButton
+import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; 
 
 class SavedRecipesPage extends StatelessWidget {
   final List<Recipe> savedRecipesList;
