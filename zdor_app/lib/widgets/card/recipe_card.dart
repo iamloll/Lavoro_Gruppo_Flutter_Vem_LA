@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
-class RecipeCardHorizontal extends StatefulWidget {
+class RecipeCard extends StatefulWidget {
   final Recipe recipe;
+  final bool isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
+  final VoidCallback? onSave; // Nuovo parametro per la funzione di salvataggio della ricetta
 
-  RecipeCardHorizontal({required this.recipe}); // Costruttore che richiede una ricetta come argomento
+  RecipeCard({required this.recipe, this.isSaved = false, this.onSave}); // Costruttore con i nuovi parametri opzionali
 
   @override
-  _RecipeCardHorizontalState createState() => _RecipeCardHorizontalState(); // Crea lo stato associato al widget
+  _RecipeCardState createState() => _RecipeCardState(); // Crea lo stato associato al widget
 }
 
-class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
-  bool _isFavorite = false; // Variabile booleana per tenere traccia dello stato del preferito
-
+class _RecipeCardState extends State<RecipeCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 22, vertical: 10), // Margini orizzontali e verticali
-      width: MediaQuery.of(context).size.width * 0.5, // Larghezza del container pari alla metà della larghezza dello schermo
+      width: MediaQuery.of(context).size.width, // Larghezza del container pari alla larghezza dello schermo
       height: 180, // Altezza fissa del container
       decoration: BoxDecoration(
         color: kWhiteColor, 
@@ -39,30 +39,12 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(widget.recipe.image ?? ''), // Immagine della ricetta
+          image: AssetImage(widget.recipe.image ?? ''), // Immagine della ricetta
           fit: BoxFit.cover, // Adatta l'immagine per coprire tutto il container
         ),
       ),
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: IconButton(
-                icon: Icon(
-                  _isFavorite ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
-                  color: _isFavorite ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
-                  size: 20, // Dimensione dell'icona
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isFavorite = !_isFavorite; // Cambia lo stato del preferito quando viene premuto l'icona
-                  });
-                },
-              ),
-            ),
-          ),
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
@@ -77,11 +59,16 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
                 children: [
                   Icon(
                     Icons.schedule, // Icona dell'orologio
-                    color: kOrangeColor, 
-                    size: 18, 
+                    color: kOrangeColor,
+                    size: 18, // Dimensione dell'icona
                   ),
                   SizedBox(width: 7),
-                  Text(widget.recipe.prep_time ?? ''), // Tempo di preparazione della ricetta
+                  Text(
+                    widget.recipe.prep_time ?? '',
+                    style: TextStyle(
+                      color: kWhiteColor
+                    ),
+                  ), // Tempo di preparazione della ricetta
                 ],
               ),
             ),
@@ -93,12 +80,29 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
               child: Text(
                 widget.recipe.title ?? '', // Titolo della ricetta
                 style: TextStyle(
-                  fontSize: 19, 
+                  color: kWhiteColor,
+                  fontSize: 19, // Dimensione del testo
                 ),
                 overflow: TextOverflow.ellipsis, // Tronca il testo se troppo lungo
                 maxLines: 2, // Numero massimo di linee per il testo
                 textAlign: TextAlign.center, // Allineamento del testo al centro
               ),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: IconButton(
+              icon: Icon(
+                widget.isSaved ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
+                color: widget.isSaved ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
+                size: 20, // Dimensione dell'icona
+              ),
+              onPressed: () {
+                if (widget.onSave != null) {
+                  widget.onSave!(); // Esegui la funzione di salvataggio, se definita
+                }
+              },
             ),
           ),
         ],

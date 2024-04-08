@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
-import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
 import 'package:zdor_app/widgets/style/constant.dart';
+import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
+import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; 
 
 class SavedRecipesPage extends StatelessWidget {
   final List<Recipe> savedRecipesList;
-  final void Function(int) onPageChanged; // Funzione per cambiare la pagina
+  final void Function(int) onPageChanged;
 
   const SavedRecipesPage({
     Key? key,
@@ -36,15 +37,15 @@ class SavedRecipesPage extends StatelessWidget {
                   recipe: recipe,
                   isSaved: true,
                   onSave: () {
-                    // Implementa la logica per gestire il salvataggio/rimozione della ricetta
+                    if (savedRecipesList.contains(recipe)) {
+                      savedRecipesList.remove(recipe);
+                    } else {
+                      savedRecipesList.add(recipe);
+                    }
                   },
                 );
               },
             ),
-      bottomNavigationBar: Custom.CustomNavigationBar(
-        currentPageIndex: 2,
-        onPageChanged: onPageChanged, // Passa la funzione onPageChanged alla barra di navigazione personalizzata
-      ),
     );
   }
 }
