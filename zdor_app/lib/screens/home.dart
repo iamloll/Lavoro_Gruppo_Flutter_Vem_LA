@@ -5,7 +5,7 @@ import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/card/horizontal_recipe_card.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/searchbar/recipe_search_bar.dart';
-import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; 
+import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -39,7 +39,7 @@ class _HomepageState extends State<Homepage> {
                 // );
                 showBottomSheet(context: context, builder: (bc) {
                   return Column(
-                    
+
                   children: [
                     ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
                   ],
