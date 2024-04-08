@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class checking_modifica_button extends StatelessWidget {
   const checking_modifica_button();

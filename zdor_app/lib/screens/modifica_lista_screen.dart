@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import '../widgets/checking_modifica_button.dart';
 import 'lista_spesa_screen.dart';
 

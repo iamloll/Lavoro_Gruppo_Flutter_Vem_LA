@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:zdor_app/services/recipes_service.dart';
-import 'package:zdor_app/views/home.dart';
-import 'package:zdor_app/widgets/card/recipe_card.dart';
-import 'package:zdor_app/views/home.dart';
+
 import 'package:zdor_app/widgets/main_screen.dart';
 
 void main() {

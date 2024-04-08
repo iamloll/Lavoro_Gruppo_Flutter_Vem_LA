@@ -61,12 +61,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  assets:
-    - lib/assets/facebook.png
-    - lib/assets/instagram.png
-    - lib/assets/share.png
-    - lib/assets/telegram.png
-    - lib/assets/whatsapp.png
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/

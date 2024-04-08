@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/constant.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/screens/modifica_lista_screen.dart';
 import 'package:zdor_app/widgets/modifica_lista_button.dart'; // Importa la pagina di modifica
 

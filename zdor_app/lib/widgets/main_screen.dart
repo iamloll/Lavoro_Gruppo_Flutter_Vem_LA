@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/views/home.dart';
-import 'package:zdor_app/views/saved_recipes.dart';
+import 'package:zdor_app/screens/home.dart';
+import 'package:zdor_app/screens/saved_recipes.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
