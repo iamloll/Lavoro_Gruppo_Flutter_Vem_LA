@@ -3,6 +3,7 @@
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:flutter/material.dart';
 //import 'package:zdor_app/widgets/recipe_detail_screen.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeDetail extends StatefulWidget {
   const RecipeDetail({
@@ -14,7 +15,7 @@ class RecipeDetail extends StatefulWidget {
 }
 
 class _RecipeDetailState extends State<RecipeDetail> {
-  final recipesList = RecipesService().getRecipes(results: 10).toList();
+  final recipesList = RecipesService().getRecipes().toList();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     borderRadius: BorderRadius.circular(30.0),
                     child: Container(
                       constraints: BoxConstraints(maxHeight: 250),
-                      child: Image.network(
+                      child: Image.asset(
                         // 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg'
                         selectedRecipe.image!,
                         fit: BoxFit.fill,
@@ -58,12 +59,12 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text("Categoria:")],
+                        children: [Text("Categoria:", style: TextStyle(color: kWhiteColor))],
                       ),
                       SizedBox(height: 5),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text(selectedRecipe.category!)],
+                        children: [Text(selectedRecipe.category!, style: TextStyle(color: kWhiteColor))],
                       ),
                     ],
                   ),
@@ -77,12 +78,12 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text("Tempo:")],
+                        children: [Text("Tempo:", style: TextStyle(color: kWhiteColor))],
                       ),
                       SizedBox(height: 5),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [Text(selectedRecipe.prep_time!)],
+                        children: [Text(selectedRecipe.prep_time!, style: TextStyle(color: kWhiteColor))],
                       ),
                     ],
                   ),
@@ -95,7 +96,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Ingredienti:"),
+                Text("Ingredienti:", style: TextStyle(color: kWhiteColor)),
                 SizedBox(height: 5),
 
                 // ListView for showing every ingredient in a different line
@@ -105,7 +106,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   itemBuilder: (BuildContext context, int index) {
                     return Text(
                       '- ${selectedRecipe.ingredients_list![index]}',
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14, color: kWhiteColor),
                     );
                   },
                 ),
@@ -117,7 +118,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Procedimento:"),
+                Text("Procedimento:", style: TextStyle(color: kWhiteColor)),
                 SizedBox(height: 5),
 
                 // Expanded to avoid horizontal overflow of text
@@ -126,7 +127,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   children: [
                     Expanded(
                       child: Text(
-                        selectedRecipe.procedure!,
+                        selectedRecipe.procedure!, 
+                        style: TextStyle(color: kWhiteColor),
                         softWrap: true, //Enable wrapping of text
                       ),
                     ),

@@ -39,7 +39,7 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(widget.recipe.image ?? ''), // Immagine della ricetta
+          image: AssetImage(widget.recipe.image ?? ''), // Immagine della ricetta
           fit: BoxFit.cover, // Adatta l'immagine per coprire tutto il container
         ),
       ),
