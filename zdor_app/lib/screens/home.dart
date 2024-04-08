@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/services/recipes_service.dart';
-import 'package:zdor_app/widgets/style/constant.dart';
+import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/card/horizontal_recipe_card.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/searchbar/recipe_search_bar.dart';
-import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
+import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; 
 
 class Homepage extends StatefulWidget {
-  final void Function() navigateToSavedRecipes; // Aggiunto parametro navigateToSavedRecipes
-
-  const Homepage({Key? key, required this.navigateToSavedRecipes}) : super(key: key);
-
   @override
-  State<Homepage> createState() => _HomepageState();
+  _HomepageState createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
   final List<Recipe> recipesList = RecipesService().getRecipes(results: 10).toList();
-  int currentPageIndex = 0;
   final TextEditingController _searchController = TextEditingController();
   bool _isSearchFocused = false;
-  List<Recipe> savedRecipesList = []; // Dichiarazione della lista di ricette salvate
+  List<Recipe> savedRecipesList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -82,13 +77,13 @@ class _HomepageState extends State<Homepage> {
                 for (final r in recipesList)
                   RecipeCard(
                     recipe: r,
-                    isSaved: savedRecipesList.contains(r), // Imposta il flag isSaved in base alla presenza della ricetta nella lista salvate
+                    isSaved: savedRecipesList.contains(r),
                     onSave: () {
                       setState(() {
                         if (savedRecipesList.contains(r)) {
-                          savedRecipesList.remove(r); // Rimuovi la ricetta se è già salvata
+                          savedRecipesList.remove(r);
                         } else {
-                          savedRecipesList.add(r); // Aggiungi la ricetta se non è ancora salvata
+                          savedRecipesList.add(r);
                         }
                       });
                     },
@@ -98,18 +93,6 @@ class _HomepageState extends State<Homepage> {
             SizedBox(height: 20),
           ],
         ),
-      ),
-      bottomNavigationBar: Custom.CustomNavigationBar(
-        currentPageIndex: currentPageIndex,
-        onPageChanged: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-          if (index == 1) {
-            // Naviga alla schermata delle ricette salvate quando viene selezionata l'opzione "Salvate" nella barra di navigazione
-            widget.navigateToSavedRecipes(); // Chiamata alla funzione navigateToSavedRecipes fornita come parametro
-          }
-        },
       ),
     );
   }

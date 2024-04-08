@@ -1,23 +1,23 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'package:flutter/foundation.dart'; // Importa questo pacchetto
+import 'package:flutter/foundation.dart';
 
 class Recipe {
   final String? id;
   final String? title;
   final String? category;
   final String? image;
-  final List<dynamic>? ingredients_list;
+  final List<dynamic>? ingredients_list; 
   final String? procedure;
   final String? prep_time;
   final bool isSaved;
-  final VoidCallback onSave; 
+  final Function onSave; 
+
   Recipe({
     this.id,
     this.title,
     this.category,
     this.image,
-    this.ingredients_list,
+    this.ingredients_list, 
     this.procedure,
     this.prep_time,
     required this.isSaved,
@@ -29,11 +29,11 @@ class Recipe {
     String? title,
     String? category,
     String? image,
-    List<dynamic>? ingredients_list,
+    List<dynamic>? ingredients_list, 
     String? procedure,
-    String? prep_time,
+    String? prepTime,
     bool? isSaved,
-    VoidCallback? onSave,
+    Function? onSave, 
   }) {
     return Recipe(
       id: id ?? this.id,
@@ -54,9 +54,9 @@ class Recipe {
       'title': title,
       'category': category,
       'image': image,
-      'ingredients_list': ingredients_list,
+      'ingredients_list': ingredients_list, 
       'procedure': procedure,
-      'prep_time': prep_time,
+      'prep_time': prep_time, 
     };
   }
 
@@ -70,10 +70,10 @@ class Recipe {
         category: map['category'] != null ? map['category'] as String : null,
         image: map['image'] != null ? map['image'] as String : null,
         ingredients_list: map['ingredients_list'] != null
-            ? map['ingredients_list'] as List<dynamic>
+            ? map['ingredients_list'] as List<dynamic> 
             : null,
         procedure: map['procedure'] != null ? map['procedure'] as String : null,
-        prep_time: map['prep_time'] != null ? map['prep_time'] as String : null,
+        prep_time: map['prep_time'] != null ? map['prep_time'] as String : null, 
         isSaved: false,
         onSave: () {},
       );
