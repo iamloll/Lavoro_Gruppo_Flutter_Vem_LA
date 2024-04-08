@@ -6,14 +6,22 @@ class RecipesService {
     final Map<String, dynamic> data = jsonDecode(recipesJson);
 
     final toReturn = List<Recipe>.from(
-      data['recipes']!.map((x) => Recipe.fromJson(x)).take(results));
+      data['recipes']!.map((x) => Recipe.fromJson(x)).take(results),
+    );
 
     return toReturn;
   }
+
+  Recipe getRecipeById(int id) {
+    final List<Recipe> data = getRecipes(results: 30).toList();
+
+    final Recipe recipe = data.firstWhere((r) => int.parse(r.id!) == id);
+
+    return recipe;
+  }
 }
 
-const recipesJson = 
-'''
+const recipesJson = '''
 {
   "recipes": 
   [
@@ -21,7 +29,7 @@ const recipesJson =
       "id": "1",
       "title": "Spaghetti alla carbonara",
       "category": "Primi",
-      "image": "carbonara.jpg",
+      "image": "assets/carbonara.jpg",
       "ingredients_list": [
         "Spaghetti",
         "Uova",
@@ -36,7 +44,7 @@ const recipesJson =
       "id": "2",
       "title": "Risotto ai funghi",
       "category": "Primi",
-      "image": "risotto_funghi.jpg",
+      "image": "assets/risotto_funghi.jpg",
       "ingredients_list": [
         "Riso",
         "Funghi porcini",
@@ -54,7 +62,7 @@ const recipesJson =
       "id": "3",
       "title": "Spaghetti alle vongole",
       "category": "Primi",
-      "image": "spaghetti_vongole.jpg",
+      "image": "assets/spaghetti_vongole.jpg",
       "ingredients_list": [
         "Spaghetti",
         "Vongole",
@@ -71,7 +79,7 @@ const recipesJson =
       "id": "4",
       "title": "Lasagne al forno",
       "category": "Primi",
-      "image": "lasagne.jpg",
+      "image": "assets/lasagne.jpg",
       "ingredients_list": [
         "Lasagne",
         "Carne macinata",
@@ -88,7 +96,7 @@ const recipesJson =
       "id": "5",
       "title": "Minestrone",
       "category": "Primi",
-      "image": "minestrone.jpg",
+      "image": "assets/minestrone.jpg",
       "ingredients_list": [
         "Zucchine",
         "Patate",
@@ -111,7 +119,7 @@ const recipesJson =
       "id": "6",
       "title": "Muffin al cioccolato",
       "category": "Colazione",
-      "image": "muffin_cioccolato.jpg",
+      "image": "assets/muffin_cioccolato.jpg",
       "ingredients_list": [
         "Farina",
         "Zucchero",
@@ -130,7 +138,7 @@ const recipesJson =
       "id": "7",
       "title": "Pancake",
       "category": "Colazione",
-      "image": "pancake.jpg",
+      "image": "assets/pancake.jpg",
       "ingredients_list": [
         "Farina",
         "Zucchero",
@@ -147,7 +155,7 @@ const recipesJson =
       "id": "8",
       "title": "Croissant alla crema",
       "category": "Colazione",
-      "image": "croissant_crema.jpg",
+      "image": "assets/croissant_crema.jpg",
       "ingredients_list": [
         "Pasta sfoglia",
         "Crema pasticcera",
@@ -161,7 +169,7 @@ const recipesJson =
       "id": "9",
       "title": "Uova alla benedict",
       "category": "Colazione",
-      "image": "uova_benedict.jpg",
+      "image": "assets/uova_benedict.jpg",
       "ingredients_list": [
         "Uova",
         "Panini muffin (o altro tipo di pane)",
@@ -178,7 +186,7 @@ const recipesJson =
       "id": "10",
       "title": "Bowl di yogurt alla frutta fresca e cereali",
       "category": "Colazione",
-      "image": "bowl_yogurt_frutta.jpg",
+      "image": "assets/bowl_frutta.jpg",
       "ingredients_list": [
         "Yogurt greco",
         "Frutta fresca (fragole, mirtilli, banane, ecc.)",
@@ -193,7 +201,7 @@ const recipesJson =
       "id": "11",
       "title": "Bruschette al pomodoro",
       "category": "Antipasti",
-      "image": "bruschette_pomodoro.jpg",
+      "image": "assets/bruschetta.jpg",
       "ingredients_list": [
         "Pane rustico",
         "Pomodori maturi",
@@ -210,7 +218,7 @@ const recipesJson =
       "id": "12",
       "title": "Carpaccio di manzo",
       "category": "Antipasti",
-      "image": "carpaccio_manzo.jpg",
+      "image": "assets/carpaccio.jpg",
       "ingredients_list": [
         "Fettine di manzo",
         "Rucola",
@@ -227,7 +235,7 @@ const recipesJson =
       "id": "13",
       "title": "Insalata di mare",
       "category": "Antipasti",
-      "image": "insalata_mare.jpg",
+      "image": "assets/insalata_mare.jpg",
       "ingredients_list": [
         "Frutti di mare misti (cozze, vongole, gamberetti)",
         "Pomodorini ciliegia",
@@ -245,7 +253,7 @@ const recipesJson =
       "id": "14",
       "title": "Crostini con pate di olive",
       "category": "Antipasti",
-      "image": "crostini_pate_olive.jpg",
+      "image": "assets/crostini_olive.jpg",
       "ingredients_list": [
         "Pane croccante",
         "Olive nere denocciolate",
@@ -262,7 +270,7 @@ const recipesJson =
       "id": "15",
       "title": "Frittelle di zucchine",
       "category": "Antipasti",
-      "image": "frittelle_zucchine.jpg",
+      "image": "assets/frittelle.jpg",
       "ingredients_list": [
         "Zucchine",
         "Farina",
@@ -281,7 +289,7 @@ const recipesJson =
       "id": "16",
       "title": "Pollo al limone",
       "category": "Secondi",
-      "image": "pollo_limone.jpg",
+      "image": "assets/pollo_limone.jpg",
       "ingredients_list": [
         "Petto di pollo",
         "Limoni",
@@ -299,7 +307,7 @@ const recipesJson =
       "id": "17",
       "title": "Filetto di branzino al forno",
       "category": "Secondi",
-      "image": "branzino_forno.jpg",
+      "image": "assets/branzino.jpg",
       "ingredients_list": [
         "Filetti di branzino",
         "Limone",
@@ -316,7 +324,7 @@ const recipesJson =
       "id": "18",
       "title": "Tagliata di manzo",
       "category": "Secondi",
-      "image": "tagliata_manzo.jpg",
+      "image": "assets/tagliata.jpg",
       "ingredients_list": [
         "Bistecca di manzo",
         "Rosmarino",
@@ -332,7 +340,7 @@ const recipesJson =
       "id": "19",
       "title": "Polpette di melanzane",
       "category": "Secondi",
-      "image": "polpette_melanzane.jpg",
+      "image": "assets/polpette_melanzane.jpg",
       "ingredients_list": [
         "Melanzane",
         "Pane grattugiato",
@@ -351,7 +359,7 @@ const recipesJson =
       "id": "20",
       "title": "Cotoletta alla milanese",
       "category": "Secondi",
-      "image": "cotoletta_milanese.jpg",
+      "image": "assets/cotoletta_milanese.jpg",
       "ingredients_list": [
         "Fettine di carne (vitello, maiale o pollo)",
         "Uova",
@@ -369,7 +377,7 @@ const recipesJson =
       "id": "21",
       "title": "Cheesecake alle fragole",
       "category": "Dolci",
-      "image": "cheesecake_fragole.jpg",
+      "image": "assets/cheesecake.jpg",
       "ingredients_list": [
         "Biscotti digestive",
         "Burro fuso",
@@ -387,7 +395,7 @@ const recipesJson =
       "id": "22",
       "title": "Crostata di frutta",
       "category": "Dolci",
-      "image": "crostata_frutta.jpg",
+      "image": "assets/crostata_frutta.jpg",
       "ingredients_list": [
         "Farina",
         "Burro",
@@ -403,7 +411,7 @@ const recipesJson =
       "id": "23",
       "title": "Mousse al cioccolato",
       "category": "Dolci",
-      "image": "mousse_cioccolato.jpg",
+      "image": "assets/mousse_ciocco.jpg",
       "ingredients_list": [
         "Cioccolato fondente",
         "Uova",
@@ -417,7 +425,7 @@ const recipesJson =
       "id": "24",
       "title": "Cannoli siciliani",
       "category": "Dolci",
-      "image": "cannoli_siciliani.jpg",
+      "image": "assets/cannoli_siciliani.jpg",
       "ingredients_list": [
         "Farina",
         "Zucchero",
@@ -439,7 +447,7 @@ const recipesJson =
       "id": "25",
       "title": "Tiramisù",
       "category": "Dolci",
-      "image": "tiramisu.jpg",
+      "image": "assets/tiramisu.jpg",
       "ingredients_list": [
         "Savoiardi",
         "Caffè",
@@ -454,7 +462,7 @@ const recipesJson =
       "id": "26",
       "title": "Pizza Margherita",
       "category": "Lievitati",
-      "image": "margherita.jpg",
+      "image": "assets/pizza.jpg",
       "ingredients_list": [
         "Farina",
         "Acqua",
@@ -471,7 +479,7 @@ const recipesJson =
       "id": "27",
       "title": "Focaccia",
       "category": "Lievitati",
-      "image": "focaccia.jpg",
+      "image": "assets/focaccia.jpg",
       "ingredients_list": [
         "Farina",
         "Acqua",
@@ -488,7 +496,7 @@ const recipesJson =
       "id": "28",
       "title": "Pane ai cereali",
       "category": "Lievitati",
-      "image": "pane_ai_cereali.jpg",
+      "image": "assets/pane_cereali.jpg",
       "ingredients_list": [
         "Farina",
         "Acqua",
@@ -506,7 +514,7 @@ const recipesJson =
       "id": "29",
       "title": "Panzerotti",
       "category": "Lievitati",
-      "image": "panzerotti.jpg",
+      "image": "assets/panzerotti.jpg",
       "ingredients_list": [
         "Farina",
         "Acqua",
@@ -526,7 +534,7 @@ const recipesJson =
       "id": "30",
       "title": "Gnocco Fritto",
       "category": "Lievitati",
-      "image": "gnocco_fritto.jpg",
+      "image": "assets/gnocco_fritto.jpg",
       "ingredients_list": [
         "Farina",
         "Acqua",
