@@ -2,7 +2,7 @@
 //import 'package:accordion/controllers.dart';
 
 import 'package:flutter/material.dart';
-import 'package:zdor_app/widgets/share_buttons.dart';
+import 'package:zdor_app/widgets/recipe_detail/share_buttons.dart';
 
 class ShareRecipe extends StatelessWidget {
   const ShareRecipe({Key? key});
@@ -37,23 +37,23 @@ class ShareRecipe extends StatelessWidget {
           Row(
             children: [
               ShareButtons(
-                imagePath: 'lib/assets/share.png',
+                imagePath: 'assets/icon_social/share.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'lib/assets/instagram.png',
+                imagePath: 'assets/icon_social/instagram.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'lib/assets/facebook.png',
+                imagePath: 'assets/icon_social/facebook.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'lib/assets/telegram.png',
+                imagePath: 'assets/icon_social/telegram.png',
                 onPressed: () {},
               ),
               ShareButtons(
-                imagePath: 'lib/assets/whatsapp.png',
+                imagePath: 'assets/icon_social/whatsapp.png',
                 onPressed: () {},
               ),
             ],
