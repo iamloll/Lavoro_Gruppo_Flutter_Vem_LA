@@ -1,64 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zdor_app/services/recipes_service.dart';
-//import 'package:accordion/accordion.dart';
-//import 'package:accordion/controllers.dart';
-import 'widgets/recipe_detail_screen.dart';
+import 'package:zdor_app/views/home.dart';
+import 'package:zdor_app/widgets/recipe_card.dart';
+import 'package:zdor_app/views/home.dart';
+import 'package:zdor_app/widgets/main_screen.dart';
 
 void main() {
-  //QUI VA IL COMPONENTE BASE DA VISUALIZZARE NELL'APP
-  runApp(
-    MaterialApp(
-      //elimino il flag debug in alto a destra
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-      textTheme: TextTheme(
-        bodyLarge: TextStyle(),
-        bodyMedium: TextStyle(),
-      ).apply(
-        bodyColor: Colors.white, 
-        displayColor: Colors.black, 
-      ),
-    ),
-      home: SafeArea(
-        //child: RecipesListView()),
-        child: RecipeDetailScreen()),
-    ));
+  runApp(MyApp());
 }
 
-class RecipesListView extends StatelessWidget {
-  RecipesListView({super.key});
-
-  //chiamo il mio servizio e ottengo una lista di 10 ricette
-  final recipesList = RecipesService().getRecipes(results: 10).toList();
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //costruisco una List View con la lista di 10 ricette ottenuto a riga 12
-      body: ListView.builder(
-        //itemCount = lunghezza della lista da visualizzare
-        itemCount: recipesList.length,
-        //itemBuilder = come visualizzare la lista
-        itemBuilder: (context, index) {
-          final r = recipesList[index];
-          return Card(
-            child: Column(
-              //la colonna sarà allineata al centro
-              mainAxisAlignment: MainAxisAlignment.center,
-              //nella colonna visualizzo titolo, categoria, ingredienti e procedura (esempio base)
-              children: [
-                Text(r.title!),
-                Text(r.category!),
-                Text(r.ingredients_list!.toString()),                    
-                Text(r.procedure!),
-              ],
-            ),
-          );
-      })
+    return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(
+          // Definisci il tema della tua app
+          ),
+      home: MainScreen(), // Utilizza il MainScreen come schermata principale
     );
   }
 }
+<<<<<<< HEAD
 
 
 
@@ -81,3 +45,5 @@ class RecipesListView extends StatelessWidget {
 //         primarySwatch: Colors.orange,
 //       ),
 //       home: const RecipeDetailScreen(),
+=======
+>>>>>>> 2e5f0fc5c7b886f01ef04e78e7d52e5ba61ec720

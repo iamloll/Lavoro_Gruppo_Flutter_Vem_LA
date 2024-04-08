@@ -6,7 +6,8 @@ class RecipesService {
     final Map<String, dynamic> data = jsonDecode(recipesJson);
 
     final toReturn = List<Recipe>.from(
-      data['recipes']!.map((x) => Recipe.fromJson(x)).take(results));
+      data['recipes']!.map((x) => Recipe.fromJson(x)).take(results),
+    );
 
     return toReturn;
   }
@@ -20,8 +21,7 @@ class RecipesService {
   }
 }
 
-const recipesJson = 
-'''
+const recipesJson = '''
 {
   "recipes": 
   [
