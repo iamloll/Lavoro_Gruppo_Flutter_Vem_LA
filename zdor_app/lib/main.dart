@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:zdor_app/services/recipes_service.dart';
-import 'package:zdor_app/screens/home.dart';
-import 'package:zdor_app/widgets/recipe_card.dart';
-import 'package:zdor_app/screens/home.dart';
+import 'package:zdor_app/screens/planner_screen.dart';
 import 'package:zdor_app/widgets/main_screen.dart';
 
 void main() {
@@ -14,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(
           // Definisci il tema della tua app
@@ -26,8 +23,7 @@ class MyApp extends StatelessWidget {
 
 
 // void main() {
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
+//   runApp(MaterialApp(//     
 //     home: SafeArea(child: HomeScreen()),
 //   ));
 // }

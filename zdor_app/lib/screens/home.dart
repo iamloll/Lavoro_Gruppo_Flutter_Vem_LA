@@ -35,6 +35,20 @@ class _HomepageState extends State<Homepage> {
               searchController: _searchController,
               onSearch: (query) {
                 print('Ricerca: $query');
+                final findRecipes = RecipesService().getRecipeByInput(query).toList();
+                print("trovati $findRecipes");
+                // return Column(
+                //   children: [
+                //     ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                //   ],
+                // );
+                showBottomSheet(context: context, builder: (bc) {
+                  return Column(
+                  children: [
+                    ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                  ],
+                );
+                });
               },
               onFocusChanged: (isFocused) {
                 setState(() {
@@ -42,9 +56,9 @@ class _HomepageState extends State<Homepage> {
                 });
               },
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 22),
               child: Text(
                 'Le tue Ricette',
                 style: TextStyle(
@@ -54,7 +68,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -64,9 +78,9 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 22),
               child: Text(
                 'Ricette Suggerite',
                 style: TextStyle(
@@ -76,7 +90,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               children: [
                 for (final r in recipesList)
@@ -95,7 +109,7 @@ class _HomepageState extends State<Homepage> {
                   ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

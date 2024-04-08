@@ -14,6 +14,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _navigateToPage(int index) {
     setState(() {
+      print(index);
       _currentPageIndex = index;
     });
   }
@@ -33,20 +34,20 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentPageIndex,
-        onTap: _navigateToPage,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Salvate',
-          ),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentPageIndex,
+      //   onTap: _navigateToPage,
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.bookmark),
+      //       label: 'Salvate',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

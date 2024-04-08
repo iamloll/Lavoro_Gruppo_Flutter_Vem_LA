@@ -39,7 +39,7 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(widget.recipe.image ?? ''), // Immagine della ricetta
+          image: AssetImage(widget.recipe.image ?? ''), // Immagine della ricetta
           fit: BoxFit.cover, // Adatta l'immagine per coprire tutto il container
         ),
       ),
@@ -81,7 +81,11 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
                     size: 18, 
                   ),
                   SizedBox(width: 7),
-                  Text(widget.recipe.prep_time ?? ''), // Tempo di preparazione della ricetta
+                  Text(
+                    widget.recipe.prep_time ?? '', 
+                    style: TextStyle(
+                      color: kWhiteColor
+                    ),), // Tempo di preparazione della ricetta
                 ],
               ),
             ),
@@ -93,6 +97,7 @@ class _RecipeCardHorizontalState extends State<RecipeCardHorizontal> {
               child: Text(
                 widget.recipe.title ?? '', // Titolo della ricetta
                 style: TextStyle(
+                  color: kWhiteColor,
                   fontSize: 19, 
                 ),
                 overflow: TextOverflow.ellipsis, // Tronca il testo se troppo lungo

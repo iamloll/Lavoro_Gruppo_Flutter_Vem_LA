@@ -37,7 +37,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     borderRadius: BorderRadius.circular(30.0),
                     child: Container(
                       constraints: BoxConstraints(maxHeight: 250),
-                      child: Image.network(
+                      child: Image.asset(
                         // 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg'
                         selectedRecipe.image!,
                         fit: BoxFit.fill,
