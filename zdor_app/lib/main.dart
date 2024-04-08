@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'widgets/planner_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:zdor_app/screens/search_recipe_for_planner_screen.dart';
+import 'package:zdor_app/states/recipe_state.dart';
+import 'screens/planner_screen.dart';
 
 void main() {
   //QUI VA IL COMPONENTE BASE DA VISUALIZZARE NELL'APP
@@ -12,15 +15,12 @@ void main() {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: SafeArea(
-        child: PlannerWidget()
+      home: ChangeNotifierProvider(
+        create: (BuildContext context) => RecipeState() ,
+        child: SafeArea(
+          child: SearchRecipeForPlannerScreen()
+        ),
       ),
-      routes: {
-        //'/': (context) => PlannerWidget(),
-        '/newRecipe': (context) => const Text("Form aggiungi nuova ricetta"),
-        '/searchRecipe': (context) => const Text("Ricerca ricetta"),
-        
-      }
     ));
 }
 
