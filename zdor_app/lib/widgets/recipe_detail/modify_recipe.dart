@@ -117,6 +117,9 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(kWhiteColor),
+                ),
                 onPressed: () {
                   // final updatedRecipe = selectedRecipe.copyWith(
                   //   title: _title,
