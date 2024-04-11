@@ -133,7 +133,7 @@ class RecipeDetailScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: RecipeDetail(), // Mostra i dettagli della ricetta
+        child: RecipeDetail(recipe: recipe), // Mostra i dettagli della ricetta
       ),
     );
   }
