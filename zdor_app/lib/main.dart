@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:zdor_app/screens/screen_selector/main_screen.dart';
+import 'package:zdor_app/screens/search_recipe_for_planner_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +11,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My App',
+      title: 'ZdorApp',
       theme: ThemeData(
+        // Definisco il tema scuro per l'app
         brightness: Brightness.dark,
-          // Definisci il tema della tua app
+          
           ),
-      home: const MainScreen(), // Utilizza il MainScreen come schermata principale
+      // Utilizzo il MainScreen come schermata principale
+      // Si occupa della navigazione tra le pagine
+      //home: const MainScreen(), 
+      home : SearchRecipeForPlannerScreen()
     );
   }
 }
