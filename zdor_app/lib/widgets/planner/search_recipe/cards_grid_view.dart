@@ -27,6 +27,9 @@ class CardsGridView extends StatelessWidget {
             mainAxisSpacing: 5,
             crossAxisCount: 2,
             children: [
+              ...recipes.map((e) {
+                return SearchRecipeCard(title: e.title!, category: e.category!, image: e.image!);
+              })
               // cat != null ?  recipesByCat.map((el) {
               //   return SearchRecipeCard(title: el.title!, category: el.category!, image: el.image!);
               // }) : recipes.map((e) {

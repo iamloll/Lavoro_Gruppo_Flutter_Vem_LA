@@ -23,9 +23,9 @@ bool _isSearchFocused = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: kBlackColor,
       appBar: AppBar( 
+        automaticallyImplyLeading: false,
         backgroundColor: kBlackColor ,
         toolbarHeight: 150 ,       
         title: Column(          
