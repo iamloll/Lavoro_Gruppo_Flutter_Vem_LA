@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 
 class Recipe {
   final String? id;
@@ -9,8 +8,8 @@ class Recipe {
   final List<dynamic>? ingredients_list; 
   final String? procedure;
   final String? prep_time;
-  final bool isSaved;
-  final Function onSave; 
+  final String? isFavourite;  
+  final Function onSave; // DA TOGLIERE!
 
   Recipe({
     this.id,
@@ -20,7 +19,7 @@ class Recipe {
     this.ingredients_list, 
     this.procedure,
     this.prep_time,
-    required this.isSaved,
+    required this.isFavourite,
     required this.onSave,
   });
 
@@ -43,7 +42,7 @@ class Recipe {
       ingredients_list: ingredients_list ?? this.ingredients_list,
       procedure: procedure ?? this.procedure,
       prep_time: prep_time ?? this.prep_time,
-      isSaved: isSaved ?? this.isSaved,
+      isFavourite: isFavourite ?? this.isFavourite,
       onSave: onSave ?? this.onSave,
     );
   }
@@ -51,6 +50,7 @@ class Recipe {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'isFavourite': isFavourite,
       'title': title,
       'category': category,
       'image': image,
@@ -66,6 +66,7 @@ class Recipe {
 
   factory Recipe.fromJson(Map<String, dynamic> map) => Recipe(
         id: map['id'] != null ? map['id'] as String : null,
+        isFavourite: map['isFavourite'] != null ? map['isFavourite'] as String : null,
         title: map['title'] != null ? map['title'] as String : null,
         category: map['category'] != null ? map['category'] as String : null,
         image: map['image'] != null ? map['image'] as String : null,
@@ -74,13 +75,13 @@ class Recipe {
             : null,
         procedure: map['procedure'] != null ? map['procedure'] as String : null,
         prep_time: map['prep_time'] != null ? map['prep_time'] as String : null, 
-        isSaved: false,
+        //isFavourite: false,
         onSave: () {},
       );
 
   @override
   String toString() {
-    return 'Recipe(id: $id, title: $title, category: $category, image: $image, ingredients_list: $ingredients_list, procedure: $procedure, prep_time: $prep_time)';
+    return 'Recipe(id: $id, isFavourite: $isFavourite, title: $title, category: $category, image: $image, ingredients_list: $ingredients_list, procedure: $procedure, prep_time: $prep_time)';
   }
 
   @override
@@ -89,6 +90,7 @@ class Recipe {
 
     return other.id == id &&
         other.title == title &&
+        other.isFavourite == isFavourite &&
         other.category == category &&
         other.image == image &&
         other.ingredients_list == ingredients_list &&
@@ -99,6 +101,7 @@ class Recipe {
   @override
   int get hashCode {
     return id.hashCode ^
+        isFavourite.hashCode ^
         title.hashCode ^
         category.hashCode ^
         image.hashCode ^
