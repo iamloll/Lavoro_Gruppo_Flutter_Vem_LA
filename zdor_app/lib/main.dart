@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       // Utilizzo il MainScreen come schermata principale
       // Si occupa della navigazione tra le pagine
       home: const MainScreen(), 
-      //home : SearchRecipeForPlannerScreen()
+      // home : SearchRecipeForPlannerScreen()
     );
   }
 }

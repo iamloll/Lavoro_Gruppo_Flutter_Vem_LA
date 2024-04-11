@@ -8,7 +8,7 @@ class Recipe {
   final List<dynamic>? ingredients_list; 
   final String? procedure;
   final String? prep_time;
-  final String? isFavourite;  
+  late String? isFavourite;  
   final Function onSave; // DA TOGLIERE!
 
   Recipe({

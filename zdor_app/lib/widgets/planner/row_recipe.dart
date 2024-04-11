@@ -22,7 +22,7 @@ class RowRecipe extends StatelessWidget {
             aspectRatio: 31/9,
             child: Image.asset(recipe.image!, fit: BoxFit.fitWidth,)),
           Container(
-            height: 90,
+            height: 95,
             decoration: BoxDecoration(color: Colors.grey[700]?.withOpacity(0.6)),
           ),
           Row(

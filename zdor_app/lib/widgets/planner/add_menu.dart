@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/screens/search_recipe_for_planner_screen.dart';
 
-class AddMenu extends StatelessWidget {
-  const AddMenu({super.key});
+class AddMenu extends StatelessWidget {  
+  const AddMenu({
+    super.key, 
+    required this.day, 
+    required this.meal
+  });
+
+  final WeekDays day;
+  final Meals meal;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,7 @@ class AddMenu extends StatelessWidget {
               return;
             }
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SearchRecipeForPlannerScreen();
+              return SearchRecipeForPlannerScreen(day: day, meal: meal);
             }));
           },
           itemBuilder: (context) {
