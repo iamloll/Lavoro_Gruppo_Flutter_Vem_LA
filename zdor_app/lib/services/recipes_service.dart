@@ -41,23 +41,6 @@ class RecipesService {
 
     return favourite;
   }
-List<Recipe>  saveRecipe(Recipe recipe) {
-  final _savedRecipes= getFavouriteRecipes();
-  if (!_savedRecipes.contains(recipe)) {
-    recipe.isFavourite = 'true';
-    _savedRecipes.add(recipe);
-  }
-  return _savedRecipes;
-}
-
-List<Recipe> removeSavedRecipe(Recipe recipe) {
-  final _savedRecipes= getFavouriteRecipes();
-  if (_savedRecipes.contains(recipe)) {
-    recipe.isFavourite = 'false';
-    _savedRecipes.remove(recipe);
-  }
-  return _savedRecipes;
-}
 
   List<String> getCategories() {
     final List<Recipe> data = getRecipes(results: 30).toList();
