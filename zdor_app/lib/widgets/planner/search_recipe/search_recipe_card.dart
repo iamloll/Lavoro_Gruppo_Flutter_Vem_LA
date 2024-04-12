@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/states/recipe_state.dart';
+import 'package:zdor_app/widgets/style/constant.dart';
 
 class SearchRecipeCard extends StatefulWidget {
   final Recipe recipe;
@@ -22,11 +23,11 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
     return Consumer<RecipeState>(builder: (context, value, child) {
       return GestureDetector(
         onTap: () {
-          print("Tappato ricetta n. ${widget.recipe.id}");
-          print("day --> ${widget.day} - meal --> ${widget.meal}");
+          //print("Tappato ricetta n. ${widget.recipe.id}");
+          //print("day --> ${widget.day} - meal --> ${widget.meal}");
           value.addRecipe(
               widget.day, widget.meal, int.parse(widget.recipe.id!));
-          print(value.planner);
+          //print(value.planner);
           Navigator.pop(context);
         },
         child: Container(
@@ -69,7 +70,7 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                             onPressed: () {
                               //--LIKE DA FIXARE--
                               setState(() {
-                                print("favourite!");
+                                //print("favourite!");
                                 widget.recipe.isFavourite == "false"
                                     ? widget.recipe.isFavourite = "true"
                                     : widget.recipe.isFavourite = "false";
@@ -82,13 +83,14 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                                   )
                                 : const Icon(
                                     Icons.favorite_border,
+                                    color: kOrangeColor,
                                   )))),
               ),
               Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
-                    padding: EdgeInsets.all(5),
-                    margin: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(10),
                     height: 100,
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.05),
@@ -101,12 +103,11 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                         Flexible(
                             child: Text(
                           widget.recipe.title!,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: const TextStyle(color: Colors.white, fontSize: 18),
                         )),
                         Flexible(
                             child: Text(widget.recipe.category!,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14)))
+                                style: const TextStyle(color: Colors.white, fontSize: 14)))
                       ],
                     ),
                   )),
