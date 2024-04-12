@@ -24,7 +24,6 @@ class SearchRecipeCard extends StatefulWidget {
 class _SearchRecipeCardState extends State<SearchRecipeCard> {
   @override
   Widget build(BuildContext context) {
-    //final p = context.watch<RecipeState>();
     return Consumer<RecipeState>(
       builder: (context, value, child) {
         return GestureDetector(          
@@ -33,10 +32,7 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
           print("day --> ${widget.day} - meal --> ${widget.meal}");
           value.addRecipe(widget.day, widget.meal, int.parse(widget.recipe.id!));
           print(value.planner);
-          // --DA FIXARE--
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          //   return const PlannerWidget();
-          // }));
+          Navigator.pop(context);
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

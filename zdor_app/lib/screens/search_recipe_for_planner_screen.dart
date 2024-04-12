@@ -40,51 +40,48 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => RecipeState(),
-      child: Scaffold(
-        backgroundColor: kBlackColor,
-        appBar: AppBar( 
-          //automaticallyImplyLeading: false,
-          backgroundColor: kBlackColor ,
-          toolbarHeight: 80 ,       
-          title: RecipeSearchBar(
-            onFocusChanged: (isFocused) {
-              setState(() {
-                _isSearchFocused = isFocused;
-              });
-            },
-            onSearch: (query) {
-              print('Ricerca: $query');
-              final findRecipes = RecipesService().getRecipeByInput(query).toList();
-              print("trovati $findRecipes");              
-              showModalBottomSheet(context: context, builder: (bc) {
-                return SingleChildScrollView(
-                  child: Column(
-                  children: [
-                    ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
-                    ],
-                  ),
-                );
-              });
-            },
-            searchController: _searchController,
-          ),
-        ),
-        body: ChangeNotifierProvider(
-          create: (context) => CategoryState(),
-          child: Column(          
-              children: [ 
-                const Divider(              
-                  color: Colors.white
+    return Scaffold(
+      backgroundColor: kBlackColor,
+      appBar: AppBar( 
+        //automaticallyImplyLeading: false,
+        backgroundColor: kBlackColor ,
+        toolbarHeight: 80 ,       
+        title: RecipeSearchBar(
+          onFocusChanged: (isFocused) {
+            setState(() {
+              _isSearchFocused = isFocused;
+            });
+          },
+          onSearch: (query) {
+            print('Ricerca: $query');
+            final findRecipes = RecipesService().getRecipeByInput(query).toList();
+            print("trovati $findRecipes");              
+            showModalBottomSheet(context: context, builder: (bc) {
+              return SingleChildScrollView(
+                child: Column(
+                children: [
+                  ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                  ],
                 ),
-                FilterTags(),
-                CardsGridView(day: day, meal: meal)
-              ],
-            ),
+              );
+            });
+          },
+          searchController: _searchController,
         ),
-        
       ),
+      body: ChangeNotifierProvider(
+        create: (context) => CategoryState(),
+        child: Column(          
+            children: [ 
+              const Divider(              
+                color: Colors.white
+              ),
+              FilterTags(),
+              CardsGridView(day: day, meal: meal)
+            ],
+          ),
+      ),
+      
     );    
   }
 }

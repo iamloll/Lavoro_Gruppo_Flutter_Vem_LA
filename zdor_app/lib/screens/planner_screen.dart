@@ -13,10 +13,7 @@ class PlannerWidget extends StatelessWidget {
         appBar: AppBar(
           title: const Center(child: Text('Planner Pasti')),
         ),
-        body : ChangeNotifierProvider(
-          create: (context) => RecipeState(),
-          child: AccordionList()
-          )
+        body : AccordionList()
     );
   }
 }
