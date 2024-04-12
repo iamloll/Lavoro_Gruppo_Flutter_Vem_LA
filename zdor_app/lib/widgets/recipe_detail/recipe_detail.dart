@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
+import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 
-class RecipeDetail extends StatelessWidget {
+
+
+//------I valori modificati non vengono ancora aggiornati---------
+
+
+class RecipeDetail extends StatefulWidget {
   final Recipe recipe;
 
   const RecipeDetail({
     Key? key,
     required this.recipe,
-  }) : super(key: key);
+  }) : super(key: key); 
+
+  @override
+  State<RecipeDetail> createState() => _RecipeDetailState();
+}
+
+class _RecipeDetailState extends State<RecipeDetail> {
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   //_updateRecipe();
+  //   String? _title;
+  //   String? _category;
+  //   String? _prepTime;
+  //   String? _ingredients;
+  //   String? _procedure;
+  //   //File? _imageFile;
+    
+  //   widget.recipe.category = _category;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +52,7 @@ class RecipeDetail extends StatelessWidget {
                     child: Container(
                       constraints: BoxConstraints(maxHeight: 250),
                       child: Image.asset(
-                        recipe.image!,
+                        widget.recipe.image!,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -43,7 +69,7 @@ class RecipeDetail extends StatelessWidget {
                     children: [
                       Text("Categoria:", style: TextStyle(color: kWhiteColor)),
                       SizedBox(height: 5),
-                      Text(recipe.category ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
+                      Text(widget.recipe.category ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
                     ],
                   ),
                 ),
@@ -54,7 +80,7 @@ class RecipeDetail extends StatelessWidget {
                     children: [
                       Text("Tempo:", style: TextStyle(color: kWhiteColor)),
                       SizedBox(height: 5),
-                      Text(recipe.prep_time ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
+                      Text(widget.recipe.prep_time ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
                     ],
                   ),
                 ),
@@ -68,10 +94,10 @@ class RecipeDetail extends StatelessWidget {
                 SizedBox(height: 5),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: recipe.ingredients_list?.length ?? 0,
+                  itemCount: widget.recipe.ingredients_list?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Text(
-                      '- ${recipe.ingredients_list?[index] ?? ''}',
+                      '- ${widget.recipe.ingredients_list?[index] ?? ''}',
                       style: TextStyle(color: kWhiteColor, fontSize: 18),
                     );
                   },
@@ -85,7 +111,7 @@ class RecipeDetail extends StatelessWidget {
                 Text("Procedimento:", style: TextStyle(color: kWhiteColor)),
                 SizedBox(height: 5),
                 Text(
-                  recipe.procedure ?? '',
+                  widget.recipe.procedure ?? '',
                   style: TextStyle(color: kWhiteColor, fontSize: 18),
                   softWrap: true,
                 ),
