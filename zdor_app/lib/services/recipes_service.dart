@@ -24,12 +24,39 @@ class RecipesService {
     final List<Recipe> data = getRecipes(results: 30).toList();
 
     final List<Recipe> recipes = data.where((r) {
-      print("query $query");
+      //print("query $query");
       final String lowerTitle = r.title!.toLowerCase();
       return lowerTitle.contains(query);
     }).toList();
 
     return recipes;
+  }
+
+  List<Recipe> getFavouriteRecipes() {
+      final List<Recipe> data = getRecipes(results: 30).toList();
+
+      final List<Recipe> favourite = data.where((e) {
+        //print(e.isFavourite);
+        return e.isFavourite == "true";
+      }).toList();
+
+      return favourite;
+    }
+
+  List<String> getCategories() {
+    final List<Recipe> data = getRecipes(results: 30).toList();
+    final List<String> catList = [];
+
+    final cat = data.map((e) {
+      //print(e.category);
+      catList.add(e.category!);
+    }).toList();
+    
+    final distinctCat = catList.toSet().toList();
+    
+    //print(catList);
+    //print(distinctCat);
+    return distinctCat;
   }
 }
 
@@ -39,6 +66,7 @@ const recipesJson = '''
   [
     {
       "id": "1",
+      "isFavourite" : "false",
       "title": "Spaghetti alla carbonara",
       "category": "Primi",
       "image": "assets/image_recipes/carbonara.jpg",
@@ -54,6 +82,7 @@ const recipesJson = '''
     },
     {
       "id": "2",
+      "isFavourite" : "false",
       "title": "Risotto ai funghi",
       "category": "Primi",
       "image": "assets/image_recipes/risotto_funghi.jpg",
@@ -72,6 +101,7 @@ const recipesJson = '''
     },
     {
       "id": "3",
+      "isFavourite" : "false",
       "title": "Spaghetti alle vongole",
       "category": "Primi",
       "image": "assets/image_recipes/spaghetti_vongole.jpg",
@@ -89,6 +119,7 @@ const recipesJson = '''
     },
     {
       "id": "4",
+      "isFavourite" : "true",
       "title": "Lasagne al forno",
       "category": "Primi",
       "image": "assets/image_recipes/lasagne.jpg",
@@ -102,10 +133,11 @@ const recipesJson = '''
         "Olio extravergine d'oliva"
       ],
       "procedure": "Preparare la salsa di carne rosolando la carne macinata con la passata di pomodoro. Preparare la besciamella. In una teglia da forno, alternare strati di pasta, salsa di carne, besciamella e formaggio. Cuocere in forno preriscaldato a 180°C per circa 30 minuti.",
-      "prep_time": "1 ora e 30 minuti"
+      "prep_time": "90 minuti"
     },
     {
       "id": "5",
+      "isFavourite" : "false",
       "title": "Minestrone",
       "category": "Primi",
       "image": "assets/image_recipes/minestrone.jpg",
@@ -129,6 +161,7 @@ const recipesJson = '''
     },    
     {
       "id": "6",
+      "isFavourite" : "false",
       "title": "Muffin al cioccolato",
       "category": "Colazione",
       "image": "assets/image_recipes/muffin_cioccolato.jpg",
@@ -148,6 +181,7 @@ const recipesJson = '''
     },
     {
       "id": "7",
+      "isFavourite" : "false",
       "title": "Pancake",
       "category": "Colazione",
       "image": "assets/image_recipes/pancake.jpg",
@@ -165,6 +199,7 @@ const recipesJson = '''
     },
     {
       "id": "8",
+      "isFavourite" : "false",
       "title": "Croissant alla crema",
       "category": "Colazione",
       "image": "assets/image_recipes/croissant_crema.jpg",
@@ -179,6 +214,7 @@ const recipesJson = '''
     },
     {
       "id": "9",
+      "isFavourite" : "false",
       "title": "Uova alla benedict",
       "category": "Colazione",
       "image": "assets/image_recipes/uova_benedict.jpg",
@@ -196,6 +232,7 @@ const recipesJson = '''
     },
     {
       "id": "10",
+      "isFavourite" : "true",
       "title": "Bowl di yogurt alla frutta fresca e cereali",
       "category": "Colazione",
       "image": "assets/image_recipes/bowl_frutta.jpg",
@@ -211,6 +248,7 @@ const recipesJson = '''
     },
     {
       "id": "11",
+      "isFavourite" : "false",
       "title": "Bruschette al pomodoro",
       "category": "Antipasti",
       "image": "assets/image_recipes/bruschetta.jpg",
@@ -228,6 +266,7 @@ const recipesJson = '''
     },
     {
       "id": "12",
+      "isFavourite" : "false",
       "title": "Carpaccio di manzo",
       "category": "Antipasti",
       "image": "assets/image_recipes/carpaccio.jpg",
@@ -245,6 +284,7 @@ const recipesJson = '''
     },
     {
       "id": "13",
+      "isFavourite" : "false",
       "title": "Insalata di mare",
       "category": "Antipasti",
       "image": "assets/image_recipes/insalata_mare.jpg",
@@ -263,6 +303,7 @@ const recipesJson = '''
     },
     {
       "id": "14",
+      "isFavourite" : "false",
       "title": "Crostini con pate di olive",
       "category": "Antipasti",
       "image": "assets/image_recipes/crostini_olive.jpg",
@@ -280,6 +321,7 @@ const recipesJson = '''
     },
     {
       "id": "15",
+      "isFavourite" : "true",
       "title": "Frittelle di zucchine",
       "category": "Antipasti",
       "image": "assets/image_recipes/frittelle.jpg",
@@ -299,6 +341,7 @@ const recipesJson = '''
     },
     {
       "id": "16",
+      "isFavourite" : "false",
       "title": "Pollo al limone",
       "category": "Secondi",
       "image": "assets/image_recipes/pollo_limone.jpg",
@@ -317,6 +360,7 @@ const recipesJson = '''
     },
     {
       "id": "17",
+      "isFavourite" : "false",
       "title": "Filetto di branzino al forno",
       "category": "Secondi",
       "image": "assets/image_recipes/branzino.jpg",
@@ -334,6 +378,7 @@ const recipesJson = '''
     },
     {
       "id": "18",
+      "isFavourite" : "false",
       "title": "Tagliata di manzo",
       "category": "Secondi",
       "image": "assets/image_recipes/tagliata.jpg",
@@ -350,6 +395,7 @@ const recipesJson = '''
     },
     {
       "id": "19",
+      "isFavourite" : "true",
       "title": "Polpette di melanzane",
       "category": "Secondi",
       "image": "assets/image_recipes/polpette_melanzane.jpg",
@@ -369,6 +415,7 @@ const recipesJson = '''
     },
     {
       "id": "20",
+      "isFavourite" : "false",
       "title": "Cotoletta alla milanese",
       "category": "Secondi",
       "image": "assets/image_recipes/cotoletta_milanese.jpg",
@@ -387,6 +434,7 @@ const recipesJson = '''
     },
     {
       "id": "21",
+      "isFavourite" : "false",
       "title": "Cheesecake alle fragole",
       "category": "Dolci",
       "image": "assets/image_recipes/cheesecake.jpg",
@@ -401,10 +449,11 @@ const recipesJson = '''
         "Fragole"
       ],
       "procedure": "Tritare i biscotti digestive e mescolarli con il burro fuso. Pressare il composto di biscotti sul fondo di una teglia a cerniera, livellando bene. Mettere in frigorifero per 30 minuti. Nel frattempo, preparare la crema: sbattere il formaggio cremoso con lo zucchero e la vaniglia fino a ottenere una crema liscia. Aggiungere le uova una alla volta, mescolando bene dopo ogni aggiunta. Infine, incorporare delicatamente la panna montata. Versare la crema sulla base di biscotti e cuocere in forno preriscaldato a 160°C per circa 50-60 minuti o fino a quando il centro è leggermente tremolante. Lasciare raffreddare completamente e mettere in frigorifero per almeno 4 ore, meglio se tutta la notte. Prima di servire, decorare con fragole fresche.",
-      "prep_time": "30 minuti (più il tempo di riposo in frigorifero)"
+      "prep_time": "30 minuti"
     },
     {
       "id": "22",
+      "isFavourite" : "false",
       "title": "Crostata di frutta",
       "category": "Dolci",
       "image": "assets/image_recipes/crostata_frutta.jpg",
@@ -421,6 +470,7 @@ const recipesJson = '''
     },
     {
       "id": "23",
+      "isFavourite" : "false",
       "title": "Mousse al cioccolato",
       "category": "Dolci",
       "image": "assets/image_recipes/mousse_ciocco.jpg",
@@ -431,10 +481,11 @@ const recipesJson = '''
         "Panna montata"
       ],
       "procedure": "Fondere il cioccolato fondente a bagnomaria o nel microonde. Separare gli albumi dai tuorli. In una ciotola, sbattere i tuorli con lo zucchero fino a ottenere un composto chiaro e spumoso. Aggiungere il cioccolato fuso ai tuorli e mescolare bene. Montare gli albumi a neve ferma e incorporarli delicatamente al composto di cioccolato. Infine, incorporare la panna montata con movimenti delicati dal basso verso l'alto. Distribuire la mousse in coppette e mettere in frigorifero per almeno 2 ore prima di servire. Decorare a piacere con scaglie di cioccolato o panna montata.",
-      "prep_time": "30 minuti (più il tempo di riposo in frigorifero)"
+      "prep_time": "30 minuti"
     },
     {
       "id": "24",
+      "isFavourite" : "false",
       "title": "Cannoli siciliani",
       "category": "Dolci",
       "image": "assets/image_recipes/cannoli_siciliani.jpg",
@@ -457,6 +508,7 @@ const recipesJson = '''
     },
     {
       "id": "25",
+      "isFavourite" : "true",
       "title": "Tiramisù",
       "category": "Dolci",
       "image": "assets/image_recipes/tiramisu.jpg",
@@ -472,6 +524,7 @@ const recipesJson = '''
     },
     {
       "id": "26",
+      "isFavourite" : "false",
       "title": "Pizza Margherita",
       "category": "Lievitati",
       "image": "assets/image_recipes/pizza.jpg",
@@ -489,6 +542,7 @@ const recipesJson = '''
     },
     {
       "id": "27",
+      "isFavourite" : "false",
       "title": "Focaccia",
       "category": "Lievitati",
       "image": "assets/image_recipes/focaccia.jpg",
@@ -506,6 +560,7 @@ const recipesJson = '''
     },
     {
       "id": "28",
+      "isFavourite" : "false",
       "title": "Pane ai cereali",
       "category": "Lievitati",
       "image": "assets/image_recipes/pane_cereali.jpg",
@@ -524,6 +579,7 @@ const recipesJson = '''
     },
     {
       "id": "29",
+      "isFavourite" : "true",
       "title": "Panzerotti",
       "category": "Lievitati",
       "image": "assets/image_recipes/panzerotti.jpg",
@@ -544,6 +600,7 @@ const recipesJson = '''
     },
     {
       "id": "30",
+      "isFavourite" : "false",
       "title": "Gnocco Fritto",
       "category": "Lievitati",
       "image": "assets/image_recipes/gnocco_fritto.jpg",

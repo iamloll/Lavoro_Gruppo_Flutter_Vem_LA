@@ -29,7 +29,7 @@ class ShareRecipe extends StatelessWidget {
             child: const TextField(
               decoration: InputDecoration(
                 hintText: 'Inserisci email per condivisione', //Placeholder text
-                contentPadding: EdgeInsets.fromLTRB(5, 15, 5, 5),
+                contentPadding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                 border: InputBorder.none,
               ),
             ),

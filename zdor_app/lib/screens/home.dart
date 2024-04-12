@@ -21,29 +21,27 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _isSearchFocused ? Colors.black.withOpacity(0.8) : kBlackColor,
+      //backgroundColor: _isSearchFocused ? Colors.black.withOpacity(0.8) : kBlackColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 20),
             RecipeSearchBar(
               searchController: _searchController,
               onSearch: (query) {
                 print('Ricerca: $query');
                 final findRecipes = RecipesService().getRecipeByInput(query).toList();
                 print("trovati $findRecipes");
-                // return Column(
-                //   children: [
-                //     ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
-                //   ],
-                // );
-                showBottomSheet(context: context, builder: (bc) {
-                  return Column(
-
-                  children: [
-                    ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
-                  ],
-                );
+              
+                showModalBottomSheet(context: context, builder: (bc) {
+                  return SingleChildScrollView(
+                    child: Column(
+                    children: [
+                      ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                      ],
+                    ),
+                  );
                 });
               },
               onFocusChanged: (isFocused) {
