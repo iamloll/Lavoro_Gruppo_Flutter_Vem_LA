@@ -9,7 +9,7 @@ class Recipe {
   final String? procedure;
   final String? prep_time;
   late String? isFavourite;  
-
+  
   Recipe({
     this.id,
     this.title,
@@ -30,7 +30,6 @@ class Recipe {
     String? procedure,
     String? prepTime,
     bool? isSaved,
-    Function? onSave, 
   }) {
     return Recipe(
       id: id ?? this.id,
@@ -40,7 +39,7 @@ class Recipe {
       ingredients_list: ingredients_list ?? this.ingredients_list,
       procedure: procedure ?? this.procedure,
       prep_time: prep_time ?? this.prep_time,
-      isFavourite: isFavourite ?? this.isFavourite
+      isFavourite: isFavourite ?? this.isFavourite,
     );
   }
 

@@ -19,37 +19,31 @@ class AccordionItemRecipes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final p = context.watch<RecipeState>();
     return Consumer<RecipeState>(
       builder: (context, value, child) {
         return Column(
         children: [
-          //Text(value.planner.toString()),
           ...value.planner
               .firstWhere((el) {
-                // print(el);
                 return el.day == day && el.meal == meal;
               })
               .recipes
               .map((elem) {
-                //print(elem);
                 final recipe = _recipeService.getRecipeById(elem);
                 return RowRecipe(
                   recipe: recipe,
                   onDelete: () {
+                    print("Tappato ricetta n. ${recipe.id}");
+                    print("day --> $day - meal --> $meal");
                     value.deleteRecipe(day, meal, int.parse(recipe.id!));
+                    print(value.planner);
                   },
                 );
-              }),
-          // ElevatedButton(
-          //   onPressed: () {
-          //   p.addRecipe(day, meal, 8);
-          // }, child: const Text("Bottone aggiungi")),
+              }),          
           AddMenu(day: day, meal: meal)
         ],
       );
       },
-      // child: 
     );
   }
 }

@@ -53,7 +53,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista della spesa'),
+        title: const Text('Lista della spesa'),
         centerTitle: true,
         backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,
@@ -90,7 +90,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                   // Applica un tema personalizzato per il widget
                   data: Theme.of(context).copyWith(
                     unselectedWidgetColor: kWhiteColor,
-                    checkboxTheme: CheckboxThemeData(
+                    checkboxTheme: const CheckboxThemeData(
                       side: BorderSide(
                         color: kOrangeColor, // Colore del bordo del checkbox
                       ),

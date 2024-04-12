@@ -29,8 +29,7 @@ class _HomepageState extends State<Homepage> {
               onSearch: (query) {
                 print('Ricerca: $query');
                 final findRecipes = RecipesService().getRecipeByInput(query).toList();
-                print("trovati $findRecipes");
-              
+                print("trovati $findRecipes");              
                 showModalBottomSheet(context: context, builder: (bc) {
                   return SingleChildScrollView(
                     child: Column(

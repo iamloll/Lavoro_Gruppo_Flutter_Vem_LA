@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/screens/search_recipe_for_planner_screen.dart';
+import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 
 class AddMenu extends StatelessWidget {  
   const AddMenu({
@@ -23,7 +24,7 @@ class AddMenu extends StatelessWidget {
           onSelected: (value) {
             if (value == 0) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const Text("Widget Nuova Ricetta");
+                return const ModifyRecipe();
               }));
               return;
             }

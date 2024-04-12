@@ -31,14 +31,14 @@ class RowRecipe extends StatelessWidget {
           children: [
             Flexible(
               child: ListTile(                
-                title: Text(style: TextStyle(color: Colors.white, fontSize: 18), recipe.title!),
-                subtitle: Text(style: TextStyle(color: Colors.white, fontSize: 14),recipe.category!),
+                title: Text(style: const TextStyle(color: Colors.white, fontSize: 18), recipe.title!),
+                subtitle: Text(style: const TextStyle(color: Colors.white, fontSize: 14),recipe.category!),
                 trailing: IconButton(
                   onPressed: () {
                     onDelete();
                     print("Cancellato");
                 }, 
-                icon: Icon(Icons.delete, color: Colors.white,)),
+                icon: const Icon(Icons.delete, color: Colors.white,)),
               ),
             ),
           ],

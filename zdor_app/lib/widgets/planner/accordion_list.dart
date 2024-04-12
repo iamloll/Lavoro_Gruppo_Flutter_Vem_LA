@@ -1,4 +1,4 @@
-  import 'package:accordion/accordion.dart';
+import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/models.dart';
@@ -14,11 +14,7 @@ class AccordionList extends StatelessWidget {
     this.nestedWidget,
   });
 
-  // final wp = PlannerService().createWeeklyPlannerBaseList();
-  // late List<MealPlanner> newWP = PlannerService().addRecipeToPlanner(wp, WeekDays.monday, Meals.lunch, 12);
-
-  final recipes = RecipesService().getRecipes(results: 30).toList();
-  
+  final recipes = RecipesService().getRecipes(results: 30).toList();  
 
   static const headerStyle = TextStyle(
       color: Color(0xffffffff), fontSize: 18, fontWeight: FontWeight.bold);
