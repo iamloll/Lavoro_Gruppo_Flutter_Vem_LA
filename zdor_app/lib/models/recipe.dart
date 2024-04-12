@@ -2,14 +2,13 @@ import 'dart:convert';
 
 class Recipe {
   final String? id;
-  final String? title;
-  final String? category;
-  final String? image;
-  final List<dynamic>? ingredients_list; 
-  final String? procedure;
-  final String? prep_time;
+  late String? title;
+  late String? category;
+  late String? image;
+  late List<dynamic>? ingredients_list; 
+  late String? procedure;
+  late String? prep_time;
   late String? isFavourite;  
-  final Function onSave; // DA TOGLIERE!
 
   Recipe({
     this.id,
@@ -19,8 +18,7 @@ class Recipe {
     this.ingredients_list, 
     this.procedure,
     this.prep_time,
-    required this.isFavourite,
-    required this.onSave,
+    this.isFavourite,
   });
 
   Recipe copyWith({
@@ -43,7 +41,6 @@ class Recipe {
       procedure: procedure ?? this.procedure,
       prep_time: prep_time ?? this.prep_time,
       isFavourite: isFavourite ?? this.isFavourite,
-      onSave: onSave ?? this.onSave,
     );
   }
 
@@ -76,7 +73,6 @@ class Recipe {
         procedure: map['procedure'] != null ? map['procedure'] as String : null,
         prep_time: map['prep_time'] != null ? map['prep_time'] as String : null, 
         //isFavourite: false,
-        onSave: () {},
       );
 
   @override

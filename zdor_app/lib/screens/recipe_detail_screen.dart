@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import '../widgets/recipe_detail/recipe_detail.dart';
@@ -9,6 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
+
+
+
+//------Callback non ancora funzionante---------
+
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe; // Parametro per la ricetta
@@ -70,7 +74,16 @@ class RecipeDetailScreen extends StatelessWidget {
                                   minimumSize: MaterialStateProperty.all(Size(0, 30)),
                                 ),
                                 onPressed: () {
-                                  
+                                  if (recipe.isFavourite == 'true') {
+                                    recipe.isFavourite = 'false';
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('La ricetta non è presente nella lista dei salvati'),
+                                      ),
+                                    );
+                                  }
+                                  Navigator.pop(context);
                                 },
                                 child: Text('Cancella', style: TextStyle(color: kBlackColor)),
                               ),
@@ -102,7 +115,16 @@ class RecipeDetailScreen extends StatelessWidget {
                                   minimumSize: MaterialStateProperty.all(Size(0, 30)),
                                 ),
                                 onPressed: () {
-                                  
+                                  if (recipe.isFavourite == 'false') {
+                                    recipe.isFavourite = 'true';
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('La ricetta è già presente nella lista dei salvati'),
+                                      ),
+                                    );
+                                  }
+                                  Navigator.pop(context);
                                 },
                                 child: Text('Salva', style: TextStyle(color: kBlackColor)),
                               ),
