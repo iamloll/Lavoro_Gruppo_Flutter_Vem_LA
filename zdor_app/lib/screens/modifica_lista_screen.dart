@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class ModifyListScreen extends StatefulWidget {
@@ -82,62 +83,78 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          // Visualizza gli ingredienti trovati nella ricerca escludendo quelli già selezionati
-          ...selectedIngredients
-              .where((ingredient) => !selectedIngredients.contains(ingredient))
-              .map(
-                (ingredient) => ListTile(
-                  title: Text(
-                    ingredient,
-                    style: TextStyle(color: kWhiteColor),
-                  ),
-                  onTap: () {
-                    addIngredient(
-                        ingredient); // Aggiungi l'ingrediente selezionato
-                  },
-                ),
-              ),
-          // Visualizza gli ingredienti selezionati dall'utente, escludendo quelli già presenti nella lista degli ingredienti cercati
-          if (selectedIngredients.isNotEmpty) Divider(), // Separatore
-          if (selectedIngredients.isNotEmpty)
-            Text(
-              'Ingredienti selezionati:',
-              style: TextStyle(color: kWhiteColor, fontSize: 18.0),
-            ),
-          ...selectedIngredients.map(
-            (ingredient) => ListTile(
-              title: Row(
-                children: [
-                  Expanded(
-                    child: Text(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Visualizza gli ingredienti trovati nella ricerca escludendo quelli già selezionati
+            ...selectedIngredients
+                .where(
+                    (ingredient) => !selectedIngredients.contains(ingredient))
+                .map(
+                  (ingredient) => ListTile(
+                    title: Text(
                       ingredient,
                       style: TextStyle(color: kWhiteColor),
                     ),
+                    onTap: () {
+                      addIngredient(
+                          ingredient); // Aggiungi l'ingrediente selezionato
+                    },
                   ),
-                  if (selectedIngredients.isNotEmpty)
-                    IconButton(
-                      // Aggiunge la condizione qui
-                      icon: Icon(Icons.delete),
-                      color: kOrangeColor,
-                      onPressed: () {
-                        removeIngredient(ingredient);
-                      },
+                ),
+            // Visualizza gli ingredienti selezionati dall'utente, escludendo quelli già presenti nella lista degli ingredienti cercati
+            if (selectedIngredients.isNotEmpty) Divider(), // Separatore
+            if (selectedIngredients.isNotEmpty)
+              Text(
+                'Ingredienti selezionati:',
+                style: TextStyle(color: kWhiteColor, fontSize: 18.0),
+              ),
+            ...selectedIngredients.map(
+              (ingredient) => ListTile(
+                title: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        ingredient,
+                        style: TextStyle(color: kWhiteColor),
+                      ),
                     ),
-                ],
+                    if (selectedIngredients.isNotEmpty)
+                      IconButton(
+                        // Aggiunge la condizione qui
+                        icon: Icon(Icons.delete),
+                        color: kOrangeColor,
+                        onPressed: () {
+                          removeIngredient(ingredient);
+                        },
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       backgroundColor: kBlackColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          widget.onOk(selectedIngredients);
-          //qui va la callback per fissare i nuovi ingredienti alla lista degli ingredienti acquistabili
-        },
-        child: Icon(Icons.check),
+      floatingActionButton: SizedBox(
+        width: 70, // Imposta la larghezza del pulsante
+        height: 70, // Imposta l'altezza del pulsantes
+        child: FloatingActionButton(
+          onPressed: () {
+            widget.onOk(selectedIngredients);
+            //qui va la callback per fissare i nuovi ingredienti alla lista degli ingredienti acquistabili
+          },
+          child: Transform.scale(
+            scale:
+                1.5, // Imposta il fattore di scala desiderato per ingrandire l'icona
+            child: Icon(Icons.check),
+          ),
+          backgroundColor: kDarkGreyColor,
+          foregroundColor: kOrangeColor,
+          shape: CircleBorder(
+            side: BorderSide(color: kOrangeColor, width: 2.0),
+          ),
+        ),
       ),
     );
   }

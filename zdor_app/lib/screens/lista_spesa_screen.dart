@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/screens/modifica_lista_screen.dart';
-import 'package:zdor_app/screens/modifica_lista_screen.dart'; // Importa la pagina di modifica
+import 'package:zdor_app/widgets/style/constant.dart';
 
 final Map<String, dynamic> json = {
   'acquistabili': [
@@ -80,27 +79,33 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                       ),
                     ),
                   ),
-                  child: CheckboxListTile(
-                    title: Text(
-                      ingredient,
-                      style: TextStyle(color: kWhiteColor),
-                    ),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    value: isBought,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        if (value != null) {
-                          if (value) {
-                            bought.add(ingredient);
-                            ingredients.remove(ingredient);
-                          } else {
-                            bought.remove(ingredient);
-                            ingredients.add(ingredient);
-                          }
-                          _updateJson();
-                        }
-                      });
-                    },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CheckboxListTile(
+                          title: Text(
+                            ingredient,
+                            style: TextStyle(color: kWhiteColor),
+                          ),
+                          controlAffinity: ListTileControlAffinity.leading,
+                          value: isBought,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              if (value != null) {
+                                if (value) {
+                                  bought.add(ingredient);
+                                  ingredients.remove(ingredient);
+                                } else {
+                                  bought.remove(ingredient);
+                                  ingredients.add(ingredient);
+                                }
+                                _updateJson();
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -148,23 +153,36 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: SizedBox(
+        width: 70,
+        height: 70,
+        child: FloatingActionButton(
           onPressed: () {
-            // Naviga alla pagina di modifica quando il pulsante della matita viene premuto
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ModifyListScreen(
-                        onOk: (ing) {
-                          setState(() {
-                            ingredients.addAll(ing);
-                          });
-                          Navigator.pop(context);
-                        },
-                      )),
+                builder: (context) => ModifyListScreen(
+                  onOk: (ing) {
+                    setState(() {
+                      ingredients.addAll(ing);
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             );
           },
-          child: Icon(Icons.edit)),
+          child: Transform.scale(
+            scale: 1.5,
+            child: Icon(Icons.edit),
+          ),
+          shape: CircleBorder(
+            side: BorderSide(color: kOrangeColor, width: 2.0),
+          ),
+          backgroundColor: kDarkGreyColor,
+          foregroundColor: kOrangeColor,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
@@ -173,4 +191,10 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
     json['acquistabili'] = List<String>.from(ingredients);
     json['acquistati'] = List<String>.from(bought);
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: IngredientListScreen(),
+  ));
 }

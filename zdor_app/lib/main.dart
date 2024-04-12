@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:zdor_app/screens/lista_spesa_screen.dart';
 import 'package:zdor_app/screens/screen_selector/main_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(),
-      home: MainScreen(),
+      home: IngredientListScreen(),
     );
   }
 }
