@@ -28,10 +28,7 @@ class _MainScreenState extends State<MainScreen> {
         index: _currentPageIndex,
         children: [
           Homepage(),
-          SavedRecipesPage(
-            savedRecipesList: [],
-            onPageChanged: _navigateToPage,
-          ),
+          SavedRecipesPage(),
           PlannerWidget(),
           IngredientListScreen(),
         ],

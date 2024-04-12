@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
+import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart' as Custom;
-import 'package:zdor_app/widgets/saved_recipes/recipes_saver.dart'; 
 
-class SavedRecipesPage extends StatelessWidget {
-  final List<Recipe> savedRecipesList;
-  final void Function(int) onPageChanged;
+class SavedRecipesPage extends StatefulWidget {
+  @override
+  State<SavedRecipesPage> createState() => _SavedRecipesPageState();
+}
 
-  const SavedRecipesPage({
-    Key? key,
-    required this.savedRecipesList,
-    required this.onPageChanged,
-  }) : super(key: key);
-
+class _SavedRecipesPageState extends State<SavedRecipesPage> {
   @override
   Widget build(BuildContext context) {
+    // Ottieni la lista delle ricette salvate dal servizio
+    List<Recipe> savedRecipesList = RecipesService().getFavouriteRecipes();
+    RecipesService r = RecipesService();
+    
+
     return Scaffold(
       backgroundColor: kBlackColor,
       appBar: AppBar(
@@ -35,13 +35,11 @@ class SavedRecipesPage extends StatelessWidget {
                 final recipe = savedRecipesList[index];
                 return RecipeCard(
                   recipe: recipe,
-                  isSaved: true,
-                  onSave: () {
-                    if (savedRecipesList.contains(recipe)) {
-                      savedRecipesList.remove(recipe);
-                    } else {
-                      savedRecipesList.add(recipe);
-                    }
+                  isSaved: "true", // Imposta isSaved a true perché stiamo visualizzando le ricette già salvate
+                  onToggleFavorite: () {
+                    setState(() {
+                      r.removeSavedRecipe(recipe);
+                    });
                   },
                 );
               },

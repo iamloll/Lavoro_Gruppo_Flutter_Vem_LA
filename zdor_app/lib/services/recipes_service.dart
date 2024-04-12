@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:zdor_app/models/recipe.dart';
 
 class RecipesService {
+
   Iterable<Recipe> getRecipes({int results = 10}) {
     final Map<String, dynamic> data = jsonDecode(recipesJson);
 
@@ -24,7 +25,6 @@ class RecipesService {
     final List<Recipe> data = getRecipes(results: 30).toList();
 
     final List<Recipe> recipes = data.where((r) {
-      //print("query $query");
       final String lowerTitle = r.title!.toLowerCase();
       return lowerTitle.contains(query);
     }).toList();
@@ -33,32 +33,47 @@ class RecipesService {
   }
 
   List<Recipe> getFavouriteRecipes() {
-      final List<Recipe> data = getRecipes(results: 30).toList();
+    final List<Recipe> data = getRecipes(results: 30).toList();
 
-      final List<Recipe> favourite = data.where((e) {
-        //print(e.isFavourite);
-        return e.isFavourite == "true";
-      }).toList();
+    final List<Recipe> favourite = data.where((e) {
+      return e.isFavourite == 'true';
+    }).toList();
 
-      return favourite;
-    }
+    return favourite;
+  }
+List<Recipe>  saveRecipe(Recipe recipe) {
+  final _savedRecipes= getFavouriteRecipes();
+  if (!_savedRecipes.contains(recipe)) {
+    recipe.isFavourite = 'true';
+    _savedRecipes.add(recipe);
+  }
+  return _savedRecipes;
+}
+
+List<Recipe> removeSavedRecipe(Recipe recipe) {
+  final _savedRecipes= getFavouriteRecipes();
+  if (_savedRecipes.contains(recipe)) {
+    recipe.isFavourite = 'false';
+    _savedRecipes.remove(recipe);
+  }
+  return _savedRecipes;
+}
 
   List<String> getCategories() {
     final List<Recipe> data = getRecipes(results: 30).toList();
     final List<String> catList = [];
 
     final cat = data.map((e) {
-      //print(e.category);
       catList.add(e.category!);
     }).toList();
     
     final distinctCat = catList.toSet().toList();
     
-    //print(catList);
-    //print(distinctCat);
     return distinctCat;
   }
 }
+
+
 
 const recipesJson = '''
 {

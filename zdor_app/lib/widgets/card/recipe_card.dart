@@ -5,10 +5,10 @@ import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeCard extends StatefulWidget {
   final Recipe recipe;
-  final bool isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
-  final VoidCallback? onSave; // Nuovo parametro per la funzione di salvataggio della ricetta
+  final String isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
+  final VoidCallback? onToggleFavorite; // Nuovo parametro per la funzione di toggle del preferito
 
-  RecipeCard({required this.recipe, this.isSaved = false, this.onSave}); // Costruttore con i nuovi parametri opzionali
+  RecipeCard({required this.recipe, this.isSaved = "false", this.onToggleFavorite}); // Costruttore con i nuovi parametri opzionali
 
   @override
   _RecipeCardState createState() => _RecipeCardState(); // Crea lo stato associato al widget
@@ -103,15 +103,11 @@ class _RecipeCardState extends State<RecipeCard> {
               top: 10,
               right: 10,
               child: IconButton(
-                icon: Icon(
-                  widget.isSaved ? Icons.favorite : Icons.favorite_border, // Icona cuore pieno o vuoto
-                  color: widget.isSaved ? kRedColor : kOrangeColor, // Colore dell'icona in base al preferito
-                  size: 20, // Dimensione dell'icona
-                ),
+                icon: widget.recipe.isFavourite == "true" ? Icon(Icons.favorite, color: Colors.red) : Icon(Icons.favorite_border, color:kOrangeColor),
                 onPressed: () {
-                  if (widget.onSave != null) {
-                    widget.onSave!(); // Esegui la funzione di salvataggio, se definita
-                  }
+                  setState(() {
+                    widget.recipe.isFavourite = widget.recipe.isFavourite == "false"? "true" : "false";
+                  });
                 },
               ),
             ),
