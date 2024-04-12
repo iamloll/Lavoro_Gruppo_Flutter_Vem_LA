@@ -9,7 +9,6 @@ class Recipe {
   final String? procedure;
   final String? prep_time;
   late String? isFavourite;  
-  final Function onSave; // DA TOGLIERE!
 
   Recipe({
     this.id,
@@ -20,7 +19,6 @@ class Recipe {
     this.procedure,
     this.prep_time,
     required this.isFavourite,
-    required this.onSave,
   });
 
   Recipe copyWith({
@@ -42,8 +40,7 @@ class Recipe {
       ingredients_list: ingredients_list ?? this.ingredients_list,
       procedure: procedure ?? this.procedure,
       prep_time: prep_time ?? this.prep_time,
-      isFavourite: isFavourite ?? this.isFavourite,
-      onSave: onSave ?? this.onSave,
+      isFavourite: isFavourite ?? this.isFavourite
     );
   }
 
@@ -75,8 +72,6 @@ class Recipe {
             : null,
         procedure: map['procedure'] != null ? map['procedure'] as String : null,
         prep_time: map['prep_time'] != null ? map['prep_time'] as String : null, 
-        //isFavourite: false,
-        onSave: () {},
       );
 
   @override
