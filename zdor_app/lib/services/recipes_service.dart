@@ -24,7 +24,6 @@ class RecipesService {
     final List<Recipe> data = getRecipes(results: 30).toList();
 
     final List<Recipe> recipes = data.where((r) {
-      //print("query $query");
       final String lowerTitle = r.title!.toLowerCase();
       return lowerTitle.contains(query);
     }).toList();
@@ -36,7 +35,6 @@ class RecipesService {
       final List<Recipe> data = getRecipes(results: 30).toList();
 
       final List<Recipe> favourite = data.where((e) {
-        //print(e.isFavourite);
         return e.isFavourite == "true";
       }).toList();
 
@@ -48,14 +46,11 @@ class RecipesService {
     final List<String> catList = [];
 
     final cat = data.map((e) {
-      //print(e.category);
       catList.add(e.category!);
     }).toList();
     
     final distinctCat = catList.toSet().toList();
     
-    //print(catList);
-    //print(distinctCat);
     return distinctCat;
   }
 }

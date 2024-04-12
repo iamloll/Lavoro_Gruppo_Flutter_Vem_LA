@@ -12,7 +12,6 @@ class PlannerService {
       });
     });
 
-    //data.forEach((data) => print(data));
     return data;
   }
 }

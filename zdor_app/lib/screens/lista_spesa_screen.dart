@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-import 'package:zdor_app/screens/modifica_lista_screen.dart';
 import 'package:zdor_app/screens/modifica_lista_screen.dart'; // Importa la pagina di modifica
 
 final Map<String, dynamic> json = {
@@ -49,7 +48,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista della spesa'),
+        title: const Text('Lista della spesa'),
         centerTitle: true,
         backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,
@@ -58,8 +57,8 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Acquistabili',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -74,7 +73,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                 return Theme(
                   data: Theme.of(context).copyWith(
                     unselectedWidgetColor: kWhiteColor,
-                    checkboxTheme: CheckboxThemeData(
+                    checkboxTheme: const CheckboxThemeData(
                       side: BorderSide(
                         color: kOrangeColor,
                       ),
@@ -83,7 +82,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                   child: CheckboxListTile(
                     title: Text(
                       ingredient,
-                      style: TextStyle(color: kWhiteColor),
+                      style: const TextStyle(color: kWhiteColor),
                     ),
                     controlAffinity: ListTileControlAffinity.leading,
                     value: isBought,
@@ -106,16 +105,16 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
               },
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 20),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Divider(
               color: kWhiteColor,
               thickness: 2.0,
             ),
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Acquistati',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -129,10 +128,10 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                 return ListTile(
                   title: Text(
                     ingredient,
-                    style: TextStyle(color: kWhiteColor),
+                    style: const TextStyle(color: kWhiteColor),
                   ),
                   leading: IconButton(
-                    icon: Icon(Icons.check_box),
+                    icon: const Icon(Icons.check_box),
                     color: kOrangeColor,
                     onPressed: () {
                       setState(() {
@@ -164,7 +163,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                       )),
             );
           },
-          child: Icon(Icons.edit)),
+          child: const Icon(Icons.edit)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

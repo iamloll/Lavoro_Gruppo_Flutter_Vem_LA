@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zdor_app/screens/screen_selector/main_screen.dart';
-import 'package:zdor_app/screens/search_recipe_for_planner_screen.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 
 void main() {
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
       // Utilizzo il MainScreen come schermata principale
       // Si occupa della navigazione tra le pagine
       home: const MainScreen(), 
-      // home : SearchRecipeForPlannerScreen()
     );
   }
 }

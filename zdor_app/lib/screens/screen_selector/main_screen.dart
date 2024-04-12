@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
             savedRecipesList: [],
             onPageChanged: _navigateToPage,
           ),
-          PlannerWidget(),
+          const PlannerWidget(),
           IngredientListScreen(),
         ],
       ),

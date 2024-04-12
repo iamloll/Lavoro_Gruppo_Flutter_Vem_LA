@@ -31,7 +31,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Modifica lista'),
+        title: const Text('Modifica lista'),
         centerTitle: true,
         backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,

@@ -21,7 +21,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: _isSearchFocused ? Colors.black.withOpacity(0.8) : kBlackColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +31,7 @@ class _HomepageState extends State<Homepage> {
               onSearch: (query) {
                 print('Ricerca: $query');
                 final findRecipes = RecipesService().getRecipeByInput(query).toList();
-                print("trovati $findRecipes");
-              
+                print("trovati $findRecipes");              
                 showModalBottomSheet(context: context, builder: (bc) {
                   return SingleChildScrollView(
                     child: Column(
