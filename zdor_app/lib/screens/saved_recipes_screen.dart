@@ -12,7 +12,7 @@ class SavedRecipesPage extends StatelessWidget {
     // Ottieni la lista delle ricette salvate dal servizio
     final savedRecipesList = context
         .read<RecipeState>()
-        .savedRecipes
+        .recipes
         .where((e) => e.isFavourite == "true")
         .toList();
     return Consumer<RecipeState>(builder: (context, state, child) {
@@ -37,9 +37,9 @@ class SavedRecipesPage extends StatelessWidget {
                     //isSaved: "true", // Imposta isSaved a true perché stiamo visualizzando le ricette già salvate
                     onToggleFavorite: () {
                       if (recipe.isFavourite == "true") {
-                        state.removeSavedRecipe(recipe);
+                        state.setFavourite(recipe, isFavourite: false);
                       } else {
-                        state.saveRecipe(recipe);
+                        state.setFavourite(recipe, isFavourite: true);
                       }
                     },
                   );

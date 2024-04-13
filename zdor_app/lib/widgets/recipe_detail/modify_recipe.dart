@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:zdor_app/models/recipe.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/recipe_detail/recipe_detail.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
@@ -193,7 +194,7 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
                   // Aggiorna la ricetta corrente con i nuovi valori
                                     
 //Ancora da finire                  
-                  final recipe = RecipesService().getRecipeById(int.parse(widget.recipe!.id!));
+                  final recipe = RecipeState().recipes.getRecipeById(int.parse(widget.recipe!.id!));
                   
                   // Torna alla schermata precedente
                   Navigator.pop(context);

@@ -118,9 +118,9 @@ class RecipeCard extends StatelessWidget {
                       : Icon(Icons.favorite_border, color: kOrangeColor),
                   onPressed: () {
                     if (recipe.isFavourite == "true") {
-                      state.removeSavedRecipe(recipe);
+                      state.setFavourite(recipe, isFavourite: false);
                     } else {
-                      state.saveRecipe(recipe);
+                      state.setFavourite(recipe, isFavourite: true);
                     }
                   },
                 ),

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/states/category_state.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 
 class FilterTags extends StatelessWidget {
-  final categories = RecipesService().getCategories();
+  final categories = RecipeState().recipes.getCategories();
   final CategoryState c = CategoryState();
 
   String? selectedValue;

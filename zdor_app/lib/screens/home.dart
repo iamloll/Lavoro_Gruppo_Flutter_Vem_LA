@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/services/recipes_service.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/card/horizontal_recipe_card.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
@@ -28,7 +29,7 @@ class _HomepageState extends State<Homepage> {
               searchController: _searchController,
               onSearch: (query) {
                 print('Ricerca: $query');
-                final findRecipes = RecipesService().getRecipeByInput(query).toList();
+                final findRecipes = RecipeState().recipes.getRecipeByInput(query).toList();
                 print("trovati $findRecipes");              
                 showModalBottomSheet(context: context, builder: (bc) {
                   return SingleChildScrollView(

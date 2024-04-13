@@ -11,52 +11,8 @@ class RecipesService {
     );
 
     return toReturn;
-  }
-
-  Recipe getRecipeById(int id) {
-    final List<Recipe> data = getRecipes(results: 30).toList();
-
-    final Recipe recipe = data.firstWhere((r) => int.parse(r.id!) == id);
-
-    return recipe;
-  }
-
-  List<Recipe> getRecipeByInput(String query) {
-    final List<Recipe> data = getRecipes(results: 30).toList();
-
-    final List<Recipe> recipes = data.where((r) {
-      final String lowerTitle = r.title!.toLowerCase();
-      return lowerTitle.contains(query);
-    }).toList();
-
-    return recipes;
-  }
-
-  List<Recipe> getFavouriteRecipes() {
-    final List<Recipe> data = getRecipes(results: 30).toList();
-
-    final List<Recipe> favourite = data.where((e) {
-      return e.isFavourite == 'true';
-    }).toList();
-
-    return favourite;
-  }
-
-  List<String> getCategories() {
-    final List<Recipe> data = getRecipes(results: 30).toList();
-    final List<String> catList = [];
-
-    final cat = data.map((e) {
-      catList.add(e.category!);
-    }).toList();
-    
-    final distinctCat = catList.toSet().toList();
-    
-    return distinctCat;
-  }
+  }  
 }
-
-
 
 const recipesJson = '''
 {

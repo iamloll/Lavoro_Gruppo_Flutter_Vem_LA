@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/states/planner_state.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class SearchRecipeCard extends StatefulWidget {
@@ -20,12 +21,13 @@ class SearchRecipeCard extends StatefulWidget {
 class _SearchRecipeCardState extends State<SearchRecipeCard> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlannerState>(builder: (context, value, child) {
+    return Consumer2<PlannerState, RecipeState>(
+        builder: (context, planState, recipeState, child) {
       return GestureDetector(
         onTap: () {
           //print("Tappato ricetta n. ${widget.recipe.id}");
           //print("day --> ${widget.day} - meal --> ${widget.meal}");
-          value.addRecipe(
+          planState.addRecipe(
               widget.day, widget.meal, int.parse(widget.recipe.id!));
           //print(value.planner);
           Navigator.pop(context);
@@ -72,8 +74,9 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                               setState(() {
                                 //print("favourite!");
                                 widget.recipe.isFavourite == "false"
-                                    ? widget.recipe.isFavourite = "true"
-                                    : widget.recipe.isFavourite = "false";
+                                    ? recipeState.setFavourite(widget.recipe, isFavourite: true)
+                                    : recipeState
+                                        .setFavourite(widget.recipe, isFavourite: false);
                               });
                             },
                             icon: widget.recipe.isFavourite == "true"

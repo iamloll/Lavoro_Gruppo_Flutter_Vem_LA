@@ -2,13 +2,13 @@ import 'dart:convert';
 
 class Recipe {
   final String? id;
-  late String? title;
-  late String? category;
-  late String? image;
-  late List<dynamic>? ingredients_list; 
-  late String? procedure;
-  late String? prep_time;
-  late String? isFavourite;  
+  final String? title;
+  final String? category;
+  final String? image;
+  final List<dynamic>? ingredients_list; 
+  final String? procedure;
+  final String? prep_time;
+  final String? isFavourite;  
 
   Recipe({
     this.id,
@@ -28,8 +28,8 @@ class Recipe {
     String? image,
     List<dynamic>? ingredients_list, 
     String? procedure,
-    String? prepTime,
-    bool? isSaved,
+    String? prep_time,
+    String? isFavourite,
   }) {
     return Recipe(
       id: id ?? this.id,
