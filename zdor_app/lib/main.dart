@@ -5,8 +5,6 @@ import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/states/saved_state.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => RecipeState(), child: const MyApp()));
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => RecipeState()),
     ChangeNotifierProvider(create: (context) => SavedState())
