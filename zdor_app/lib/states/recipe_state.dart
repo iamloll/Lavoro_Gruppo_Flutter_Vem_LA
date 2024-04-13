@@ -16,12 +16,11 @@ class RecipeState extends ChangeNotifier {
   void saveRecipe(Recipe recipe) {
     final incrementMaxIndex = (_recipes.length + 1).toString();
     late Recipe newRecipe;
+    final oldRecipe = _recipes
+          .firstWhere((element) => element.id == recipe.id, orElse: () => Recipe());
 
-    if (_recipes.contains(recipe)) {
-      newRecipe = _recipes
-          .firstWhere((element) => element.id == recipe.id)
-          .copyWith(
-              id: recipe.id,
+    if (oldRecipe.id != null) {
+      newRecipe = oldRecipe.copyWith(
               title: recipe.title,
               category: recipe.category,
               image: recipe.image ?? "assets/image_recipes/no_image.jpg",
@@ -49,26 +48,15 @@ class RecipeState extends ChangeNotifier {
   }
 
   void setFavourite(Recipe recipe, {bool isFavourite = false}) {
-    // _recipes.firstWhere((element) => element.id == recipe.id).copyWith(isFavourite: "true");
-    // _recipes.add(recipe);
-
     final String boolString = isFavourite.toString();
-    final r = _recipes.firstWhere((element) => element.id == recipe.id).copyWith(isFavourite: boolString);
+    final r = _recipes
+        .firstWhere((element) => element.id == recipe.id)
+        .copyWith(isFavourite: boolString);
     saveRecipe(r);
 
-
     //print(recipe);
-    //notifyListeners();
+    notifyListeners();
   }
-
-  // void deleteFromSavedList(Recipe recipe) {
-  //   _recipes
-  //       .firstWhere((element) => element.id == recipe.id)
-  //       .copyWith(isFavourite: "false");
-
-  //   print(recipe);
-  //   notifyListeners();
-  // }
 }
 
 extension RecipesGetter on List<Recipe> {
