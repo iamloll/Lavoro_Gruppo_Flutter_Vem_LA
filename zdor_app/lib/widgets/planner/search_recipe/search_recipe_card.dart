@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/states/recipe_state.dart';
+import 'package:zdor_app/states/planner_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class SearchRecipeCard extends StatefulWidget {
@@ -20,7 +20,7 @@ class SearchRecipeCard extends StatefulWidget {
 class _SearchRecipeCardState extends State<SearchRecipeCard> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecipeState>(builder: (context, value, child) {
+    return Consumer<PlannerState>(builder: (context, value, child) {
       return GestureDetector(
         onTap: () {
           //print("Tappato ricetta n. ${widget.recipe.id}");
@@ -103,11 +103,13 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                         Flexible(
                             child: Text(
                           widget.recipe.title!,
-                          style: const TextStyle(color: Colors.white, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
                         )),
                         Flexible(
                             child: Text(widget.recipe.category!,
-                                style: const TextStyle(color: Colors.white, fontSize: 14)))
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14)))
                       ],
                     ),
                   )),

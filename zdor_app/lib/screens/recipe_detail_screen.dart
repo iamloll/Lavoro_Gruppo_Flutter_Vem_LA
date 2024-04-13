@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:zdor_app/services/recipes_service.dart';
 import '../widgets/recipe_detail/recipe_detail.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-import 'package:zdor_app/models/recipe.dart'; 
-import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 
 
