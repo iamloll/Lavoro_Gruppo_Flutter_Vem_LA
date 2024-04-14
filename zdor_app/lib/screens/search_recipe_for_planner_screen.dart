@@ -28,10 +28,10 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
 
   final TextEditingController _searchController = TextEditingController();
   bool _isSearchFocused = false;
-  final CategoryState c = CategoryState();
-
+  
   @override
   Widget build(BuildContext context) {
+    final recipeState = context.read<RecipeState>();
     return Scaffold(
       backgroundColor: kBlackColor,
       appBar: AppBar( 
@@ -44,9 +44,7 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
             });
           },
           onSearch: (query) {
-            print('Ricerca: $query');
-            final findRecipes = RecipeState().recipes.getRecipeByInput(query).toList();
-            print("trovati $findRecipes");              
+            final findRecipes = recipeState.recipes.getRecipeByInput(query).toList();
             showModalBottomSheet(context: context, builder: (bc) {
               return SingleChildScrollView(
                 child: Column(
@@ -71,8 +69,7 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
             FilterTags(),
             CardsGridView(day: widget.day, meal: widget.meal)
           ],
-        ),
-      
+        ),      
     );    
   }
 }
