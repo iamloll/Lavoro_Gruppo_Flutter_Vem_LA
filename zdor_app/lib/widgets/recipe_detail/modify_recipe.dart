@@ -19,9 +19,10 @@ class ModifyRecipe extends StatelessWidget {
   late String? _ingredients;
   late String? _procedure;
   File? _imageFile;
-  final Recipe? recipe; 
+  final Recipe? recipe;
+  final ValueSetter<Recipe> onSave; 
 
-  ModifyRecipe({super.key, this.recipe});
+  ModifyRecipe({super.key, this.recipe, required this.onSave});
 
   // Funzione per selezionare un'immagine dalla galleria
   Future<void> _pickImage() async {
@@ -88,10 +89,8 @@ class ModifyRecipe extends StatelessWidget {
               TextFormField(
                 style: TextStyle(color: kWhiteColor),
                 initialValue: _title,
-                onChanged: (value) {
-                  print("value --> $value");
-                  _title = value;
-                  print("tit --> $_title");                                     
+                onChanged: (value) {                  
+                  _title = value;                                                       
                 },
                 decoration: InputDecoration(labelText: 'Titolo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -99,10 +98,8 @@ class ModifyRecipe extends StatelessWidget {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _category,
-                onChanged: (value) {    
-                  print("value --> $value");              
-                  _category = value;    
-                  print("cat --> $_category");              
+                onChanged: (value) { 
+                  _category = value;
                 },
                 decoration: InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -110,10 +107,8 @@ class ModifyRecipe extends StatelessWidget {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _prepTime,
-                onChanged: (value) {
-                  print("value --> $value");                  
-                  _prepTime = value;   
-                  print("prep --> $_prepTime");               
+                onChanged: (value) {                 
+                  _prepTime = value;                
                 },
                 decoration: InputDecoration(labelText: 'Tempo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -121,10 +116,8 @@ class ModifyRecipe extends StatelessWidget {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _ingredients,
-                onChanged: (value) {  
-                  print("value --> $value");                
-                  _ingredients = value;   
-                  print("ing --> $_ingredients");             
+                onChanged: (value) {                
+                  _ingredients = value;            
                 },
                 decoration: InputDecoration(labelText: 'Ingredienti', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
@@ -133,10 +126,8 @@ class ModifyRecipe extends StatelessWidget {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _procedure,
-                onChanged: (value) {        
-                  print("value --> $value");          
-                  _procedure = value;  
-                  print("proc --> $_procedure");                
+                onChanged: (value) {          
+                  _procedure = value;                 
                 },
                 decoration: InputDecoration(labelText: 'Procedimento', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
@@ -148,8 +139,8 @@ class ModifyRecipe extends StatelessWidget {
                 ),
                 onPressed: () {
                   final newIngredientList = _ingredients!.split("\n");
-                  print("newIng --> $newIngredientList");
-                  // Aggiorna la ricetta corrente con i nuovi valori   
+
+                  // Creo la nuova ricetta con i valori inseriti   
                   final newRecipe = Recipe(
                     id: recipe?.id,
                     title: _title,
@@ -159,8 +150,11 @@ class ModifyRecipe extends StatelessWidget {
                     prep_time: _prepTime,
                     procedure: _procedure
                   );
-                  print("newRec --> $newRecipe");
-                  state.saveRecipe(newRecipe);
+
+                  //Callback di salvataggio
+                  onSave(newRecipe);
+                  // state.saveRecipe(newRecipe);
+                  
                   // Torna alla schermata precedente
                   Navigator.pop(context);
                 },

@@ -13,7 +13,7 @@ class RecipeState extends ChangeNotifier {
 
   UnmodifiableListView<Recipe> get recipes => UnmodifiableListView(_recipes);
 
-  void saveRecipe(Recipe recipe) {
+  Recipe saveRecipe(Recipe recipe) {
     final incrementMaxIndex = (_recipes.length + 1).toString();
     late Recipe newRecipe;
     final oldRecipe = _recipes
@@ -47,8 +47,9 @@ class RecipeState extends ChangeNotifier {
 
       _recipes.add(newRecipe);
     }    
-
+    
     notifyListeners();
+    return newRecipe;
   }
 
   void setFavourite(Recipe recipe, {bool isFavourite = false}) {
@@ -104,5 +105,15 @@ extension RecipesGetter on List<Recipe> {
     }).toList();
 
     return catList;
+  }
+
+  List<Recipe> getByCategory(String? category) {
+    final initialList = this;
+
+    if(category == null) {
+      return initialList;
+    }
+
+    return initialList.where((element) => element.category == category).toList();
   }
 }

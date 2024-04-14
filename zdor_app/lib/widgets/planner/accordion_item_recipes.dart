@@ -18,24 +18,21 @@ class AccordionItemRecipes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlannerState>(
-      builder: (context, value, child) {
+    return Consumer2<PlannerState, RecipeState>(
+      builder: (context, planState, recipeState, child) {
         return Column(
           children: [
-            ...value.planner
+            ...planState.planner
                 .firstWhere((el) {
                   return el.day == day && el.meal == meal;
                 })
                 .recipes
                 .map((elem) {
-                  final recipe = RecipeState().recipes.getRecipeById(elem);
+                  final recipe = recipeState.recipes.getRecipeById(elem);
                   return RowRecipe(
                     recipe: recipe,
-                    onDelete: () {
-                      print("Cancellato ricetta n. ${recipe.id}");
-                      print("day --> $day - meal --> $meal");
-                      value.deleteRecipe(day, meal, int.parse(recipe.id!));
-                      print(value.planner);
+                    onDelete: () {                      
+                      planState.deleteRecipe(day, meal, int.parse(recipe.id!));
                     },
                   );
                 }),

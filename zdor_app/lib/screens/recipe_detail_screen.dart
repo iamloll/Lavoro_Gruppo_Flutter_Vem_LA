@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zdor_app/screens/home.dart';
+import 'package:zdor_app/screens/screen_selector/main_screen.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 import '../widgets/recipe_detail/recipe_detail.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_recipe.dart';
@@ -54,25 +56,21 @@ class RecipeDetailScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ModifyRecipe(recipe: recipe)),
+                                    ModifyRecipe(recipe: recipe, onSave: (r) => value.saveRecipe(r) ,)),
                           );
                         },
                       ),
                       PopupMenuItem(
                         child: r.isFavourite == "true" ? Text("Elimina dai preferiti") : Text("Salva"),
                         onTap: () {
-                          showMenu(
+                          showDialog(
                             context: context,
-                            position: RelativeRect.fromLTRB(100, 150, 0, 0),
-                            items: [
-                              PopupMenuItem(
-                                child: Container(
-                                  width: 200, //Width of confirmation item
-                                  child: Column(
-                                    children: [
-                                      r.isFavourite == "true" ? Text("Vuoi eliminare la ricetta dalle salvate?") : Text("Vuoi salvare la ricetta?"),
-                                      ElevatedButton(
-                                        style: ButtonStyle(
+                            builder: (context) {
+                              return AlertDialog(                                
+                                title: r.isFavourite == "true" ? Text("Vuoi eliminare la ricetta dalle salvate?") : Text("Vuoi salvare la ricetta?"),
+                                actions: [
+                                  ElevatedButton(
+                                        style: ButtonStyle(                                          
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   kWhiteColor),
@@ -86,19 +84,61 @@ class RecipeDetailScreen extends StatelessWidget {
                                         onPressed: () {
                                           final isFavourite = recipe.isFavourite == "true" ? false : true;
                                           value.setFavourite(recipe, isFavourite: isFavourite);
-                                          final snackBar = SnackBar(content: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"));
-                                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                          Future.delayed(Duration(seconds: 1), () {
+                                            Navigator.of(context).popUntil((route) => route.isFirst);
+                                          }); 
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {                                              
+                                              return AlertDialog(
+                                                title: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"),
+                                              );
+                                            }
+                                          ); 
+                                                                                                                            
                                         },
                                         child: r.isFavourite == "true" ? Text('Elimina', style: TextStyle(color: kBlackColor)) : Text('Salva', style: TextStyle(color: kBlackColor)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                                      )
+                                ],
+                                actionsAlignment: MainAxisAlignment.center,
+                              );
+                            });}),
+
+                            // context: context,
+                            // position: RelativeRect.fromLTRB(100, 150, 0, 0),
+                            // items: [
+                            //   PopupMenuItem(
+                            //     child: Container(
+                            //       width: 200, //Width of confirmation item
+                            //       child: Column(
+                            //         children: [
+                            //           r.isFavourite == "true" ? Text("Vuoi eliminare la ricetta dalle salvate?") : Text("Vuoi salvare la ricetta?"),
+                            //           ElevatedButton(
+                            //             style: ButtonStyle(
+                            //               backgroundColor:
+                            //                   MaterialStateProperty.all(
+                            //                       kWhiteColor),
+                            //               padding: MaterialStateProperty.all(
+                            //                   EdgeInsets.fromLTRB(
+                            //                       15, 0, 15, 0)),
+                            //               minimumSize:
+                            //                   MaterialStateProperty.all(
+                            //                       Size(0, 30)),
+                            //             ),
+                            //             onPressed: () {
+                            //               final isFavourite = recipe.isFavourite == "true" ? false : true;
+                            //               value.setFavourite(recipe, isFavourite: isFavourite);
+                            //               final snackBar = SnackBar(content: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"));
+                            //               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            //             },
+                            //             child: r.isFavourite == "true" ? Text('Elimina', style: TextStyle(color: kBlackColor)) : Text('Salva', style: TextStyle(color: kBlackColor)),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            
+                      
                       PopupMenuItem(
                         child: Text("Condividi"),
                         onTap: () {

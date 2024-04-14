@@ -34,7 +34,7 @@ class AccordionList extends StatelessWidget {
         headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
         sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
         sectionClosingHapticFeedback: SectionHapticFeedback.light,
-        maxOpenSections: 1 ,//WeekDays.values.length,
+        maxOpenSections: 1 ,
         children: WeekDays.values.map((e) {
           return AccordionItem.buildAccordionSection(
               headerText: e.toString(),
@@ -55,7 +55,7 @@ class AccordionList extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
                   sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
                   sectionClosingHapticFeedback: SectionHapticFeedback.light,
-                  maxOpenSections: 1, //WeekDays.values.length,
+                  maxOpenSections: 1,
                   children: Meals.values.map((m) {
                     return AccordionItem.buildAccordionSection(
                         headerText: m.toString(),

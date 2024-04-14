@@ -9,13 +9,10 @@ import 'package:zdor_app/widgets/style/constant.dart';
 
 class SavedRecipesPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    // Ottieni la lista delle ricette salvate dal servizio
-    final savedRecipesList = context
-        .watch<RecipeState>()
-        .recipes
-        .getFavouriteRecipes();
+  Widget build(BuildContext context) {    
     return Consumer<RecipeState>(builder: (context, state, child) {
+      // Ottieni la lista delle ricette salvate dal servizio
+      final savedRecipesList = state.recipes.getFavouriteRecipes(); 
       return Scaffold(
         backgroundColor: kBlackColor,
         appBar: AppBar(
@@ -27,7 +24,7 @@ class SavedRecipesPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ModifyRecipe()),
+                        ModifyRecipe(onSave: (r) => state.saveRecipe(r) ,)),
               );
             },
           )]
