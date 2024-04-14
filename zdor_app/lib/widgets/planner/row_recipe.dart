@@ -35,8 +35,7 @@ class RowRecipe extends StatelessWidget {
                 subtitle: Text(style: const TextStyle(color: Colors.white, fontSize: 14),recipe.category!),
                 trailing: IconButton(
                   onPressed: () {
-                    onDelete();
-                    print("Cancellato");
+                    onDelete();                  
                 }, 
                 icon: const Icon(Icons.delete, color: Colors.white,)),
               ),

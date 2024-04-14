@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/models/recipe.dart';
+import 'package:zdor_app/states/planner_state.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
-class SearchRecipeCard extends StatefulWidget {
+class SearchRecipeCard extends StatelessWidget {
   final Recipe recipe;
   final WeekDays day;
   final Meals meal;
@@ -14,20 +15,13 @@ class SearchRecipeCard extends StatefulWidget {
       {super.key, required this.recipe, required this.day, required this.meal});
 
   @override
-  State<SearchRecipeCard> createState() => _SearchRecipeCardState();
-}
-
-class _SearchRecipeCardState extends State<SearchRecipeCard> {
-  @override
   Widget build(BuildContext context) {
-    return Consumer<RecipeState>(builder: (context, value, child) {
+    return Consumer2<PlannerState, RecipeState>(
+        builder: (context, planState, recipeState, child) {
       return GestureDetector(
         onTap: () {
-          //print("Tappato ricetta n. ${widget.recipe.id}");
-          //print("day --> ${widget.day} - meal --> ${widget.meal}");
-          value.addRecipe(
-              widget.day, widget.meal, int.parse(widget.recipe.id!));
-          //print(value.planner);
+          planState.addRecipe(
+              day, meal, int.parse(recipe.id!));
           Navigator.pop(context);
         },
         child: Container(
@@ -50,7 +44,7 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                 Colors.black.withOpacity(0.35),
                 BlendMode.multiply,
               ),
-              image: AssetImage(widget.recipe.image!),
+              image: AssetImage(recipe.image!),
               fit: BoxFit.cover,
             ),
           ),
@@ -68,15 +62,10 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                         ),
                         child: IconButton(
                             onPressed: () {
-                              //--LIKE DA FIXARE--
-                              setState(() {
-                                //print("favourite!");
-                                widget.recipe.isFavourite == "false"
-                                    ? widget.recipe.isFavourite = "true"
-                                    : widget.recipe.isFavourite = "false";
-                              });
+                              final isFavourite = recipe.isFavourite == "true" ? false : true;
+                              recipeState.setFavourite(recipe, isFavourite: isFavourite);
                             },
-                            icon: widget.recipe.isFavourite == "true"
+                            icon: recipe.isFavourite == "true"
                                 ? const Icon(
                                     Icons.favorite,
                                     color: Colors.red,
@@ -102,12 +91,14 @@ class _SearchRecipeCardState extends State<SearchRecipeCard> {
                       children: [
                         Flexible(
                             child: Text(
-                          widget.recipe.title!,
-                          style: const TextStyle(color: Colors.white, fontSize: 18),
+                          recipe.title!,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
                         )),
                         Flexible(
-                            child: Text(widget.recipe.category!,
-                                style: const TextStyle(color: Colors.white, fontSize: 14)))
+                            child: Text(recipe.category!,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14)))
                       ],
                     ),
                   )),

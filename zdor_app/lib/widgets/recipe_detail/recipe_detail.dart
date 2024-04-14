@@ -8,33 +8,13 @@ import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 //------I valori modificati non vengono ancora aggiornati---------
 
 
-class RecipeDetail extends StatefulWidget {
+class RecipeDetail extends StatelessWidget {
   final Recipe recipe;
 
   const RecipeDetail({
     Key? key,
     required this.recipe,
   }) : super(key: key); 
-
-  @override
-  State<RecipeDetail> createState() => _RecipeDetailState();
-}
-
-class _RecipeDetailState extends State<RecipeDetail> {
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   //_updateRecipe();
-  //   String? _title;
-  //   String? _category;
-  //   String? _prepTime;
-  //   String? _ingredients;
-  //   String? _procedure;
-  //   //File? _imageFile;
-    
-  //   widget.recipe.category = _category;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +32,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     child: Container(
                       constraints: BoxConstraints(maxHeight: 250),
                       child: Image.asset(
-                        widget.recipe.image!,
-                        fit: BoxFit.fill,
+                        recipe.image!,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -69,7 +49,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     children: [
                       Text("Categoria:", style: TextStyle(color: kWhiteColor)),
                       SizedBox(height: 5),
-                      Text(widget.recipe.category ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
+                      Text(recipe.category ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
                     ],
                   ),
                 ),
@@ -80,7 +60,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     children: [
                       Text("Tempo:", style: TextStyle(color: kWhiteColor)),
                       SizedBox(height: 5),
-                      Text(widget.recipe.prep_time ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
+                      Text(recipe.prep_time ?? '', style: TextStyle(color: kWhiteColor, fontSize: 18)),
                     ],
                   ),
                 ),
@@ -94,10 +74,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 SizedBox(height: 5),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: widget.recipe.ingredients_list?.length ?? 0,
+                  itemCount: recipe.ingredients_list?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Text(
-                      '- ${widget.recipe.ingredients_list?[index] ?? ''}',
+                      '- ${recipe.ingredients_list?[index] ?? ''}',
                       style: TextStyle(color: kWhiteColor, fontSize: 18),
                     );
                   },
@@ -111,7 +91,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 Text("Procedimento:", style: TextStyle(color: kWhiteColor)),
                 SizedBox(height: 5),
                 Text(
-                  widget.recipe.procedure ?? '',
+                  recipe.procedure ?? '',
                   style: TextStyle(color: kWhiteColor, fontSize: 18),
                   softWrap: true,
                 ),

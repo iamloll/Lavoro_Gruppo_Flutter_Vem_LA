@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zdor_app/models/meal_planner.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/states/category_state.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
 import 'package:zdor_app/widgets/searchbar/recipe_search_bar.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
@@ -44,33 +45,33 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
           },
           onSearch: (query) {
             print('Ricerca: $query');
-            final findRecipes = RecipesService().getRecipeByInput(query).toList();
+            final findRecipes = RecipeState().recipes.getRecipeByInput(query).toList();
             print("trovati $findRecipes");              
             showModalBottomSheet(context: context, builder: (bc) {
               return SingleChildScrollView(
                 child: Column(
                 children: [
-                  ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                  Text("Risultati:"),
+                  SizedBox(height: 20),
+                  ...findRecipes.map((e) => RecipeCard(recipe: e, onToggleFavorite: (value) {                    
+                  },)).toList()
                   ],
                 ),
               );
-            });
+            }, isScrollControlled: true);
           },
           searchController: _searchController,
         ),
       ),
-      body: ChangeNotifierProvider(
-        create: (context) => CategoryState(),
-        child: Column(          
-            children: [ 
-              const Divider(              
-                color: Colors.white
-              ),
-              FilterTags(),
-              CardsGridView(day: widget.day, meal: widget.meal)
-            ],
-          ),
-      ),
+      body: Column(          
+          children: [ 
+            const Divider(              
+              color: Colors.white
+            ),
+            FilterTags(),
+            CardsGridView(day: widget.day, meal: widget.meal)
+          ],
+        ),
       
     );    
   }

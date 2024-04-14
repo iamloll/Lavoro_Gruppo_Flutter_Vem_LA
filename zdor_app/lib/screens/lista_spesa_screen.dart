@@ -55,16 +55,16 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
       appBar: AppBar(
         title: const Text('Lista della spesa'),
         centerTitle: true,
-        backgroundColor: kBlackColor,
+        //backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,
       ),
-      backgroundColor: kBlackColor,
+      // backgroundColor: kBlackColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment
             .stretch, // Allinea gli elementi lungo l'asse trasversale (orizzontale)
-        children: [
+        children: [          
           Divider(
-            color: kWhiteColor, // Colore del separatore
+            color: kOrangeColor, // Colore del separatore
             thickness: 2.0, // Spessore del separatore
           ),
           SizedBox(
@@ -85,7 +85,6 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                     index]; // Ottiene l'ingrediente corrente dall'elenco
                 final isBought = bought.contains(
                     ingredient); // Verifica se l'ingrediente è già stato acquistato
-
                 return Theme(
                   // Applica un tema personalizzato per il widget
                   data: Theme.of(context).copyWith(
@@ -148,9 +147,9 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Divider(
-              color: kWhiteColor, // Colore del separatore
+              color: kOrangeColor, // Colore del separatore
               thickness: 2.0, // Spessore del separatore
             ),
           ),

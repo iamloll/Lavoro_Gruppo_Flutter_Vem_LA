@@ -3,40 +3,44 @@ import 'package:provider/provider.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/screens/recipe_detail_screen.dart'; // Importa la schermata dei dettagli della ricetta
 import 'package:zdor_app/screens/saved_recipes_screen.dart';
-import 'package:zdor_app/states/saved_state.dart';
+import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
-
 class RecipeCard extends StatelessWidget {
+  final Recipe recipe;  
+  final ValueSetter<Recipe> onToggleFavorite;
 
-  final Recipe recipe;
-  final String isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
-  final VoidCallback? onToggleFavorite; // Nuovo parametro per la funzione di toggle del preferito
-  RecipeCard({required this.recipe, this.isSaved = "false", this.onToggleFavorite});
+  RecipeCard(
+      {required this.recipe, required this.onToggleFavorite});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SavedState>(
-      builder: (context, state, child) {
-        return GestureDetector(
+    
+      return GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RecipeDetailScreen(recipe: recipe), // Passa la ricetta alla schermata dei dettagli
+              builder: (context) => RecipeDetailScreen(
+                  recipe:
+                      recipe), // Passa la ricetta alla schermata dei dettagli
             ),
           );
         },
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 22, vertical: 10), // Margini orizzontali e verticali
-          width: MediaQuery.of(context).size.width, // Larghezza del container pari alla larghezza dello schermo
+          margin: EdgeInsets.symmetric(
+              horizontal: 22, vertical: 10), // Margini orizzontali e verticali
+          width: MediaQuery.of(context)
+              .size
+              .width, // Larghezza del container pari alla larghezza dello schermo
           height: 180, // Altezza fissa del container
           decoration: BoxDecoration(
-            color: kWhiteColor, 
+            color: kWhiteColor,
             borderRadius: BorderRadius.circular(15), // Bordo arrotondato
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.6), // Ombra nera con opacità 0.6
+                color:
+                    Colors.black.withOpacity(0.6), // Ombra nera con opacità 0.6
                 offset: Offset(
                   0.0,
                   10.0,
@@ -51,7 +55,8 @@ class RecipeCard extends StatelessWidget {
                 BlendMode.multiply,
               ),
               image: AssetImage(recipe.image ?? ''), // Immagine della ricetta
-              fit: BoxFit.cover, // Adatta l'immagine per coprire tutto il container
+              fit: BoxFit
+                  .cover, // Adatta l'immagine per coprire tutto il container
             ),
           ),
           child: Stack(
@@ -62,8 +67,10 @@ class RecipeCard extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4), // Sfondo scuro con opacità 0.4
-                    borderRadius: BorderRadius.circular(15), // Bordo arrotondato
+                    color: Colors.black
+                        .withOpacity(0.4), // Sfondo scuro con opacità 0.4
+                    borderRadius:
+                        BorderRadius.circular(15), // Bordo arrotondato
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -76,9 +83,7 @@ class RecipeCard extends StatelessWidget {
                       SizedBox(width: 7),
                       Text(
                         recipe.prep_time ?? '',
-                        style: TextStyle(
-                          color: kWhiteColor
-                        ),
+                        style: TextStyle(color: kWhiteColor),
                       ), // Tempo di preparazione della ricetta
                     ],
                   ),
@@ -94,9 +99,11 @@ class RecipeCard extends StatelessWidget {
                       color: kWhiteColor,
                       fontSize: 19, // Dimensione del testo
                     ),
-                    overflow: TextOverflow.ellipsis, // Tronca il testo se troppo lungo
+                    overflow: TextOverflow
+                        .ellipsis, // Tronca il testo se troppo lungo
                     maxLines: 2, // Numero massimo di linee per il testo
-                    textAlign: TextAlign.center, // Allineamento del testo al centro
+                    textAlign:
+                        TextAlign.center, // Allineamento del testo al centro
                   ),
                 ),
               ),
@@ -104,14 +111,11 @@ class RecipeCard extends StatelessWidget {
                 top: 10,
                 right: 10,
                 child: IconButton(
-                  icon: recipe.isFavourite == "true" ? Icon(Icons.favorite, color: Colors.red) : Icon(Icons.favorite_border, color:kOrangeColor),
+                  icon: recipe.isFavourite == "true"
+                      ? Icon(Icons.favorite, color: Colors.red)
+                      : Icon(Icons.favorite_border, color: kOrangeColor),
                   onPressed: () {
-                    if(recipe.isFavourite == "true") {
-                      state.removeSavedRecipe(recipe);
-                    } else {
-                      state.saveRecipe(recipe); 
-                    }
-                    
+                    onToggleFavorite(recipe);
                   },
                 ),
               ),
@@ -119,8 +123,5 @@ class RecipeCard extends StatelessWidget {
           ),
         ),
       );
-      }
-      
-    );
-  }
+   }
 }
