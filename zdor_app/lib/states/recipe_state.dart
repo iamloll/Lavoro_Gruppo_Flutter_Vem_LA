@@ -20,6 +20,7 @@ class RecipeState extends ChangeNotifier {
           .firstWhere((element) => element.id == recipe.id, orElse: () => Recipe());
 
     if (oldRecipe.id != null) {
+      final index = _recipes.indexOf(oldRecipe);
       newRecipe = oldRecipe.copyWith(
               title: recipe.title,
               category: recipe.category,
@@ -30,6 +31,9 @@ class RecipeState extends ChangeNotifier {
               isFavourite: recipe.isFavourite ?? "false");
 
       _recipes.removeWhere((element) => element.id == recipe.id);
+      _recipes.insert(index, newRecipe);
+
+      // _recipes.removeWhere((element) => element.id == recipe.id);
     } else {
       newRecipe = Recipe(
           id: incrementMaxIndex,
@@ -39,10 +43,10 @@ class RecipeState extends ChangeNotifier {
           ingredients_list: recipe.ingredients_list,
           procedure: recipe.procedure,
           prep_time: recipe.prep_time,
-          isFavourite: recipe.isFavourite ?? "false");
-    }
+          isFavourite: recipe.isFavourite ?? "true");
 
-    _recipes.add(newRecipe);
+      _recipes.add(newRecipe);
+    }    
 
     notifyListeners();
   }
@@ -55,7 +59,7 @@ class RecipeState extends ChangeNotifier {
     saveRecipe(r);
 
     //print(recipe);
-    notifyListeners();
+    // notifyListeners();
   }
 }
 

@@ -31,12 +31,12 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
       child: TextField(
         controller: widget.searchController,
         cursorColor: kWhiteColor,
-        style: TextStyle(color: kWhiteColor),
+        style: TextStyle(color: kWhiteColor, fontSize: 20.0),
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                30.0), // Imposta i bordi del campo di ricerca
-          ),
+            // Imposta i bordi del campo di ricerca
+            borderRadius: BorderRadius.circular(30.0), 
+          ),          
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
                 30.0), // Imposta i bordi del campo di ricerca quando è in focus

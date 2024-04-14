@@ -42,7 +42,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
             false, // Disabilita il pulsante indietro automatico
         title: Text('Modifica lista'),
         centerTitle: true,
-        backgroundColor: kBlackColor,
+        // backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(
@@ -150,7 +150,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
           ],
         ),
       ),
-      backgroundColor: kBlackColor,
+      // backgroundColor: kBlackColor,
       floatingActionButton: SizedBox(
         width: 70, // Larghezza del pulsante
         height: 70, // Altezza del pulsante

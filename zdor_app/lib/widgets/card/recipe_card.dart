@@ -7,17 +7,15 @@ import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeCard extends StatelessWidget {
-  final Recipe recipe;
-  final String
-      isSaved; // Nuovo parametro per indicare se la ricetta è salvata o meno
-  final VoidCallback?
-      onToggleFavorite; // Nuovo parametro per la funzione di toggle del preferito
+  final Recipe recipe;  
+  final ValueSetter<Recipe> onToggleFavorite;
+
   RecipeCard(
-      {required this.recipe, this.isSaved = "false", this.onToggleFavorite});
+      {required this.recipe, required this.onToggleFavorite});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecipeState>(builder: (context, state, child) {
+    
       return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -117,11 +115,7 @@ class RecipeCard extends StatelessWidget {
                       ? Icon(Icons.favorite, color: Colors.red)
                       : Icon(Icons.favorite_border, color: kOrangeColor),
                   onPressed: () {
-                    if (recipe.isFavourite == "true") {
-                      state.setFavourite(recipe, isFavourite: false);
-                    } else {
-                      state.setFavourite(recipe, isFavourite: true);
-                    }
+                    onToggleFavorite(recipe);
                   },
                 ),
               ),
@@ -129,6 +123,5 @@ class RecipeCard extends StatelessWidget {
           ),
         ),
       );
-    });
-  }
+   }
 }

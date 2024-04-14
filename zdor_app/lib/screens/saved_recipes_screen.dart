@@ -4,6 +4,7 @@ import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/card/recipe_card.dart';
+import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class SavedRecipesPage extends StatelessWidget {
@@ -19,6 +20,17 @@ class SavedRecipesPage extends StatelessWidget {
         backgroundColor: kBlackColor,
         appBar: AppBar(
           title: Text('Ricette Salvate'),
+          actions: [IconButton(
+            icon: Icon(Icons.add, color: kOrangeColor),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ModifyRecipe()),
+              );
+            },
+          )]
         ),
         body: savedRecipesList.isEmpty
             ? Center(
@@ -33,11 +45,9 @@ class SavedRecipesPage extends StatelessWidget {
                   final recipe = savedRecipesList[index];
                   return RecipeCard(
                     recipe: recipe,
-                    //isSaved: "true", // Imposta isSaved a true perché stiamo visualizzando le ricette già salvate
-                    onToggleFavorite: () {
-                      final isFavourite = recipe.isFavourite == "true" ? false : true;                       
-                      state.setFavourite(recipe, isFavourite: isFavourite);
-                      
+                    onToggleFavorite: (value) {
+                      final isFavourite = value.isFavourite == "true" ? false : true;                       
+                      state.setFavourite(value, isFavourite: isFavourite);                      
                     },
                   );
                 },

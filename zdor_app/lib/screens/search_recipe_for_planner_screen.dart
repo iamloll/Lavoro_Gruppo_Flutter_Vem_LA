@@ -51,11 +51,14 @@ class _SearchRecipeForPlannerScreenState extends State<SearchRecipeForPlannerScr
               return SingleChildScrollView(
                 child: Column(
                 children: [
-                  ...findRecipes.map((e) => RecipeCard(recipe: e)).toList()
+                  Text("Risultati:"),
+                  SizedBox(height: 20),
+                  ...findRecipes.map((e) => RecipeCard(recipe: e, onToggleFavorite: (value) {                    
+                  },)).toList()
                   ],
                 ),
               );
-            });
+            }, isScrollControlled: true);
           },
           searchController: _searchController,
         ),

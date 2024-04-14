@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/recipe_detail/recipe_detail.dart';
@@ -11,85 +12,41 @@ import 'package:zdor_app/widgets/style/constant.dart';
 
 //------Callback non ancora funzionante---------
 
-
-class ModifyRecipe extends StatefulWidget {
+class ModifyRecipe extends StatelessWidget {
+  late String? _title;
+  late String? _category;
+  late String? _prepTime;
+  late String? _ingredients;
+  late String? _procedure;
+  File? _imageFile;
   final Recipe? recipe; 
 
-  const ModifyRecipe({Key? key, this.recipe}) : super(key: key);
-
-  @override
-  State<ModifyRecipe> createState() => _ModifyRecipeState();
-}
-
-
-// class ModifyRecipe extends StatefulWidget {
-//   final Recipe? recipe; 
-//   final Function(List<Recipe>?)? callback; // List<Recipe>? come tipo per callback
-
-//   const ModifyRecipe({Key? key, this.recipe, this.callback}) : super(key: key);
-
-//   @override
-//   State<ModifyRecipe> createState() => _ModifyRecipeState();
-// }
-
-
-
-class _ModifyRecipeState extends State<ModifyRecipe> {
-  String? _title;
-  String? _category;
-  String? _prepTime;
-  String? _ingredients;
-  String? _procedure;
-  File? _imageFile;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Inizializza le variabili di stato se necessario
-  //   _title = widget.recipe?.title;
-  //   _category = widget.recipe?.category;
-  //   _prepTime = widget.recipe?.prep_time;
-  //   _ingredients = widget.recipe?.ingredients_list != null ? widget.recipe!.ingredients_list!.join('\n') : '';
-  //   _procedure = widget.recipe?.procedure;
-  // }
-
-
-  // void _updateRecipe() {
-  //   setState(() {
-  //     widget.recipe?.title = _title ?? '';
-  //     widget.recipe?.category = _category ?? '';
-  //     widget.recipe?.prep_time = _prepTime ?? '';
-  //     widget.recipe?.ingredients_list = _ingredients != null ? _ingredients!.split('\n') : [];
-  //     widget.recipe?.procedure = _procedure ?? '';
-  //     widget.recipe?.image = _imageFile?.path ?? widget.recipe?.image;
-  //   });
-  // }
-
+  ModifyRecipe({super.key, this.recipe});
 
   // Funzione per selezionare un'immagine dalla galleria
   Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedImage != null) {
-        _imageFile = File(pickedImage.path);
-      }
-    });
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);    
+    if (pickedImage != null) {
+      _imageFile = File(pickedImage.path);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Recipe recipe = Recipe();
-    _title =  widget.recipe?.title ?? '';  // Utilizza il valore della ricetta solo se non è null
-    _category =  widget.recipe?.category ?? '';
-    _prepTime =  widget.recipe?.prep_time ?? '';
-    _ingredients =  widget.recipe?.ingredients_list != null ? widget.recipe!.ingredients_list!.join('\n') : '';
-    _procedure =  widget.recipe?.procedure ?? '';
+    final state = context.read<RecipeState>();
+
+    // Utilizza il valore della ricetta solo se non è null
+    _title =  recipe?.title ?? '';
+    _category =  recipe?.category ?? '';
+    _prepTime =  recipe?.prep_time ?? '';
+    _ingredients =  recipe?.ingredients_list != null ? recipe?.ingredients_list!.join('\n') : '';
+    _procedure =  recipe?.procedure ?? '';
 
     return Scaffold(
       backgroundColor: kBlackColor,
       appBar: AppBar(
         backgroundColor: kBlackColor,
-        title: Text('Modifica Ricetta', style: TextStyle(color: kWhiteColor)),
+        title: recipe != null ? Text('Modifica Ricetta', style: TextStyle(color: kWhiteColor)) : Text('Nuova Ricetta', style: TextStyle(color: kWhiteColor)),
         shape: Border(
             bottom: BorderSide(
                 color: kWhiteColor,
@@ -113,11 +70,11 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: [              
               _imageFile != null
                 ? Image.file(_imageFile!)
-                : widget.recipe?.image != null
-                  ? Image.asset(widget.recipe!.image!) // Utilizza ! per garantire che widget.recipe non sia null.
+                : recipe?.image != null
+                  ? Image.asset(recipe!.image!) // Utilizza ! per garantire che widget.recipe non sia null.
                   : Container(),
               SizedBox(height: 10),
               ElevatedButton(
@@ -132,10 +89,9 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
                 style: TextStyle(color: kWhiteColor),
                 initialValue: _title,
                 onChanged: (value) {
-                  setState(() {
-                    //_title = value;
-                    recipe.copyWith(title: value);
-                  });
+                  print("value --> $value");
+                  _title = value;
+                  print("tit --> $_title");                                     
                 },
                 decoration: InputDecoration(labelText: 'Titolo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -143,10 +99,10 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _category,
-                onChanged: (value) {
-                  setState(() {
-                    _category = value;
-                  });
+                onChanged: (value) {    
+                  print("value --> $value");              
+                  _category = value;    
+                  print("cat --> $_category");              
                 },
                 decoration: InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -155,9 +111,9 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _prepTime,
                 onChanged: (value) {
-                  setState(() {
-                    _prepTime = value;
-                  });
+                  print("value --> $value");                  
+                  _prepTime = value;   
+                  print("prep --> $_prepTime");               
                 },
                 decoration: InputDecoration(labelText: 'Tempo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
@@ -165,10 +121,10 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _ingredients,
-                onChanged: (value) {
-                  setState(() {
-                    _ingredients = value;
-                  });
+                onChanged: (value) {  
+                  print("value --> $value");                
+                  _ingredients = value;   
+                  print("ing --> $_ingredients");             
                 },
                 decoration: InputDecoration(labelText: 'Ingredienti', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
@@ -177,10 +133,10 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
               TextFormField(
                 style: TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _procedure,
-                onChanged: (value) {
-                  setState(() {
-                    _procedure = value;
-                  });
+                onChanged: (value) {        
+                  print("value --> $value");          
+                  _procedure = value;  
+                  print("proc --> $_procedure");                
                 },
                 decoration: InputDecoration(labelText: 'Procedimento', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
@@ -191,11 +147,20 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
                   backgroundColor: MaterialStateProperty.all(kWhiteColor),
                 ),
                 onPressed: () {
-                  // Aggiorna la ricetta corrente con i nuovi valori
-                                    
-//Ancora da finire                  
-                  final recipe = RecipeState().recipes.getRecipeById(int.parse(widget.recipe!.id!));
-                  
+                  final newIngredientList = _ingredients!.split("\n");
+                  print("newIng --> $newIngredientList");
+                  // Aggiorna la ricetta corrente con i nuovi valori   
+                  final newRecipe = Recipe(
+                    id: recipe?.id,
+                    title: _title,
+                    category: _category,
+                    image: _imageFile != null ? _imageFile!.path.toString() : recipe?.image,
+                    ingredients_list: newIngredientList,
+                    prep_time: _prepTime,
+                    procedure: _procedure
+                  );
+                  print("newRec --> $newRecipe");
+                  state.saveRecipe(newRecipe);
                   // Torna alla schermata precedente
                   Navigator.pop(context);
                 },
@@ -208,3 +173,31 @@ class _ModifyRecipeState extends State<ModifyRecipe> {
     );
   }
 }
+
+// class ImageContainer extends StatelessWidget {
+//   const ImageContainer({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//             decoration: BoxDecoration(
+//               color: Colors.black,
+//               borderRadius: BorderRadius.circular(15),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.black.withOpacity(0.7),
+//                   offset: const Offset(0.0, 10.0),
+//                   blurRadius: 10.0,
+//                   spreadRadius: -6.0,
+//                 )
+//               ],
+//               image: DecorationImage(
+//                 image: (_imageFile != null
+//                   ? FileImage(_imageFile!)
+//                   : AssetImage(recipe!.image != null ? recipe!.image! : "assets/image_recipes/no_image.jpg")) as ImageProvider,
+//                   fit: BoxFit.cover,
+//                 ),                   
+//               ),
+//           );
+//   }
+// }

@@ -24,7 +24,7 @@ class AddMenu extends StatelessWidget {
           onSelected: (value) {
             if (value == 0) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const ModifyRecipe();
+                return ModifyRecipe();
               }));
               return;
             }
