@@ -9,7 +9,6 @@ import 'package:zdor_app/widgets/style/constant.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 
-//------Callback non ancora funzionante---------
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe; // Parametro per la ricetta
@@ -94,51 +93,15 @@ class RecipeDetailScreen extends StatelessWidget {
                                                 title: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"),
                                               );
                                             }
-                                          ); 
-                                                                                                                            
+                                          );                                                                                                                             
                                         },
                                         child: r.isFavourite == "true" ? Text('Elimina', style: TextStyle(color: kBlackColor)) : Text('Salva', style: TextStyle(color: kBlackColor)),
                                       )
                                 ],
                                 actionsAlignment: MainAxisAlignment.center,
                               );
-                            });}),
-
-                            // context: context,
-                            // position: RelativeRect.fromLTRB(100, 150, 0, 0),
-                            // items: [
-                            //   PopupMenuItem(
-                            //     child: Container(
-                            //       width: 200, //Width of confirmation item
-                            //       child: Column(
-                            //         children: [
-                            //           r.isFavourite == "true" ? Text("Vuoi eliminare la ricetta dalle salvate?") : Text("Vuoi salvare la ricetta?"),
-                            //           ElevatedButton(
-                            //             style: ButtonStyle(
-                            //               backgroundColor:
-                            //                   MaterialStateProperty.all(
-                            //                       kWhiteColor),
-                            //               padding: MaterialStateProperty.all(
-                            //                   EdgeInsets.fromLTRB(
-                            //                       15, 0, 15, 0)),
-                            //               minimumSize:
-                            //                   MaterialStateProperty.all(
-                            //                       Size(0, 30)),
-                            //             ),
-                            //             onPressed: () {
-                            //               final isFavourite = recipe.isFavourite == "true" ? false : true;
-                            //               value.setFavourite(recipe, isFavourite: isFavourite);
-                            //               final snackBar = SnackBar(content: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"));
-                            //               ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            //             },
-                            //             child: r.isFavourite == "true" ? Text('Elimina', style: TextStyle(color: kBlackColor)) : Text('Salva', style: TextStyle(color: kBlackColor)),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ),
-                            
-                      
+                            });
+                          }),
                       PopupMenuItem(
                         child: Text("Condividi"),
                         onTap: () {

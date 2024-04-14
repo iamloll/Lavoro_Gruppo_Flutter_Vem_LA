@@ -27,10 +27,8 @@ class _HomepageState extends State<Homepage> {
                 RecipeSearchBar(
                   searchController: _searchController,
                   onSearch: (query) {
-                    print('Ricerca: $query');
                     final findRecipes =
                         state.recipes.getRecipeByInput(query).toList();
-                    print("trovati $findRecipes");
                     showModalBottomSheet(
                         context: context,
                         builder: (bc) {

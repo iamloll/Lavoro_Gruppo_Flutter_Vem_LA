@@ -14,8 +14,7 @@ class RecipeCard extends StatelessWidget {
       {required this.recipe, required this.onToggleFavorite});
 
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context) {    
       return GestureDetector(
         onTap: () {
           Navigator.push(

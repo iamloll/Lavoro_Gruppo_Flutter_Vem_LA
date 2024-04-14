@@ -15,7 +15,6 @@ class RecipeCardHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.read<RecipeState>();
       return GestureDetector(
         onTap: () {
           Navigator.push(

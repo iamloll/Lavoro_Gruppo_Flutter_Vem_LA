@@ -58,9 +58,6 @@ class RecipeState extends ChangeNotifier {
         .firstWhere((element) => element.id == recipe.id)
         .copyWith(isFavourite: boolString);
     saveRecipe(r);
-
-    //print(recipe);
-    // notifyListeners();
   }
 }
 
