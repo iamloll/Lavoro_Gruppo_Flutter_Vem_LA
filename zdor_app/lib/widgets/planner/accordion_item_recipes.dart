@@ -18,17 +18,22 @@ class AccordionItemRecipes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Metto a disposizione lo stato per la modifica del planner e delle ricette
     return Consumer2<PlannerState, RecipeState>(
       builder: (context, planState, recipeState, child) {
         return Column(
           children: [
+            //CARD RICETTE
+            //Cerco il MealPlanner del giorno e del pasto che mi interessa
             ...planState.planner
                 .firstWhere((el) {
                   return el.day == day && el.meal == meal;
                 })
+                //Visualizzo le ricette del MealPlanner trovato
                 .recipes
                 .map((elem) {
                   final recipe = recipeState.recipes.getRecipeById(elem);
+                  //Passo la ricetta da visualizzare e il comportamento, tramite lo stato, da usare alla richesta di cancellazione dal planner
                   return RowRecipe(
                     recipe: recipe,
                     onDelete: () {                      
@@ -36,6 +41,7 @@ class AccordionItemRecipes extends StatelessWidget {
                     },
                   );
                 }),
+            //MENU DI AGGIUNTA RICETTA
             AddMenu(day: day, meal: meal)
           ],
         );

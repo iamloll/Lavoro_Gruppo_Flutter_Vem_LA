@@ -7,7 +7,7 @@ import 'package:zdor_app/widgets/navbar/bottom_navigation_bar.dart';
 
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -28,9 +28,9 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _currentPageIndex,
         children: [
-          Homepage(),
+          const Homepage(),
           SavedRecipesPage(),
-          PlannerWidget(),
+          const PlannerWidget(),
           IngredientListScreen(),
         ],
       ),

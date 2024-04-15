@@ -4,7 +4,7 @@ class ShareButtons extends StatelessWidget {
   final String imagePath;
   final Function()? onPressed;
 
-  const ShareButtons({
+  const ShareButtons({super.key, 
     required this.imagePath,
     this.onPressed,
   });

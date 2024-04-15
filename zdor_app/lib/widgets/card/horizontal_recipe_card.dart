@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:zdor_app/models/recipe.dart';
 import 'package:zdor_app/screens/recipe_detail_screen.dart';
-import 'package:zdor_app/states/recipe_state.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 
@@ -11,12 +9,14 @@ class RecipeCardHorizontal extends StatelessWidget {
   final Recipe recipe;
   final ValueSetter<Recipe> onToggleFavorite;
 
-  RecipeCardHorizontal({required this.recipe, required this.onToggleFavorite});
+  const RecipeCardHorizontal({super.key, required this.recipe, required this.onToggleFavorite});
 
   @override
   Widget build(BuildContext context) {
+      //Rendo la card sensibile ad alcune azioni
       return GestureDetector(
         onTap: () {
+          //Al click della card apro il dettaglio della ricetta cliccata
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -25,7 +25,7 @@ class RecipeCardHorizontal extends StatelessWidget {
           );
         },
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
           width: MediaQuery.of(context).size.width * 0.5,
           height: 180,
           decoration: BoxDecoration(
@@ -34,7 +34,7 @@ class RecipeCardHorizontal extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.6),
-                offset: Offset(
+                offset: const Offset(
                   0.0,
                   10.0,
                 ),
@@ -42,6 +42,7 @@ class RecipeCardHorizontal extends StatelessWidget {
                 spreadRadius: -6.0,
               ),
             ],
+            //Immagine della ricetta usata come sfondo del contenitore
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.35),
@@ -53,25 +54,29 @@ class RecipeCardHorizontal extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              //ICONA CUORE
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: IconButton(
+                    //Uso due icone a seconda dello stato di isFavourite
                     icon: recipe.isFavourite == "true"
-                        ? Icon(Icons.favorite, color: Colors.red)
-                        : Icon(Icons.favorite_border, color: kOrangeColor),
+                        ? const Icon(Icons.favorite, color: Colors.red)
+                        : const Icon(Icons.favorite_border, color: kOrangeColor),
                     onPressed: () {  
+                      //Callback alla pressione del cuore
                       onToggleFavorite(recipe);
                     },
                   ),
                 ),
               ),
+              //TEMPO DI PREPARAZIONE
               Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(15),
@@ -79,27 +84,28 @@ class RecipeCardHorizontal extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.schedule,
                         color: kOrangeColor,
                         size: 18,
                       ),
-                      SizedBox(width: 7),
+                      const SizedBox(width: 7),
                       Text(
                         recipe.prep_time ?? '',
-                        style: TextStyle(color: kWhiteColor),
+                        style: const TextStyle(color: kWhiteColor),
                       ),
                     ],
                   ),
                 ),
               ),
+              //TITOLO DELLA RICETTA
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
                     recipe.title ?? '',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: kWhiteColor,
                       fontSize: 19,
                     ),

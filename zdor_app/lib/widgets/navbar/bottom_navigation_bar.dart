@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
@@ -7,10 +6,10 @@ class CustomNavigationBar extends StatelessWidget {
   final void Function(int) onPageChanged; // Funzione chiamata quando si cambia pagina
 
   const CustomNavigationBar({
-    Key? key,
+    super.key,
     required this.currentPageIndex,
     required this.onPageChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class CustomNavigationBar extends StatelessWidget {
         unselectedItemColor: Colors.white, // Imposta il colore degli elementi non selezionati
         currentIndex: currentPageIndex, // Imposta l'indice della pagina corrente
         onTap: onPageChanged, // Chiamata quando si tocca un elemento della barra
-        items: <BottomNavigationBarItem>[ // Elementi della barra di navigazione
+        items: const <BottomNavigationBarItem>[ // Elementi della barra di navigazione
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined), // Icona per la home
             label: 'Home',

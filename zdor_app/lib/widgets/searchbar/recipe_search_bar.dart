@@ -10,28 +10,27 @@ class RecipeSearchBar extends StatefulWidget {
       onFocusChanged; // Funzione chiamata quando lo stato di focus cambia
 
   const RecipeSearchBar({
-    Key? key,
+    super.key,
     required this.searchController,
     required this.onSearch,
     required this.onFocusChanged,
-  }) : super(key: key);
+  });
 
   @override
   _RecipeSearchBarState createState() => _RecipeSearchBarState();
 }
 
 class _RecipeSearchBarState extends State<RecipeSearchBar> {
-  bool _isFocused =
-      false; // Flag per indicare se il campo di ricerca ha lo stato di focus attivo
+  bool _isFocused = false; // Flag per indicare se il campo di ricerca ha lo stato di focus attivo
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: TextField(
         controller: widget.searchController,
         cursorColor: kWhiteColor,
-        style: TextStyle(color: kWhiteColor, fontSize: 20.0),
+        style: const TextStyle(color: kWhiteColor, fontSize: 20.0),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             // Imposta i bordi del campo di ricerca
@@ -40,7 +39,7 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
                 30.0), // Imposta i bordi del campo di ricerca quando è in focus
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color:
                   kOrangeColor, // Imposta il colore del bordo quando è in focus
             ),
@@ -48,7 +47,7 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
           filled: true, // Imposta se il campo di ricerca è riempito
           fillColor: kDarkGreyColor,
           suffixIcon: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               color: kOrangeColor,
               size: 34.0,
@@ -59,12 +58,12 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
             },
           ),
           hintText: "Cerca una ricetta...",
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: kGreyColor,
             fontSize: 20.0,
           ),
           contentPadding:
-              EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
         ),
         onChanged: (value) {
           setState(() {

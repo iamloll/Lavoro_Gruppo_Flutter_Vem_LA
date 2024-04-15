@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/widgets/card/recipe_card.dart';
 
 class RecipeSaveButton extends StatelessWidget {
   final Recipe recipe;
   final List<Recipe> savedRecipesList;
   final Function(List<Recipe>) onSave;
 
-  RecipeSaveButton({
+  const RecipeSaveButton({
+    super.key, 
     required this.recipe,
     required this.savedRecipesList,
     required this.onSave,

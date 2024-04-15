@@ -16,12 +16,16 @@ class SearchRecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Metto a disposizione gli stati per la modifica del planner e delle ricette
     return Consumer2<PlannerState, RecipeState>(
         builder: (context, planState, recipeState, child) {
+      //Rendo le card sensibili ad alcune azioni 
       return GestureDetector(
         onTap: () {
+          //Alla pressione della card, aggiungo quella ricetta al giorno e al pasto selezionato del planner
           planState.addRecipe(
               day, meal, int.parse(recipe.id!));
+          //Navigo indietro al planner
           Navigator.pop(context);
         },
         child: Container(
@@ -39,6 +43,7 @@ class SearchRecipeCard extends StatelessWidget {
                 spreadRadius: -6.0,
               )
             ],
+            //IMMAGINE SFONDO
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.35),
@@ -50,6 +55,7 @@ class SearchRecipeCard extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              //ICONA CUORE
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
@@ -62,9 +68,11 @@ class SearchRecipeCard extends StatelessWidget {
                         ),
                         child: IconButton(
                             onPressed: () {
+                              //Modifico il flag isFavourite al suo opposto tramite lo stato
                               final isFavourite = recipe.isFavourite == "true" ? false : true;
                               recipeState.setFavourite(recipe, isFavourite: isFavourite);
                             },
+                            //Uso due icone a seconda del flag isFavourite
                             icon: recipe.isFavourite == "true"
                                 ? const Icon(
                                     Icons.favorite,
@@ -75,6 +83,7 @@ class SearchRecipeCard extends StatelessWidget {
                                     color: kOrangeColor,
                                   )))),
               ),
+              //DESCRIZIONE DELLA RICETTA
               Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
@@ -89,12 +98,14 @@ class SearchRecipeCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        //TITOLO
                         Flexible(
                             child: Text(
                           recipe.title!,
                           style: const TextStyle(
                               color: Colors.white, fontSize: 18),
                         )),
+                        //CATEGORIA
                         Flexible(
                             child: Text(recipe.category!,
                                 style: const TextStyle(

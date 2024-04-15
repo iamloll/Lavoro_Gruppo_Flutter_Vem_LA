@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//COSTANTI PER PALETTE DI COLORI
 const kOrangeColor = Color.fromARGB(255, 230, 160, 97);
 const kBlackColor = Color.fromARGB(255, 1, 1, 1);
 const kDarkGreyColor = Color.fromARGB(255, 45, 45, 45);
