@@ -19,11 +19,14 @@ class ModifyRecipe extends StatelessWidget {
 
   // Funzione per selezionare un'immagine dalla galleria
   Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);    
-    if (pickedImage != null) {
-      _imageFile = File(pickedImage.path);
-    }
+  final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);    
+  if (pickedImage != null) {
+    _imageFile = File(pickedImage.path);
+  } else {
+    _imageFile = null; // Resetta _imageFile a null se nessuna immagine viene selezionata
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

@@ -19,6 +19,7 @@ class RecipeDetail extends StatelessWidget {
         child: Column(
           children: [
             //IMMAGINE
+            if (recipe.image != null) // Verifica se la ricetta ha un'immagine predefinita
             Row(
               children: [
                 Expanded(
@@ -26,10 +27,7 @@ class RecipeDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                     child: Container(
                       constraints: const BoxConstraints(maxHeight: 250),
-                      child: Image.asset(
-                        recipe.image!,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.asset(recipe.image!, fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -82,9 +80,9 @@ class RecipeDetail extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            //pROCEDIMENTO
+            //PROCEDIMENTO
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text("Procedimento:", style: TextStyle(color: kWhiteColor)),
                 const SizedBox(height: 5),
