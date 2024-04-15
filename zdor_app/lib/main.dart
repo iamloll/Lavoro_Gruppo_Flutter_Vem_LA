@@ -10,7 +10,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => PlannerState()),
     ChangeNotifierProvider(create: (context) => RecipeState()),
     ChangeNotifierProvider(create: (context) => CategoryState())
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

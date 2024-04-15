@@ -28,10 +28,9 @@ class IngredientListScreen extends StatefulWidget {
   final List<String>
       selectedIngredients; // Elenco degli ingredienti selezionati
 
-  IngredientListScreen({Key? key, List<String>? selectedIngredients})
+  IngredientListScreen({super.key, List<String>? selectedIngredients})
       : selectedIngredients = selectedIngredients ??
-            [], // Inizializza gli ingredienti selezionati con una lista vuota se non specificato
-        super(key: key);
+            [];
 
   @override
   _IngredientListScreenState createState() =>
@@ -63,14 +62,14 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
         crossAxisAlignment: CrossAxisAlignment
             .stretch, // Allinea gli elementi lungo l'asse trasversale (orizzontale)
         children: [          
-          Divider(
+          const Divider(
             color: kOrangeColor, // Colore del separatore
             thickness: 2.0, // Spessore del separatore
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Da acquistare',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -101,7 +100,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                         child: CheckboxListTile(
                           title: Text(
                             ingredient,
-                            style: TextStyle(color: kWhiteColor),
+                            style: const TextStyle(color: kWhiteColor),
                           ),
                           controlAffinity: ListTileControlAffinity
                               .leading, // Posizione del checkbox rispetto al testo
@@ -130,7 +129,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                       // Se l'ingrediente non è stato acquistato, mostra l'icona per eliminare l'ingrediente
                       if (!isBought)
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           color: kOrangeColor,
                           onPressed: () {
                             setState(() {
@@ -146,17 +145,17 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
               },
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             child: Divider(
               color: kOrangeColor, // Colore del separatore
               thickness: 2.0, // Spessore del separatore
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Acquistati', // Testo per la sezione degli ingredienti acquistati
             textAlign: TextAlign.center, // Allinea il testo al centro
             style: TextStyle(
@@ -177,11 +176,11 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                         child: Text(
                           ingredient,
                           style:
-                              TextStyle(color: kWhiteColor), // Stile del testo
+                              const TextStyle(color: kWhiteColor), // Stile del testo
                         ),
                       ),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                             Icons.delete), // Icona per eliminare l'ingrediente
                         color: kOrangeColor, // Colore dell'icona
                         onPressed: () {
@@ -195,7 +194,7 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
                     ],
                   ),
                   leading: IconButton(
-                    icon: Icon(Icons
+                    icon: const Icon(Icons
                         .check_box), // Icona per spostare l'ingrediente negli acquistabili
                     color: kOrangeColor, // Colore dell'icona
                     onPressed: () {
@@ -235,16 +234,16 @@ class _IngredientListScreenState extends State<IngredientListScreen> {
               ),
             );
           },
-          child: Transform.scale(
-            scale: 1.5, // Scala dell'icona del pulsante
-            child: Icon(Icons.edit), // Icona del pulsante
-          ),
-          shape: CircleBorder(
+          shape: const CircleBorder(
             side: BorderSide(
                 color: kOrangeColor, width: 2.0), // Bordo del pulsante
           ),
           backgroundColor: kDarkGreyColor, // Colore di sfondo del pulsante
-          foregroundColor: kOrangeColor, // Colore dell'icona del pulsante
+          foregroundColor: kOrangeColor,
+          child: Transform.scale(
+            scale: 1.5, // Scala dell'icona del pulsante
+            child: const Icon(Icons.edit), // Icona del pulsante
+          ), // Colore dell'icona del pulsante
         ),
       ),
       floatingActionButtonLocation:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 // Schermo per modificare la lista "Da acquistare che si trova nella lista della spesa"
@@ -40,20 +39,20 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
       appBar: AppBar(
         automaticallyImplyLeading:
             false, // Disabilita il pulsante indietro automatico
-        title: Text('Modifica lista'),
+        title: const Text('Modifica lista'),
         centerTitle: true,
         // backgroundColor: kBlackColor,
         foregroundColor: kWhiteColor,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(
+          preferredSize: const Size.fromHeight(
               70.0), // Altezza preferita della parte inferiore della barra dell'applicazione
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: TextField(
               controller:
                   _addController, // Controller controlla cosa viene scritto nel campo di testo
               cursorColor: kWhiteColor,
-              style: TextStyle(color: kWhiteColor),
+              style: const TextStyle(color: kWhiteColor),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
@@ -62,14 +61,14 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(
                       30.0), // Bordi arrotondati quando premi sulla barra di ricerca e spunta la tastiera
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: kOrangeColor,
                   ),
                 ),
                 filled: true, // Campo di testo riempito
                 fillColor: kDarkGreyColor,
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   color: kOrangeColor,
                   onPressed: () {
                     if (_addController.text.trim().isEmpty) {
@@ -84,11 +83,11 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 ),
                 hintText:
                     "Aggiungi un ingrediente...", // Suggerimento per il campo di testo
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: kGreyColor,
                   fontSize: 20.0,
                 ),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 15.0, // Riempimento verticale del contenuto
                   horizontal: 20.0, // Riempimento orizzontale del contenuto
                 ),
@@ -108,7 +107,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                   (ingredient) => ListTile(
                     title: Text(
                       ingredient,
-                      style: TextStyle(color: kWhiteColor),
+                      style: const TextStyle(color: kWhiteColor),
                     ),
                     onTap: () {
                       addIngredient(
@@ -118,9 +117,9 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 ),
             //visualliza la lista degli ingredienti selezionati solo quando l'utente preme il tasto + per aggiungere
             //un ingrediente alla lista
-            if (selectedIngredients.isNotEmpty) Divider(), // Separatore
+            if (selectedIngredients.isNotEmpty) const Divider(), // Separatore
             if (selectedIngredients.isNotEmpty)
-              Text(
+              const Text(
                 'Ingredienti selezionati:',
                 style: TextStyle(color: kWhiteColor, fontSize: 18.0),
               ),
@@ -131,12 +130,12 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                     Expanded(
                       child: Text(
                         ingredient,
-                        style: TextStyle(color: kWhiteColor),
+                        style: const TextStyle(color: kWhiteColor),
                       ),
                     ),
                     if (selectedIngredients.isNotEmpty)
                       IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                         color: kOrangeColor,
                         onPressed: () {
                           removeIngredient(
@@ -160,15 +159,15 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                 selectedIngredients); // Chiamata alla funzione di callback onOK, che aiuta ad aggiungere gli ingredienti selezionati
             //alla lista degli ingredienti "Da acquistare" premendo il bottone check
           },
-          child: Transform.scale(
-            scale: 1.5, // Dimensione del bottone check
-            child: Icon(Icons.check),
-          ),
           backgroundColor: kDarkGreyColor,
           foregroundColor: kOrangeColor,
-          shape: CircleBorder(
+          shape: const CircleBorder(
             side: BorderSide(
                 color: kOrangeColor, width: 2.0), // Bordo del pulsante
+          ),
+          child: Transform.scale(
+            scale: 1.5, // Dimensione del bottone check
+            child: const Icon(Icons.check),
           ),
         ),
       ),

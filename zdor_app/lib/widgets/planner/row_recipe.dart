@@ -9,7 +9,6 @@ class RowRecipe extends StatelessWidget {
   });
 
   final Recipe recipe;
-
   final Function() onDelete;
 
   @override
@@ -18,6 +17,7 @@ class RowRecipe extends StatelessWidget {
       clipBehavior: Clip.hardEdge,     
       child: Stack( 
         children : [
+          //IMMAGINE
           AspectRatio(
             aspectRatio: 31/9,
             child: Image.asset(recipe.image!, fit: BoxFit.fitWidth,)),
@@ -31,12 +31,14 @@ class RowRecipe extends StatelessWidget {
           children: [
             Flexible(
               child: ListTile(                
-                title: Text(style: const TextStyle(color: Colors.white, fontSize: 18), recipe.title!),
-                subtitle: Text(style: const TextStyle(color: Colors.white, fontSize: 14),recipe.category!),
+                title: Text(style: const TextStyle(color: Colors.white, fontSize: 18), recipe.title!), //TITOLO RICETTA
+                subtitle: Text(style: const TextStyle(color: Colors.white, fontSize: 14),recipe.category!), //CATEGORIA RICETTA
                 trailing: IconButton(
                   onPressed: () {
+                    //Callback di rimozione
                     onDelete();                  
                 }, 
+                //ICONA CESTINO
                 icon: const Icon(Icons.delete, color: Colors.white,)),
               ),
             ),

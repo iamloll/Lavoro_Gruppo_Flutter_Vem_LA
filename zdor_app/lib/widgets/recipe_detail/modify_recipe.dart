@@ -1,16 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/states/recipe_state.dart';
-import 'package:zdor_app/widgets/recipe_detail/recipe_detail.dart';
-import 'package:zdor_app/services/recipes_service.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
-
-
-
-//------Callback non ancora funzionante---------
 
 class ModifyRecipe extends StatelessWidget {
   late String? _title;
@@ -19,6 +11,7 @@ class ModifyRecipe extends StatelessWidget {
   late String? _ingredients;
   late String? _procedure;
   File? _imageFile;
+
   final Recipe? recipe;
   final ValueSetter<Recipe> onSave; 
 
@@ -34,118 +27,133 @@ class ModifyRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.read<RecipeState>();
-
-    // Utilizza il valore della ricetta solo se non è null
+    // Utilizzo il valore della ricetta se non è null
     _title =  recipe?.title ?? '';
     _category =  recipe?.category ?? '';
     _prepTime =  recipe?.prep_time ?? '';
-    _ingredients =  recipe?.ingredients_list != null ? recipe?.ingredients_list!.join('\n') : '';
+    _ingredients =  recipe?.ingredients_list != null ? recipe?.ingredients_list!.join('\n') : ''; //Trasformo la lista ingredienti in una stringa
     _procedure =  recipe?.procedure ?? '';
 
     return Scaffold(
       backgroundColor: kBlackColor,
+      //TITOLO RICETTA
       appBar: AppBar(
         backgroundColor: kBlackColor,
-        title: recipe != null ? Text('Modifica Ricetta', style: TextStyle(color: kWhiteColor)) : Text('Nuova Ricetta', style: TextStyle(color: kWhiteColor)),
-        shape: Border(
+        //Visualizzo il titolo condizionalmente a seconda se la ricetta ricevuta come parametro è popolata o null
+        title: recipe != null ? const Text('Modifica Ricetta', style: TextStyle(color: kWhiteColor)) : const Text('Nuova Ricetta', style: TextStyle(color: kWhiteColor)),
+        shape: const Border(
             bottom: BorderSide(
                 color: kWhiteColor,
                 width: 1
             )
         ),
+        //ICONA BACK
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
               icon: const Icon(Icons.arrow_back, color: kWhiteColor,),
               onPressed: () {
-                Navigator.pop(context);  //Return to previous screen
+                Navigator.pop(context);  //Navigo verso la schermata precedente
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
           },
         ),
       ),
+      //IMMAGINE
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [              
+            children: [  
+              //Se l'immagine ottenuta alla pressione del bottone è null uso l'immagine della ricetta            
               _imageFile != null
                 ? Image.file(_imageFile!)
                 : recipe?.image != null
-                  ? Image.asset(recipe!.image!) // Utilizza ! per garantire che widget.recipe non sia null.
+                  ? Image.asset(recipe!.image!) 
                   : Container(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(kWhiteColor),
                 ),
-                onPressed: _pickImage,
-                child: Text('Seleziona Immagine', style: TextStyle(color: kBlackColor)),
+                onPressed: _pickImage, //Funzione per ottenere un'immagine dalla galleria
+                child: const Text('Seleziona Immagine', style: TextStyle(color: kBlackColor)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              //TITOLO
               TextFormField(
-                style: TextStyle(color: kWhiteColor),
-                initialValue: _title,
-                onChanged: (value) {                  
+                style: const TextStyle(color: kWhiteColor),
+                initialValue: _title, 
+                onChanged: (value) {    
+                  //Imposto il valore della proprietà con il valore inserito in input              
                   _title = value;                                                       
                 },
-                decoration: InputDecoration(labelText: 'Titolo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
+                decoration: const InputDecoration(labelText: 'Titolo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              //CATEGORIA
               TextFormField(
-                style: TextStyle(color: kWhiteColor, fontSize: 18),
+                style: const TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _category,
-                onChanged: (value) { 
+                onChanged: (value) {
+                  //Imposto il valore della proprietà con il valore inserito in input  
                   _category = value;
                 },
-                decoration: InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
+                decoration: const InputDecoration(labelText: 'Categoria', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              //TEMPO DI PREPARAZIONE
               TextFormField(
-                style: TextStyle(color: kWhiteColor, fontSize: 18),
+                style: const TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _prepTime,
-                onChanged: (value) {                 
+                onChanged: (value) {  
+                  //Imposto il valore della proprietà con il valore inserito in input                
                   _prepTime = value;                
                 },
-                decoration: InputDecoration(labelText: 'Tempo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
+                decoration: const InputDecoration(labelText: 'Tempo', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              //LISTA INGREDIENTI
               TextFormField(
-                style: TextStyle(color: kWhiteColor, fontSize: 18),
+                style: const TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _ingredients,
-                onChanged: (value) {                
+                onChanged: (value) {     
+                  //Imposto il valore della proprietà con il valore inserito in input            
                   _ingredients = value;            
                 },
-                decoration: InputDecoration(labelText: 'Ingredienti', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
+                decoration: const InputDecoration(labelText: 'Ingredienti', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
+              //PROCEDURA
               TextFormField(
-                style: TextStyle(color: kWhiteColor, fontSize: 18),
+                style: const TextStyle(color: kWhiteColor, fontSize: 18),
                 initialValue: _procedure,
-                onChanged: (value) {          
+                onChanged: (value) {  
+                  //Imposto il valore della proprietà con il valore inserito in input         
                   _procedure = value;                 
                 },
-                decoration: InputDecoration(labelText: 'Procedimento', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
+                decoration: const InputDecoration(labelText: 'Procedimento', labelStyle: TextStyle(color: kWhiteColor, fontSize: 18)),
                 maxLines: null,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+              //PULSANTE SALVA
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(kWhiteColor),
                 ),
                 onPressed: () {
+                  //Trasformo in lista la stringa di ingredienti
                   final newIngredientList = _ingredients!.split("\n");
 
                   // Creo la nuova ricetta con i valori inseriti   
                   final newRecipe = Recipe(
-                    id: recipe?.id,
+                    id: recipe?.id, //Uso l'id della ricetta passata come parametro, se non è null
                     title: _title,
                     category: _category,
-                    image: _imageFile != null ? _imageFile!.path.toString() : recipe?.image,
+                    image: _imageFile != null ? _imageFile!.path.toString() : recipe?.image, //Se la path della nuova immagine è null uso quella della ricetta
                     ingredients_list: newIngredientList,
                     prep_time: _prepTime,
                     procedure: _procedure
@@ -153,12 +161,11 @@ class ModifyRecipe extends StatelessWidget {
 
                   //Callback di salvataggio
                   onSave(newRecipe);
-                  // state.saveRecipe(newRecipe);
                   
                   // Torna alla schermata precedente
                   Navigator.pop(context);
                 },
-                child: Text('Salva', style: TextStyle(color: kBlackColor, fontSize: 18)),
+                child: const Text('Salva', style: TextStyle(color: kBlackColor, fontSize: 18)),
               ),
             ],
           ),
@@ -167,31 +174,3 @@ class ModifyRecipe extends StatelessWidget {
     );
   }
 }
-
-// class ImageContainer extends StatelessWidget {
-//   const ImageContainer({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//             decoration: BoxDecoration(
-//               color: Colors.black,
-//               borderRadius: BorderRadius.circular(15),
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: Colors.black.withOpacity(0.7),
-//                   offset: const Offset(0.0, 10.0),
-//                   blurRadius: 10.0,
-//                   spreadRadius: -6.0,
-//                 )
-//               ],
-//               image: DecorationImage(
-//                 image: (_imageFile != null
-//                   ? FileImage(_imageFile!)
-//                   : AssetImage(recipe!.image != null ? recipe!.image! : "assets/image_recipes/no_image.jpg")) as ImageProvider,
-//                   fit: BoxFit.cover,
-//                 ),                   
-//               ),
-//           );
-//   }
-// }

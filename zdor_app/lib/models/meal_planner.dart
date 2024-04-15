@@ -1,3 +1,4 @@
+//Enum di tutti i giorni della settimana
 enum WeekDays { 
   monday, 
   tuesday, 
@@ -7,6 +8,7 @@ enum WeekDays {
   saturday, 
   sunday;
   
+  //Se viene letto uno dei suoi valori, verrà restituito in italiano
   @override
   String toString() {
     switch (this) {
@@ -29,11 +31,13 @@ enum WeekDays {
     }
   }}
 
+//Enum dei possibili pasti
 enum Meals {
   breakfast,
   lunch,
   dinner;
 
+  //Se viene letto uno dei suoi valori, verrà restituito in italiano
   @override
   String toString() {
     switch (this) {
@@ -49,6 +53,7 @@ enum Meals {
   }
 }
 
+//Classe di riferimento per il Planner
 class MealPlanner {
   WeekDays day;
   Meals meal;

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+//Classe di riferimento per le ricette
 class Recipe {
   final String? id;
   final String? title;

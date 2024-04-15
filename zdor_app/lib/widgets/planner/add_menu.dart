@@ -19,35 +19,42 @@ class AddMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Metto a disposizione gli stati per la modifica del planner e delle ricette
     final planState = context.read<PlannerState>();
     final recipeState = context.read<RecipeState>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        //TITOLO DEL MENU
         const Text("Aggiungi una ricetta"),
         PopupMenuButton(
+          //ICONA ADD
           icon: const Icon(Icons.add),
           onSelected: (value) {
+            //Se premo aggiungi navigo verso la schermata di creazione di una nuova ricetta
             if (value == 0) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return ModifyRecipe(
-                  onSave: (recipe) {
+                //Non gli passo una ricetta ma solo il comportamento da eseguire alla richiesta del salvataggio tramite lo stato
+                return ModifyRecipe(onSave: (recipe) {
                     Recipe newRecipe = recipeState.saveRecipe(recipe);
                     planState.addRecipe(day, meal, int.parse(newRecipe.id!));
                 },);
               }));
               return;
             }
+            //Altrimenti navigo verso la schermata di ricerca passandogli giorno e pasto
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return SearchRecipeForPlannerScreen(day: day, meal: meal);
             }));
           },
           itemBuilder: (context) {
             return const [
+              //PRIMA RIGA
               PopupMenuItem(
                 value: 0,
                 child: Text("Aggiungi nuova ricetta"),
               ),
+              //SECONDA RIGA
               PopupMenuItem(
                 value: 1,
                 child: Text("Cerca ricetta"),

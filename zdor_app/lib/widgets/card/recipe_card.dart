@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:zdor_app/models/recipe.dart';
-import 'package:zdor_app/screens/recipe_detail_screen.dart'; // Importa la schermata dei dettagli della ricetta
-import 'package:zdor_app/screens/saved_recipes_screen.dart';
-import 'package:zdor_app/states/recipe_state.dart';
+import 'package:zdor_app/screens/recipe_detail_screen.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;  
   final ValueSetter<Recipe> onToggleFavorite;
 
-  RecipeCard(
-      {required this.recipe, required this.onToggleFavorite});
+  const RecipeCard(
+      {super.key, required this.recipe, required this.onToggleFavorite});
 
   @override
   Widget build(BuildContext context) {    
+      //Rendo la card sensibile ad alcune azioni
       return GestureDetector(
         onTap: () {
+          //Al click della card navigo verso il dettaglio della ricetta cliccata
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -27,7 +26,7 @@ class RecipeCard extends StatelessWidget {
           );
         },
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
               horizontal: 22, vertical: 10), // Margini orizzontali e verticali
           width: MediaQuery.of(context)
               .size
@@ -40,7 +39,7 @@ class RecipeCard extends StatelessWidget {
               BoxShadow(
                 color:
                     Colors.black.withOpacity(0.6), // Ombra nera con opacità 0.6
-                offset: Offset(
+                offset: const Offset(
                   0.0,
                   10.0,
                 ),
@@ -48,6 +47,7 @@ class RecipeCard extends StatelessWidget {
                 spreadRadius: -6.0,
               ),
             ],
+            //Immagine della ricetta usata come sfondo del container
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.35),
@@ -60,11 +60,12 @@ class RecipeCard extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              //TEMPO DI PREPARAZIONE
               Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.black
                         .withOpacity(0.4), // Sfondo scuro con opacità 0.4
@@ -74,27 +75,28 @@ class RecipeCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.schedule, // Icona dell'orologio
                         color: kOrangeColor,
                         size: 18, // Dimensione dell'icona
                       ),
-                      SizedBox(width: 7),
+                      const SizedBox(width: 7),
                       Text(
                         recipe.prep_time ?? '',
-                        style: TextStyle(color: kWhiteColor),
+                        style: const TextStyle(color: kWhiteColor),
                       ), // Tempo di preparazione della ricetta
                     ],
                   ),
                 ),
               ),
+              //TITOLO DELLA RICETTA
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text(
                     recipe.title ?? '', // Titolo della ricetta
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: kWhiteColor,
                       fontSize: 19, // Dimensione del testo
                     ),
@@ -106,14 +108,17 @@ class RecipeCard extends StatelessWidget {
                   ),
                 ),
               ),
+              //ICONA CUORE
               Positioned(
                 top: 10,
                 right: 10,
                 child: IconButton(
+                  //Uso due icone a seconda del flag isFavourite
                   icon: recipe.isFavourite == "true"
-                      ? Icon(Icons.favorite, color: Colors.red)
-                      : Icon(Icons.favorite_border, color: kOrangeColor),
+                      ? const Icon(Icons.favorite, color: Colors.red)
+                      : const Icon(Icons.favorite_border, color: kOrangeColor),
                   onPressed: () {
+                    //Callback alla pressione del cuore
                     onToggleFavorite(recipe);
                   },
                 ),

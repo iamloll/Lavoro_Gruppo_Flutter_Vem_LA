@@ -9,16 +9,18 @@ class FilterTags extends StatelessWidget {
   const FilterTags({super.key});
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
+    //Metto a disposizione gli stati per la modifica delle ricette e delle categorie
     final catState = context.read<CategoryState>();  
     final catList = context.read<RecipeState>().recipes.getCategories();
     return Choice<String>.inline(
           clearable: true,
-          value: ChoiceSingle.value(catState.selectedCategory),         
+          value: ChoiceSingle.value(catState.selectedCategory), //Uso la categoria nello stato come valore attuale del filtro       
           onChanged: ChoiceSingle.onChanged((value) {
+            //Modifico la categoria del filtro in base al tag selezionato, tramite lo stato
             catState.changeCategory(value);
           }),
-          itemCount: catList.length,
+          itemCount: catList.length, //Numero massimo di tag
           itemBuilder: (state, i) {
             return Row(
               children: [

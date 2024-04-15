@@ -1,12 +1,9 @@
-//import 'package:accordion/accordion.dart';
-//import 'package:accordion/controllers.dart';
-
 import 'package:flutter/material.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_buttons.dart';
 import 'package:zdor_app/widgets/style/constant.dart';
 
 class ShareRecipe extends StatelessWidget {
-  const ShareRecipe({Key? key});
+  const ShareRecipe({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +12,8 @@ class ShareRecipe extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Condividi"),
-          SizedBox(height: 5),
+          const Text("Condividi"),
+          const SizedBox(height: 5),
           Container(
             height: 30,
             decoration: BoxDecoration(
@@ -34,7 +31,7 @@ class ShareRecipe extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             children: [
               ShareButtons(

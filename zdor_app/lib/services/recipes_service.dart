@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'package:zdor_app/models/recipe.dart';
 
+//Servizio per le ricette
 class RecipesService {
 
+  //Ottenere una lista di ricette dal Json
   Iterable<Recipe> getRecipes({int results = 10}) {
+    //Leggo il json e lo trasformo in una mappa di stringhe e dynamic
     final Map<String, dynamic> data = jsonDecode(recipesJson);
 
+    //Creo un Iterable di ricette dalla mappa 
     final toReturn = List<Recipe>.from(
       data['recipes']!.map((x) => Recipe.fromJson(x)).take(results),
     );
@@ -14,6 +18,7 @@ class RecipesService {
   }  
 }
 
+//Json iniziale di ricette
 const recipesJson = '''
 {
   "recipes": 

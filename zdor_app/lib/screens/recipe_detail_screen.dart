@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zdor_app/screens/home.dart';
-import 'package:zdor_app/screens/screen_selector/main_screen.dart';
 import 'package:zdor_app/states/recipe_state.dart';
 import '../widgets/recipe_detail/recipe_detail.dart';
 import 'package:zdor_app/widgets/recipe_detail/share_recipe.dart';
@@ -11,106 +9,125 @@ import 'package:zdor_app/widgets/recipe_detail/modify_recipe.dart';
 
 
 class RecipeDetailScreen extends StatelessWidget {
-  final Recipe recipe; // Parametro per la ricetta
+  final Recipe recipe;
 
-  const RecipeDetailScreen({Key? key, required this.recipe}) : super(key: key);
+  const RecipeDetailScreen({super.key, required this.recipe});
 
-  static const headerStyle =
-      TextStyle(color: kWhiteColor, fontSize: 18, fontWeight: FontWeight.bold);
+  static const headerStyle = TextStyle(color: kWhiteColor, fontSize: 18, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
+    //Metto a disposizione lo stato per la manipolazione delle ricette
     return Consumer<RecipeState>(
       builder: (context, value, child) {
+        //Ottengo la singola ricetta che devo visualizzare
         final r = value.recipes.firstWhere((e) => e.id == recipe.id);
         return Scaffold(
           backgroundColor: kBlackColor,
+          //TITOLO
           appBar: AppBar(
             backgroundColor: kBlackColor,
-            shape: Border(bottom: BorderSide(color: kWhiteColor, width: 1)),
+            shape: const Border(bottom: BorderSide(color: kWhiteColor, width: 1)),
+            //Icona di ritorno
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back,
                 color: kWhiteColor,
               ),
               onPressed: () {
+                //Alla pressione dell'icona navigo nella schermata principale
                 Navigator.pop(context);
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             ),
+            //TITOLO RICETTA
             title:
-                Text(r.title ?? '', style: TextStyle(color: kWhiteColor)),
+                Text(r.title ?? '', style: const TextStyle(color: kWhiteColor)),
+            //MENU LATERALE
             actions: <Widget>[
               PopupMenuButton(
-                  icon: Icon(
+                  //MODIFICA
+                  icon: const Icon(
                     Icons.menu,
                     color: kWhiteColor,
                   ),
                   itemBuilder: (context) {
                     return [
                       PopupMenuItem(
-                        child: Text("Modifica"),
+                        child: const Text("Modifica"),
                         onTap: () {
+                          //Alla pressione navigo verso la pagina di modifica della ricetta
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    ModifyRecipe(recipe: recipe, onSave: (r) => value.saveRecipe(r) ,)),
+                              builder: (context) =>
+                                //Passo al widget la ricetta da visualizzare e come comportarsi alla richiesta di salvataggio
+                                ModifyRecipe(recipe: recipe, onSave: (r) => value.saveRecipe(r) 
+                            ) ),
                           );
                         },
                       ),
+                      //SALVA -- ELIMINA
                       PopupMenuItem(
-                        child: r.isFavourite == "true" ? Text("Elimina dai preferiti") : Text("Salva"),
+                        //Visualizzazione dei testi condizionale in base al flag isFavourite
+                        child: r.isFavourite == "true" ? const Text("Elimina dai preferiti") : const Text("Salva"),
                         onTap: () {
+                          //Alla pressione del pulsante apro un dialog centrale alla pagina
                           showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(                                
-                                title: r.isFavourite == "true" ? Text("Vuoi eliminare la ricetta dalle salvate?") : Text("Vuoi salvare la ricetta?"),
+                                title: r.isFavourite == "true" ? const Text("Vuoi eliminare la ricetta dalle salvate?") : const Text("Vuoi salvare la ricetta?"),
                                 actions: [
+                                  //BOTTONE SALVA -- ELIMINA
                                   ElevatedButton(
                                         style: ButtonStyle(                                          
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   kWhiteColor),
                                           padding: MaterialStateProperty.all(
-                                              EdgeInsets.fromLTRB(
+                                              const EdgeInsets.fromLTRB(
                                                   15, 0, 15, 0)),
                                           minimumSize:
                                               MaterialStateProperty.all(
-                                                  Size(0, 30)),
+                                                  const Size(0, 30)),
                                         ),
                                         onPressed: () {
+                                          //Alla pressione del pulsante modifico il flag isFavourite all'opposto del suo valore attuale tramite lo stato
                                           final isFavourite = recipe.isFavourite == "true" ? false : true;
                                           value.setFavourite(recipe, isFavourite: isFavourite);
-                                          Future.delayed(Duration(seconds: 1), () {
+                                          //Dopo un intervallo navigo indietro fino alla pagina iniziale
+                                          Future.delayed(const Duration(seconds: 1), () {
                                             Navigator.of(context).popUntil((route) => route.isFirst);
-                                          }); 
+                                          });
+                                          //Mostro un messaggio di avvenuta modifica 
                                           showDialog(
                                             context: context,
                                             builder: (context) {                                              
                                               return AlertDialog(
-                                                title: isFavourite == false ? Text("Ricetta eliminata!") : Text("Ricetta salvata"),
+                                                title: isFavourite == false ? const Text("Ricetta eliminata!") : const Text("Ricetta salvata"),
                                               );
                                             }
                                           );                                                                                                                             
                                         },
-                                        child: r.isFavourite == "true" ? Text('Elimina', style: TextStyle(color: kBlackColor)) : Text('Salva', style: TextStyle(color: kBlackColor)),
+                                        child: r.isFavourite == "true" ? const Text('Elimina', style: TextStyle(color: kBlackColor)) : const Text('Salva', style: TextStyle(color: kBlackColor)),
                                       )
                                 ],
+                                //Allineo il bottone al centro
                                 actionsAlignment: MainAxisAlignment.center,
                               );
                             });
                           }),
+                      //CONDIVIDI
                       PopupMenuItem(
-                        child: Text("Condividi"),
+                        child: const Text("Condividi"),
                         onTap: () {
                           showMenu(
                             context: context,
-                            position: RelativeRect.fromLTRB(
+                            position: const RelativeRect.fromLTRB(
                                 100, 200, 100, 0), // Adjust position as needed
                             items: [
-                              PopupMenuItem(
+                              const PopupMenuItem(
                                 child: ShareRecipe(),
                               ),
                             ],
@@ -123,7 +140,7 @@ class RecipeDetailScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child:
-                RecipeDetail(recipe: r), // Mostra i dettagli della ricetta
+                RecipeDetail(recipe: r), // Mostro i dettagli della ricetta
           ),
         );
       },
