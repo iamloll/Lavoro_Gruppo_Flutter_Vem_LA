@@ -26,7 +26,7 @@ class _HomepageState extends State<Homepage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 //BARRA DI RICERCA
                 RecipeSearchBar(
                   searchController: _searchController,
