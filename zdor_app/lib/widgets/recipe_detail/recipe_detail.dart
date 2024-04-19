@@ -84,7 +84,7 @@ class RecipeDetail extends StatelessWidget {
             const SizedBox(height: 20),
             //pROCEDIMENTO
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text("Procedimento:", style: TextStyle(color: kWhiteColor)),
                 const SizedBox(height: 5),
